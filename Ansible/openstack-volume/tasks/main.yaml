@@ -1,0 +1,16 @@
+---
+# Create volumes according to variables
+- name: Create volumes on MRC
+  os_volume:
+    display_name: "{{item.vol_name}}"
+    size: "{{item.size}}"
+    availability_zone: "{{availability_zone}}"
+    wait: yes
+    timeout: 600 #10 mins
+    state: present
+  loop: "{{volumes}}"
+  register: os_vol
+
+- name: Show openstack volume information
+  debug:
+    msg: "Volumnes have been created: {{ os_vol.results }}"

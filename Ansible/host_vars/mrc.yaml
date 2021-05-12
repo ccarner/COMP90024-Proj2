@@ -1,0 +1,55 @@
+---
+#Variables to be used when deploying instances to MRC
+#Creates 4 instances, each with a 100gb volume
+
+availability_zone: melbourne-qh2-uom
+
+#Volumes, one per each instance we're creating
+volumes:
+  - vol_name: volume-instance-1
+    vol_size: 100
+  - vol_name: volume-instance-2
+    vol_size: 100
+  - vol_name: volume-instance-3
+    vol_size: 100
+  - vol_name: volume-instance-4
+    vol_size: 100
+
+# Security groups to create
+security-groups:
+  - name: comp90024_proj2_ssh
+    description: "Security group for COMP90024 project 2; allows SSH"
+    protocol: tcp
+    port_range_min: 22
+    port_range_max: 22
+    remote_ip_prefix: 0.0.0.0/0
+  - name: comp90024_proj2_http
+    description: "Security group for COMP90024 project 2; allows HTTP"
+    protocol: tcp
+    port_range_min: 80
+    port_range_max: 80
+    remote_ip_prefix: 0.0.0.0/0
+  - name: comp90024_proj2_https
+    description: "Security group for COMP90024 project 2; allows HTTPS"
+    protocol: tcp
+    port_range_min: 443
+    port_range_max: 443
+    remote_ip_prefix: 0.0.0.0/0
+
+#Instances to create
+instances:
+  - name: instance-1
+    volumes: [volume-instance-1]
+    flavor: uom.mse.2c9g
+  - name: instance-2
+    volumes: [volume-instance-2]
+    flavor: uom.mse.2c9g
+  - name: instance-3
+    flavor: uom.mse.2c9g
+    volumes: [volume-instance-3]
+  - name: instance-4
+    volumes: [volume-instance-4]
+    flavor: uom.mse.1c4g
+
+instance_image: f8b79936-6616-4a22-b55d-0d0a1d27bceb #ubuntu 20.04
+instance_key_name: cloudssh # uses existing public/private keypair, TODO CHECK IF THIS OK (ie not uploading new one)

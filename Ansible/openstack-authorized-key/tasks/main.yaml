@@ -1,0 +1,16 @@
+#TODO: haven't implemented/used this yet
+
+# add public keys from the ./"authorized_keys" folder in the Ansible folder
+- name: Set up multiple authorized keys
+  os_keypair:
+    state: present
+    name: "{{item.key_name}}"
+    public_key_file: /home/me/.ssh/id_rsa.pub
+  with_file:
+    - ./authorized_keys/colton.pem
+    - ./authorized_keys/someoneElse.pem
+  register: keys_result
+
+- name: Show openstack keys information
+  debug:
+    msg: "{{ keys_result }}"
