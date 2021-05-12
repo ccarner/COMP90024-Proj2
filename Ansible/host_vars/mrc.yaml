@@ -16,7 +16,7 @@ volumes:
     vol_size: 100
 
 # Security groups to create
-security-groups:
+security_groups:
   - name: comp90024_proj2_ssh
     description: "Security group for COMP90024 project 2; allows SSH"
     protocol: tcp

@@ -6,7 +6,7 @@
     image: "{{instance_image}}"
     key_name: "{{instance_key_name}}"
     flavor: "{{item.flavor}}"
-    availability_zome: "{{availability_zone}}"
+    availability_zone: "{{availability_zone}}"
     security_groups: "{{sg_names}}"
     volumes: "{{item.volumes}}"
     auto_floating_ip: yes

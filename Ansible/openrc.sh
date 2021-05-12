@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Note
+#
+# auomatically generated from the MRC site, profile > download openrc.sh file
+#
 # To use an OpenStack cloud you need to authenticate against the Identity
 # service named keystone, which returns a **Token** and **Service Catalog**.
 # The catalog contains the endpoints for all services the user/tenant has
@@ -14,6 +16,7 @@
 export OS_AUTH_URL=https://keystone.rc.nectar.org.au:5000/v3/
 # With the addition of Keystone we have standardized on the term **project**
 # as the entity that owns the resources.
+export OS_PROJECT_ID=1fa0c859a298443492810d50cf30f8d6
 export OS_PROJECT_NAME="unimelb-comp90024-2021-grp-40"
 export OS_USER_DOMAIN_NAME="Default"
 if [ -z "$OS_USER_DOMAIN_NAME" ]; then unset OS_USER_DOMAIN_NAME; fi
@@ -24,7 +27,7 @@ unset OS_TENANT_ID
 unset OS_TENANT_NAME
 # In addition to the owning entity (tenant), OpenStack stores the entity
 # performing the action as the **user**.
-export OS_USERNAME="ccarner@student.unimelb.edu.au"
+export OS_USERNAME="c.carner@student.unimelb.edu.au"
 # With Keystone you pass the keystone password.
 echo "Please enter your OpenStack Password for project $OS_PROJECT_NAME as user $OS_USERNAME: "
 read -sr OS_PASSWORD_INPUT

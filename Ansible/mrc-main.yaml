@@ -7,9 +7,9 @@
   gather_facts: true
 
   roles:
-    - role: openstack-common
+    # - role: openstack-common 
     # - role: openstack-authorized-key #possibly add later to allow for auto-upload of new keys
-    # - role: openstack-images
+    # - role: openstack-images# not needed
     - role: openstack-volume
     - role: openstack-security-group
     - role: openstack-instances
