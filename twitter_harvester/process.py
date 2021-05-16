@@ -18,6 +18,8 @@ def createDictionaries(shapeFile, codeCol, nameCol, geomCol):
 
 
 # given the city name, use the corresponding shape file to assign geometry and name dict (name and geom of sa2)
+# we will probably only use the melbourne one since we dont care about sa2 for other cities
+# included here for completeness
 def assignShapeFile(city_str):
     if city_str == "MELB":
         # set up shape files for processing tweets
