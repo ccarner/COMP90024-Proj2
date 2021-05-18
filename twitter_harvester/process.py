@@ -106,7 +106,7 @@ class Processor:
         tweetDict["time"] = self.reformatTime(tweet["created_at"])
         tweetDict["sentiment"] = self.sentiment_analyser.polarity_scores(tweetDict["text"])['compound']
         tweetDict["sa2Code"] = sa2
-        if coords is not None:
+        if sa2 is not None:
             tweetDict["sa2Name"] = self.namesDict[sa2]
         else:
             tweetDict["sa2Name"] = None
