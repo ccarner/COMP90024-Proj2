@@ -46,21 +46,6 @@ def assignShapeFile(city_str):
         shapeFile = "shp-pop/ADL/2fdb22a2-164b-4c67-b002-0e6673ad5f81.shp"
         geomDict, namesDict = createDictionaries(shapeFile, "sa2_mainc0", "sa2_name", "geometry")
         return geomDict, namesDict
-    elif city_str == "CAN":
-        # set up shape files for processing tweets
-        shapeFile = "shp-pop/CAN/e288c897-af42-4156-8393-ddd357c6f152.shp"
-        geomDict, namesDict = createDictionaries(shapeFile, "sa2_mainc0", "sa2_name", "geometry")
-        return geomDict, namesDict
-    elif city_str == "DAR":
-        # set up shape files for processing tweets
-        shapeFile = "shp-pop/DAR/3691c5a8-84d3-4706-8e2e-4af9137d3eed.shp"
-        geomDict, namesDict = createDictionaries(shapeFile, "sa2_mainc0", "sa2_name", "geometry")
-        return geomDict, namesDict
-    elif city_str == "HOB":
-        # set up shape files for processing tweets
-        shapeFile = "shp-pop/HOB/a47e5c69-2fd1-442a-bb1a-b7bb4831c920.shp"
-        geomDict, namesDict = createDictionaries(shapeFile, "sa2_mainc0", "sa2_name", "geometry")
-        return geomDict, namesDict
     else:
         print("Invalid city")
         return None
