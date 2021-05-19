@@ -79,15 +79,6 @@ def getCityCoords(city_str):
     elif city_str == "ADL":
         ADL = [138.241227, -34.537995, 138.934533, -35.299131]
         return ADL
-    elif city_str == "CAN":
-        CAN = [148.861492, -35.115577, 149.355877, -35.597180]
-        return CAN
-    elif city_str == "DAR":
-        DAR = [130.778797, -12.346823, 131.015251, -12.532209]
-        return DAR
-    elif city_str == "HOB":
-        HOB = [147.151422, -42.751293, 147.452172, -42.944606]
-        return HOB
     else:
         print("Invalid city")
         return None
