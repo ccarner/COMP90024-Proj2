@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, createRef } from "react";
 import mapboxgl from "mapbox-gl";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
 
 const map_styles = {
   // width: "100vw",
@@ -24,7 +25,7 @@ export default function MapBox() {
       center: [lng, lat],
       zoom: zoom,
       attributionControl: false,
-    })
+    });
   });
 
   useEffect(() => {
@@ -37,6 +38,22 @@ export default function MapBox() {
   });
 
   return (
-    <div ref={mapContainer} className="map-container" style={map_styles} />
+    <div>
+      {/* <AppBar>
+        <Toolbar
+          disableGutters
+          style={{
+            maxWidth: "1280px",
+            margin: "0 auto",
+            width: "100%",
+            padding: "0 16px",
+            position: 'relative',
+          }}
+        >
+          <Typography>Cluster and Cloud Computing Project 2</Typography>
+        </Toolbar>
+      </AppBar> */}
+      <div ref={mapContainer} className="map-container" style={map_styles} />
+    </div>
   );
 }
