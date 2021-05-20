@@ -1,10 +1,29 @@
 import React, { useEffect, useRef, useState } from "react";
 import Layout from "../components/Layout";
-import { Container, Grid, Typography, Avatar, Button } from "@material-ui/core";
+import { Container, Grid, Typography, Avatar, Button, makeStyles } from "@material-ui/core";
+ 
 
+const useStyles = makeStyles((theme) => ({
+  toolbarMargin: {
+    ...theme.mixins.toolbar,
+    marginBottom: `5em`,
+    [theme.breakpoints.down("md")]: {
+      marginBottom: "4em",
+    },
+    [theme.breakpoints.down("xs")]: {
+      marginBottom: "2em",
+    },
+  },
+}));
 export default function Stats() {
+
+
+  const classes = useStyles();
+
   return (
     <Layout title="Cluster and Cloud Computing Project 2" description="COMP">
+      <div className={classes.toolbarMargin} />
+
       <Container maxWidth="md">
         <Typography
           variant="h1"

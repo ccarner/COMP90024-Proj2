@@ -35,16 +35,7 @@ function ElevationScroll(props) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  toolbarMargin: {
-    ...theme.mixins.toolbar,
-    marginBottom: `5em`,
-    [theme.breakpoints.down("md")]: {
-      marginBottom: "4em",
-    },
-    [theme.breakpoints.down("xs")]: {
-      marginBottom: "2em",
-    },
-  },
+
   logo: {
     color: theme.palette.secondary.main,
     width: "max-content",
@@ -183,7 +174,6 @@ const Header = () => {
         </AppBar>
       </ElevationScroll>
 
-      <div className={classes.toolbarMargin} />
     </>
   );
 };
