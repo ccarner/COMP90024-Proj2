@@ -104,3 +104,13 @@ def runStreamer(city_str):
             time.sleep(60*5)
             continue
 
+
+            
+# if this script is run from command line as python city
+# we want it to run the streamer
+if __name__ == '__main__':
+    try:
+        city = sys.argv[1]
+        twitterStreamer.runStreamer(city)
+    except IndexError:
+        pass
