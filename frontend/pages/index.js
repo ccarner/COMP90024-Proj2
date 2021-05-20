@@ -1,48 +1,40 @@
-import Head from 'next/head';
 import React, { useEffect, useRef, useState} from 'react';
-import mapboxgl from 'mapbox-gl';
+import { Container, Grid, Typography, Avatar, Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
-const map_styles = {
-  width: "100vw",
-  height: "calc(100vh - 115px)",
-  position: "absolute"
-};
+import mapboxgl from 'mapbox-gl';
+import Layout from '../components/Layout';
+import MapBox from '../components/MapBox';
+
+const useStyles = makeStyles((theme) => ({
+  btn: {
+    background: theme.palette.primary.main,
+    color: theme.palette.secondary.main,
+    border: `1px solid ${theme.palette.primary.main}`,
+    "&:hover": {
+      color: theme.palette.primary.main,
+    },
+  },
+  img: {
+    width: "100%",
+    height: "auto",
+    boxShadow: "0px 2px 20px rgba(0,0,0,0.4)",
+  },
+  main: {
+    marginBottom: theme.spacing(4),
+  },
+}));
+
+
 
 export default function Home() {
-  const mapContainer = useRef(null);
-  const map = useRef(null);
-  const [lng, setLng] = useState(145.11);
-  const [lat, setLat] = useState(-37.84);
-  const [zoom, setZoom] = useState(9);
-      
-  useEffect(() => {
-      mapboxgl.accessToken = "pk.eyJ1IjoiYmluZ3gxIiwiYSI6ImNrb3ZpdjdmMDA3b28ycG1zczkzc3p2d2YifQ.XI1rQXCzrpvw5qNwSWM5qg"
-      if (map.current) return; // initialize map only once
-      map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: "mapbox://styles/shijiel2/cjvcb640p3oag1gjufck6jcio",
-      center: [lng, lat],
-      zoom: zoom
-      });
-  });
-      
-  useEffect(() => {
-  if (!map.current) return; // wait for map to initialize
-  map.current.on('move', () => {
-      setLng(map.current.getCenter().lng.toFixed(4));
-      setLat(map.current.getCenter().lat.toFixed(4));
-      setZoom(map.current.getZoom().toFixed(2));
-      }); 
-  });
+  const classes = useStyles();
       
   return (
-    <div>
-      <Head>
-        <title>Cluster and Cloud Computing Project 2</title>
-      </Head>
-      <main>
-        <div ref={mapContainer} className="map-container" style={map_styles}/>
-      </main>
-    </div>
+    <Layout title="Cluster and Cloud Computing Project 2" description="COMP">
+      {/* <Container maxWidth="md"> */}
+        <MapBox />
+      {/* </Container> */}
+    </Layout>
   )
 }      

@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState, createRef} from 'react';
 import mapboxgl from 'mapbox-gl';
 
-
-
-const styles = {
-    width: "100vw",
-    height: "calc(100vh - 115px)",
-    position: "absolute"
+const map_styles = {
+    // width: "100vw",
+    height: "100vh",
+    // position: "relative"
   };
 
 export default function MapBox() {
@@ -21,7 +19,7 @@ export default function MapBox() {
         if (map.current) return; // initialize map only once
         map.current = new mapboxgl.Map({
         container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/streets-v11',
+        style: "mapbox://styles/shijiel2/cjvcb640p3oag1gjufck6jcio",
         center: [lng, lat],
         zoom: zoom
         });
@@ -37,8 +35,6 @@ export default function MapBox() {
     });
         
     return (
-        <div>
-            <div className="map-container" />            
-        </div>
+        <div ref={mapContainer} className="map-container" style={map_styles}/>            
     );
  }
