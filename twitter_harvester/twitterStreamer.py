@@ -39,8 +39,9 @@ class tweetStreamer(tweepy.StreamListener):
 
     def on_error(self, status_code):
         if status_code == 420:
-            print("rate limit error! will temporarily disconnect")
+            print("rate limit error - sleep, then disconnect awhile!")
             # we must DC for code 420 which means rate limit
+            time.sleep(5*60)
             return False
 
 
