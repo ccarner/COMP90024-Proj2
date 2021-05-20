@@ -1,26 +1,24 @@
 import Link from "./Link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import {
-  Grid,
-  AppBar,
-  Toolbar,
-  Typography,
-  List,
-  ListItem,
-  ListItemText,
-  SwipeableDrawer,
-  IconButton,
-} from "@material-ui/core";
+import {Grid,AppBar,Toolbar,Typography,List,ListItem,ListItemText,SwipeableDrawer,IconButton} from "@material-ui/core";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-
 import MenuIcon from "@material-ui/icons/Menu";
-
 import { routes } from "../data/routes";
 
+const sections = [
+    { title: 'Melbourne', url: '#' },
+    { title: 'Sydney', url: '#' },
+    { title: 'Brisbane', url: '#' },
+    { title: 'Canberra', url: '#' },
+    { title: 'Darwin', url: '#' },
+    { title: 'Perth', url: '#' },
+    { title: 'Tasmania', url: '#' },
+  ];
+
+  
 function ElevationScroll(props) {
   const { children } = props;
 
@@ -30,12 +28,11 @@ function ElevationScroll(props) {
   });
 
   return React.cloneElement(children, {
-    elevation: trigger ? 4 : 0,
+    elevation: trigger ? 4 : 2,
   });
 }
 
 const useStyles = makeStyles((theme) => ({
-
   logo: {
     color: theme.palette.secondary.main,
     width: "max-content",
@@ -61,6 +58,18 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
     padding: "0 6em",
   },
+  toolbar:{
+    maxWidth: "1280px",
+    margin: "0 auto",
+    width: "100%",
+    borderBottom: `1px solid ${theme.palette.divider}`,
+  },
+  toolbarSecondary: {
+    justifyContent: 'space-between',
+    overflowX: 'auto',
+    backgroundColor: "#2E3138",
+    // opacity: 0.9,
+  },
   link: {
     fontSize: "1.25em",
     color: theme.palette.secondary.main,
@@ -68,19 +77,22 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.info.main,
     },
   },
-  toolbar:{
-    maxWidth: "1280px",
-    margin: "0 auto",
-    width: "100%",
-  }
+  toolbarLink: {
+    padding: theme.spacing(1),
+    color: theme.palette.secondary.main,
+    flexShrink: 0,
+    // "&:hover": {
+    //   color: theme.palette.info.main,
+    // },
+  },
 }));
 
-const Header = () => {
+const MapHeader = () => {
   const classes = useStyles();
   const theme = useTheme();
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
-
+  const [city, setCity] = useState("Melbourne");
   const [openDrawer, setOpenDrawer] = useState(false);
 
   const router = useRouter();
@@ -158,20 +170,36 @@ const Header = () => {
       </IconButton>
     </>
   );
+  console.log(city);
   return (
     <>
       <ElevationScroll>
         <AppBar className={classes.appBar}>
-          <Toolbar disableGutters className={classes.toolBar} style={{padding: matches ? "0 16px" : "24px"}}>
+          <Toolbar disableGutters className={classes.toolbar} style={{padding: matches ? "0 16px" : "24px",}}>
             <Link href="/">
               <Typography className={classes.logo}>Cluster and Cloud Computing Project 2</Typography>
             </Link>
             {matches ? drawer : tabs}
           </Toolbar>
+          <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
+            {sections.map((section) => (
+            <Link
+                noWrap
+                key={section.title}
+                // variant="body2"
+                href={section.url}
+                onClick = {() => setCity(section.title)}
+                className={classes.toolbarLink}
+            >
+              <Typography style = {{color: city === section.title ?"inherit":"6C6F7D", fontWeight: city === section.title && "bold",}}>
+                {section.title}
+              </Typography>
+            </Link>
+            ))}
+          </Toolbar>
         </AppBar>
       </ElevationScroll>
-
     </>
   );
 };
-export default Header;
+export default MapHeader;

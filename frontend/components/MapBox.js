@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState, createRef } from "react";
 import mapboxgl from "mapbox-gl";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
-
+import MapHeader from "./MapHeader";
+import Footer from "./Footer";
+import Head from "next/head";
+ 
 const map_styles = {
   // width: "100vw",
   height: "100vh",
@@ -38,22 +41,15 @@ export default function MapBox() {
   });
 
   return (
-    <div>
-      {/* <AppBar>
-        <Toolbar
-          disableGutters
-          style={{
-            maxWidth: "1280px",
-            margin: "0 auto",
-            width: "100%",
-            padding: "0 16px",
-            position: 'relative',
-          }}
-        >
-          <Typography>Cluster and Cloud Computing Project 2</Typography>
-        </Toolbar>
-      </AppBar> */}
+    <>
+      <Head>
+        <title>
+          "COMP90024"
+        </title>
+      </Head>
+      <MapHeader/>
       <div ref={mapContainer} className="map-container" style={map_styles} />
-    </div>
-  );
+      <Footer />
+    </>
+  )
 }

@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState} from 'react';
-import { Container, Grid, Typography, Avatar, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import mapboxgl from 'mapbox-gl';
+import Header from '../components/Header';
 import Layout from '../components/Layout';
 import MapBox from '../components/MapBox';
 
@@ -31,10 +30,6 @@ export default function Home() {
   const classes = useStyles();
       
   return (
-    <Layout title="Cluster and Cloud Computing Project 2" description="COMP">
-      {/* <Container maxWidth="md"> */}
-        <MapBox />
-      {/* </Container> */}
-    </Layout>
+      <MapBox />
   )
 }      

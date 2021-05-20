@@ -73,7 +73,7 @@ const Footer = () => {
           }}
         >
           <Typography className={classes.copylight}>
-          &copy; bingx1 - ccarner - mmarik - BLULHAM
+          &copy; bingx1 - ccarner - mamarik - BLULHAM
           </Typography>
         </Grid>
       </Container>
