@@ -12,7 +12,6 @@ class tweetStreamer(tweepy.StreamListener):
     def __init__(self, city_str, max_time=1000000):
         self.start = time.time()
         self.limit = max_time
-        self.count = 0
         self.city = city_str
         self.ourCouch = couchDatabase.CouchDatabase()
         self.processor = process.Processor(city_str)
@@ -22,14 +21,13 @@ class tweetStreamer(tweepy.StreamListener):
     def on_status(self, status):
         # tweet as json file
         tweet = status._json
-        self.count += 1
         # ensure not a retweet
         if not hasattr(status, "retweeted_status"):
             # process tweet and get dict
             tweetDict = self.processor.processTweet(tweet)
             print(tweetDict)
             # add to dict
-            self.ourCouch.add_tweet(tweetDict, 'twitter')
+            self.ourCouch.add_tweet(tweetDict, self.city)
 
         # check time limit and exit if exceeded
         if (time.time() - self.start) > self.limit:
@@ -64,19 +62,19 @@ def getAuth(fileLoc):
 
 # get the coordinates for the relevant city for use in twitter streamer filter
 def getCityCoords(city_str):
-    if city_str == "MELB":
+    if city_str == "melbourne":
         MELB = [144.05143, -38.45143, 145.64219, -37.34171]
         return MELB
-    elif city_str == "SYD":
+    elif city_str == "sydney":
         SYD = [150.436268, -34.126157, 151.403528, -33.569185]
         return SYD
-    elif city_str == "BRIS":
+    elif city_str == "brisbane":
         BRIS = [152.649805, -27.960568, 153.504633, -26.988025]
         return BRIS
-    elif city_str == "PER":
+    elif city_str == "perth":
         PER = [115.408955, -31.591256, 116.499348, -32.631133]
         return PER
-    elif city_str == "ADL":
+    elif city_str == "adelaide":
         ADL = [138.241227, -34.537995, 138.934533, -35.299131]
         return ADL
     else:
