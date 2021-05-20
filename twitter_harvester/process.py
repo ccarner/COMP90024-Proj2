@@ -21,27 +21,27 @@ def createDictionaries(shapeFile, codeCol, nameCol, geomCol):
 # we will probably only use the melbourne one since we dont care about sa2 for other cities
 # included here for completeness
 def assignShapeFile(city_str):
-    if city_str == "MELB":
+    if city_str == "melbourne":
         # set up shape files for processing tweets
         shapeFile = "shp-pop/MELB/118d4d92-477a-4763-b824-3d34ff04720d.shp"
         geomDict, namesDict = createDictionaries(shapeFile, "sa2_mainc0", "sa2_name", "geometry")
         return geomDict, namesDict
-    elif city_str == "SYD":
+    elif city_str == "sydney":
         # set up shape files for processing tweets
         shapeFile = "shp-pop/SYD/11f5c712-2791-4ff4-b6cc-755ca3b6cb88.shp"
         geomDict, namesDict = createDictionaries(shapeFile, "sa2_mainc0", "sa2_name", "geometry")
         return geomDict, namesDict
-    elif city_str == "BRIS":
+    elif city_str == "brisbane":
         # set up shape files for processing tweets
         shapeFile = "shp-pop/BRIS/225e1af6-0673-4c08-8b22-0a50d2734088.shp"
         geomDict, namesDict = createDictionaries(shapeFile, "sa2_mainc0", "sa2_name", "geometry")
         return geomDict, namesDict
-    elif city_str == "PER":
+    elif city_str == "perth":
         # set up shape files for processing tweets
         shapeFile = "shp-pop/PER/92b7725b-0803-4b2e-8554-d6943db3b21e.shp"
         geomDict, namesDict = createDictionaries(shapeFile, "sa2_mainc0", "sa2_name", "geometry")
         return geomDict, namesDict
-    elif city_str == "ADL":
+    elif city_str == "adelaide":
         # set up shape files for processing tweets
         shapeFile = "shp-pop/ADL/2fdb22a2-164b-4c67-b002-0e6673ad5f81.shp"
         geomDict, namesDict = createDictionaries(shapeFile, "sa2_mainc0", "sa2_name", "geometry")
