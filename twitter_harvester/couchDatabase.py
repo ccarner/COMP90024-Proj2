@@ -2,6 +2,7 @@ import couchdb
 from couchdb.design import ViewDefinition
 import requests
 import json
+from datetime import date
 import mapreducefunct as mr
 
 
@@ -87,6 +88,8 @@ class CouchDatabase:
             count = [x['value']['count'] for x in output_json['rows']]
             if view == 'byWeek':
                 time = [str(x['key'][1]) + "-" + str(x['key'][2]) for x in output_json['rows']]
+                toDate = lambda x : date.fromisocalendar(int(x.split("-")[0]),int(x.split("-")[1]),1)
+                time = [toDate(x).strftime('%d-%m-%Y') for x in time]
                 return avg_sentiment, count, time
             else:
                 sa2 = [x['key'][0] for x in output_json['rows']]
