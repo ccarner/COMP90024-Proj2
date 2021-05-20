@@ -111,6 +111,6 @@ def runStreamer(city_str):
 if __name__ == '__main__':
     try:
         city = sys.argv[1]
-        tweetStreamer.runStreamer(city)
+        runStreamer(city)
     except IndexError:
         pass
