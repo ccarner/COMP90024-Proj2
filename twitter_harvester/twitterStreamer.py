@@ -41,7 +41,7 @@ class tweetStreamer(tweepy.StreamListener):
         if status_code == 420:
             print("rate limit error - sleep, then disconnect awhile!")
             # we must DC for code 420 which means rate limit
-            time.sleep(5*60)
+            time.sleep(15*60)
             return False
 
 
@@ -102,7 +102,7 @@ def runStreamer(city_str):
             tweetStream.filter(locations=getCityCoords(city_str),languages=['en'])
         except (ProtocolError, AttributeError):
             # if error, sleep for 5 mins
-            time.sleep(60*5)
+            time.sleep(60*15)
             continue
 
 
