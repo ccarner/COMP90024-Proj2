@@ -86,7 +86,7 @@ def getCityCoords(city_str):
 # run the actual streamer continually
 def runStreamer(city_str):
     # first authenticate
-    consumerKey, secretKey, bearerKey, access, accessSecret = getAuth("./keys_mamarik.txt")  # grab keys
+    consumerKey, secretKey, bearerKey, access, accessSecret = getAuth("./twitter_keys.txt")  # grab keys
     auth = tweepy.OAuthHandler(consumerKey, secretKey)
     auth.set_access_token(access, accessSecret)
     api = tweepy.API(auth)
