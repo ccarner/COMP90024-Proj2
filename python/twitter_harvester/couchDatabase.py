@@ -9,7 +9,7 @@ import mapreducefunct as mr
 class CouchDatabase:
 
     def __init__(self):
-        with open("./couchdb_pw.txt", 'r') as f:
+        with open("./couchdb_pword.txt", 'r') as f:
             self.DB = couchdb.Server('http://' + next(f) + '@localhost:5984')
         self.setup_databases()
 
