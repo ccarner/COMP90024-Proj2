@@ -36,7 +36,7 @@ def request_twitter_corpus(city, date_start="1/1/2020", date_end="30/4/2021", ev
                 # only process and add tweet if i) has coordinates or ii) is every 20th tweet
                 # this is to ensure we can finish in time
                 if tweet['coordinates'] is not None or counter % int(every_nth_tweet) == 0:
-                    tweet_dict = processor.processTweet(tweet)
+                    tweet_dict = processor.process_tweet(tweet)
                     our_couch.add_tweet(tweet_dict, city)
                 counter += 1
             except json.decoder.JSONDecodeError:
