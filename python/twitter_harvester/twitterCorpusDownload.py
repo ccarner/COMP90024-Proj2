@@ -5,7 +5,7 @@ import couchDatabase
 import sys
 
 
-def request_twitter_corpus(city, date_start="1/1/2020", date_end="30/4/2021", every_nth_tweet=100):
+def request_twitter_corpus(city, date_start="1/1/2020", date_end="30/4/2021", every_nth_tweet=1000):
     # create tweet processor
     processor = process.Processor(city)
 
