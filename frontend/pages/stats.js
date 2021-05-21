@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Layout from "../components/Layout";
 import { Container, Grid, Typography, Avatar, Button, makeStyles } from "@material-ui/core";
 import LineChart from "../components/Chart";
+import DoughnutChart from "../components/Doughnut";
 
 const useStyles = makeStyles((theme) => ({
   toolbarMargin: {
@@ -43,6 +44,7 @@ export default function Stats() {
         <Grid item>
           <Container maxWidth="sm">
               <LineChart/>
+              <DoughnutChart/>
           </Container>
         </Grid>
       </Container>

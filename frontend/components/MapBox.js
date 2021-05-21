@@ -40,6 +40,8 @@ export default function MapBox() {
     });
   });
 
+  console.log(" Long: " + lng + " Lat: " + lat);
+
   return (
     <>
       <Head>
@@ -47,7 +49,7 @@ export default function MapBox() {
           "COMP90024"
         </title>
       </Head>
-      <MapHeader/>
+      <MapHeader Map={map.current} changeLat={setLat} changeLong={setLng}/>
       <div ref={mapContainer} className="map-container" style={map_styles} />
       <Footer />
     </>

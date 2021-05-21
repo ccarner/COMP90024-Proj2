@@ -9,15 +9,14 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { routes } from "../data/routes";
 
 const sections = [
-    { title: 'Melbourne', url: '#' },
-    { title: 'Sydney', url: '#' },
-    { title: 'Brisbane', url: '#' },
-    { title: 'Canberra', url: '#' },
-    { title: 'Darwin', url: '#' },
-    { title: 'Perth', url: '#' },
-    { title: 'Tasmania', url: '#' },
+    { title: 'Melbourne', url: '#',lng:145.11,lat:-37.84},
+    { title: 'Sydney', url: '#', lng: 151.21, lat: -33.87},
+    { title: 'Brisbane', url: '#', lng: 153.02, lat:-27.47},
+    { title: 'Canberra', url: '#', lng: 149.13, lat: -35.28},
+    { title: 'Darwin', url: '#', lng: 130.84, lat: -12.46},
+    { title: 'Perth', url: '#', lng: 115.86, lat: -31.95},
+    { title: 'Hobart', url: '#', lng: 147.32, lat:-42.88},
   ];
-
   
 function ElevationScroll(props) {
   const { children } = props;
@@ -87,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MapHeader = () => {
+const MapHeader = ({Map, changeLat, changeLong}) => {
   const classes = useStyles();
   const theme = useTheme();
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -171,6 +170,7 @@ const MapHeader = () => {
     </>
   );
   console.log(city);
+
   return (
     <>
       <ElevationScroll>
@@ -188,7 +188,14 @@ const MapHeader = () => {
                 key={section.title}
                 // variant="body2"
                 href={section.url}
-                onClick = {() => setCity(section.title)}
+                onClick = {() => {
+                  setCity(section.title);
+                  console.log(`Changing longitude and latitude to ${section.title}`);
+                  changeLat(section.lat);
+                  changeLong(section.lng);
+                  console.log(`Flying to: ${section.lng}, ${section.lat}`);
+                  Map.flyTo({centre:[section.lng, section.lat], speed: 2000});
+                }}
                 className={classes.toolbarLink}
             >
               <Typography style = {{color: city === section.title ?"inherit":"6C6F7D", fontWeight: city === section.title && "bold",}}>
