@@ -39,7 +39,7 @@ def request_twitter_corpus(city, date_start="1/1/2020", date_end="30/4/2021", ev
                     tweet_dict = processor.process_tweet(tweet)
                     our_couch.add_tweet(tweet_dict, city)
                 counter += 1
-            except json.decoder.JSONDecodeError:
+            except:
                 # could not parse (usually will be first or last line)
                 pass
 
