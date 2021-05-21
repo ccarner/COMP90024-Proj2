@@ -9,7 +9,8 @@ import mapreducefunct as mr
 class CouchDatabase:
 
     def __init__(self):
-        self.DB = couchdb.Server('http://admin:admin@172.17.0.2:5984')
+        with open("./couchdb_pw.txt", 'r') as f:
+            self.DB = couchdb.Server('http://' + next(f) + '@localhost:5984')
         self.setup_databases()
 
     def setup_databases(self) -> None:
@@ -66,6 +67,7 @@ class CouchDatabase:
             pass
 
     def create_views(self, db):
+        # https://markhaa.se/posts/couchdb-views-in-python/
         # create the two views we will need (by week and by suburb)
         # note that if they already exist in the DB it won't do anything
         view_by_week = ViewDefinition('sentimentDocs', 'byWeek', mr.MAP_BY_WEEK, reduce_fun=mr.REDUCE_STATS)
@@ -88,7 +90,7 @@ class CouchDatabase:
             count = [x['value']['count'] for x in output_json['rows']]
             if view == 'byWeek':
                 time = [str(x['key'][1]) + "-" + str(x['key'][2]) for x in output_json['rows']]
-                toDate = lambda x : date.fromisocalendar(int(x.split("-")[0]),int(x.split("-")[1]),1)
+                toDate = lambda x: date.fromisocalendar(int(x.split("-")[0]), int(x.split("-")[1]), 1)
                 time = [toDate(x).strftime('%d-%m-%Y') for x in time]
                 return avg_sentiment, count, time
             else:
