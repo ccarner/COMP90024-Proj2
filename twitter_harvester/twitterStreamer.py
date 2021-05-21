@@ -24,7 +24,7 @@ class tweetStreamer(tweepy.StreamListener):
         # ensure not a retweet
         if not hasattr(status, "retweeted_status"):
             # process tweet and get dict
-            tweetDict = self.processor.processTweet(tweet)
+            tweetDict = self.processor.process_tweet(tweet)
             print(tweetDict)
             # add to dict
             self.ourCouch.add_tweet(tweetDict, self.city)
@@ -39,7 +39,7 @@ class tweetStreamer(tweepy.StreamListener):
 
     def on_error(self, status_code):
         if status_code == 420:
-            print("rate limit error - sleep, then disconnect awhile!")
+            print("rate limit error - sleep awhile, then disconnect!")
             # we must DC for code 420 which means rate limit
             time.sleep(15*60)
             return False
@@ -101,7 +101,7 @@ def runStreamer(city_str):
             # filter by location (i.e. choose a corresponding city) and appropriate language
             tweetStream.filter(locations=getCityCoords(city_str),languages=['en'])
         except (ProtocolError, AttributeError):
-            # if error, sleep for 5 mins
+            # if error, sleep for 15 mins
             time.sleep(60*15)
             continue
 
