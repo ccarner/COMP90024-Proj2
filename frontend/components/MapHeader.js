@@ -12,10 +12,8 @@ const sections = [
     { title: 'Melbourne', url: '#',lng:145.11,lat:-37.84},
     { title: 'Sydney', url: '#', lng: 151.21, lat: -33.87},
     { title: 'Brisbane', url: '#', lng: 153.02, lat:-27.47},
-    { title: 'Canberra', url: '#', lng: 149.13, lat: -35.28},
-    { title: 'Darwin', url: '#', lng: 130.84, lat: -12.46},
     { title: 'Perth', url: '#', lng: 115.86, lat: -31.95},
-    { title: 'Hobart', url: '#', lng: 147.32, lat:-42.88},
+    { title: 'Adelaide', url: '#', lng: 138.60, lat:-34.93},
   ];
   
 function ElevationScroll(props) {
