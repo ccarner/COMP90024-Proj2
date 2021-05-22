@@ -10,7 +10,8 @@ class CouchDatabase:
 
     def __init__(self):
         with open("./couchdb_pword.txt", 'r') as f:
-            self.DB = couchdb.Server('http://' + next(f) + '@localhost:5984')
+            self.url = 'http://' + next(f) + '@localhost:5984'
+            self.DB = couchdb.Server(self.url)
         self.setup_databases()
 
     def setup_databases(self) -> None:
@@ -79,8 +80,7 @@ class CouchDatabase:
         view_by_suburb.sync(self.DB[db])
 
     def get_view(self, database, view='byWeek', level=3):
-        url = "http://admin:admin@172.17.0.2:5984/{}/_design/sentimentDocs/_view/{}?reduce=true&group_level={}".format(
-            database, view, level)
+        url = self.url + "/{}/_design/sentimentDocs/_view/{}?reduce=true&group_level={}".format(database, view, level)
         output = requests.get(url)
         if output.status_code == 404:
             print("Unable to retrieve view")
