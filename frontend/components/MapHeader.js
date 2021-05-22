@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MapHeader = ({Map, changeLat, changeLong}) => {
+const MapHeader = ({goToCoord}) => {
   const classes = useStyles();
   const theme = useTheme();
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -189,10 +189,7 @@ const MapHeader = ({Map, changeLat, changeLong}) => {
                 onClick = {() => {
                   setCity(section.title);
                   console.log(`Changing longitude and latitude to ${section.title}`);
-                  changeLat(section.lat);
-                  changeLong(section.lng);
-                  console.log(`Flying to: ${section.lng}, ${section.lat}`);
-                  Map.flyTo({centre:[section.lng, section.lat], speed: 2000});
+                  goToCoord(section.lng, section.lat);
                 }}
                 className={classes.toolbarLink}
             >
