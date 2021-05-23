@@ -2,9 +2,9 @@ import React, {useState} from "react";
 import MapHeader from "./MapHeader";
 import Footer from "./Footer";
 import Head from "next/head";
-import MapGL, {FlyToInterpolator, Source, Layer, Marker} from 'react-map-gl';
-// import * as melb_geo from '../constants/melbourne.geojson';
-// import Axios from 'axios';
+import MapGL, {FlyToInterpolator, Source, Layer} from 'react-map-gl';
+import ControlPanel from "./ControlPanel";
+
 
 const suburbLayer = {
   id: 'suburbs_data',
@@ -43,6 +43,7 @@ export default function MapBox({suburbData}) {
   };
 
   const [city, setCity] = useState("Melbourne");
+  const [year, setYear] = useState(2020);
 
   return (
     <>
@@ -64,6 +65,7 @@ export default function MapBox({suburbData}) {
         <Layer {...suburbLayer} />
       </Source>
       </MapGL>
+      <ControlPanel year={year} onChange={value => setYear(value)} />
       <Footer />
     </>
   )
