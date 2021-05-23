@@ -9,20 +9,12 @@ function ControlPanel(props) {
     <div className={styles.controlpanel}>
       <h3>Interactive GeoJSON</h3>
       <p>
-        Map showing median household income by state in year <b>{year}</b>. Hover over a state to
+        Map showing sentiment by state in year <b>{year}</b>. Hover over a state to
         see details.
       </p>
       <p>
-        Data source: <a href="www.census.gov">US Census Bureau</a>
+        Data source: <a href="https://aurin.org.au/">AURIN</a>
       </p>
-      <div className="source-link">
-        <a
-          href="https://github.com/visgl/react-map-gl/tree/6.0-release/examples/geojson"
-          target="_new"
-        >
-          View Code ↗
-        </a>
-      </div>
       <hr />
 
       <div key={'year'} className="input">
