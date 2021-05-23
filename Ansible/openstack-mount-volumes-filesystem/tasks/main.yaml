@@ -1,0 +1,20 @@
+---
+- name: Give the volume a file system
+  become: yes
+  filesystem:
+    fstype: ext4
+    dev: "{{ volume_device }}"
+
+- name: Create the directory to serve as mounting point
+  become: yes
+  file:
+    path: "{{ volume_mount_point }}"
+    state: directory
+
+- name: Mount the volume
+  become: yes
+  mount:
+    path: "{{ volume_mount_point }}"
+    src: "{{ volume_device }}"
+    fstype: ext4
+    state: mounted

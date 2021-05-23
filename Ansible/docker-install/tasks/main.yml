@@ -1,0 +1,90 @@
+---
+
+#sudo apt-get update; sudo apt-get install python-pip
+- name: Install Pip (this could take up to 5 mins)
+  become: yes
+  apt:
+    name: ["python3-pip"]
+    state: latest
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"
+
+#pip install --upgrade pip
+- name: Update pip
+  become: yes
+  pip:
+    name: "pip"
+    state: latest
+
+# below as per https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-docker-on-ubuntu-18-04
+- name: Install aptitude using apt
+  become: yes
+  apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+
+- name: Install required system packages
+  become: yes
+  apt: name={{ item }} state=latest update_cache=yes
+  loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
+
+- name: Add Docker GPG apt Key
+  become: yes
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker Repository
+  become: yes
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu bionic stable
+    state: present
+    
+- name: Update apt and install docker-ce
+  become: yes
+  apt: update_cache=yes name=docker-ce state=latest
+
+- name: Install Docker Module for Python
+  become: yes
+  pip:
+    name: docker
+
+# configure proxy for docker CONTAINERS
+# as per https://docs.docker.com/network/proxy/
+- name: Create docker container config directory
+  become: yes
+  file:
+    path: ~/.docker
+    state: directory
+
+- name: copy docker container proxy config file
+  become: yes
+  copy:
+    src: ./configuration_files/docker_config.json
+    dest: ~/.docker/config.json
+
+# proxy config for docker itself (ie pulling images etc) 
+# as per https://docs.docker.com/config/daemon/systemd/
+- name: create docker daemon proxy directory
+  become: yes
+  file:
+    path: /etc/systemd/system/docker.service.d
+    state: directory
+
+- name: copy docker daemon proxy config file
+  become: yes
+  copy:
+    src: ./configuration_files/docker_http-proxy.conf
+    dest: /etc/systemd/system/docker.service.d/http-proxy.conf
+
+# restart and reload systemctl daemon to find changes, and also reload docker
+- name: refresh systemctl daemon and reload docker
+  become: yes
+  ansible.builtin.systemd:
+    name: docker
+    state: restarted
+    daemon_reload: yes    
+
+
+
+
+
+

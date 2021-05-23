@@ -1,0 +1,16 @@
+---
+- name: copy all ../python files to server ~/python (this could take a while...)
+  copy:
+    src: ../python/
+    dest: ~/python/
+
+- name: Install python requirements from requrirements.txt
+  become: true
+  pip:
+    requirements: /home/ubuntu/python/requirements.txt
+
+- name: start python scripts with cityname
+  shell: 'echo {{item}} >> ~/cities_this_vm_analysing.txt; python3 ~/python/main.py {{item}}'
+  loop: '{{ city_names }}'
+  args:
+    chdir: ~/python

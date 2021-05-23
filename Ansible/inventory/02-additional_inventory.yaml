@@ -1,0 +1,17 @@
+---
+#defines the cities for each instance to be analysing
+instance-1:
+  vars:
+    city_names: '["melbourne"]'
+
+instance-2:
+  vars:
+    city_names: '["brisbane", "perth"]'
+
+instance-3:
+  vars:
+    city_names: '["melbourne"]'
+
+instance-4:
+  vars:
+    city_names: '["adelaide"]'

@@ -8,7 +8,7 @@
     flavor: "{{item.flavor}}"
     availability_zone: "{{availability_zone}}"
     security_groups: "{{sg_names}}"
-    volumes: "{{item.volumes}}"
+    volumes: "{{item.volumes}}" #automatically associates with the volume
     auto_floating_ip: yes
     wait: yes
     timeout: 600
@@ -32,3 +32,20 @@
     search_regex: OpenSSH
   loop: "{{os_instance.results}}"
   when: item.openstack is defined
+
+
+#add hosts to in memory inventory so we can refer to them in later scripts
+- name: add hosts
+  add_host:
+    name: '{{item.openstack.public_v4}}'
+    groups: COMP90024-all
+  loop: '{{ os_instance.results }}'
+  when: item.openstack is defined
+
+
+# add the main/control node to its own group to the inmemory inventory
+- name: add main host
+  add_host:
+    name: '{{ os_instance.results[0].openstack.public_v4 }}'
+    group: COMP90024-main
+

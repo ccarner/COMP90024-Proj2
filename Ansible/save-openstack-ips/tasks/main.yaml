@@ -1,0 +1,6 @@
+---
+# saves a lists of IPs for the MRC instances
+# see thes script files for more info
+
+- name: run the scripts to get IPs and configure couchDB
+  shell: python3 ./inventory/01-openstack_inventory.py --list | python3 ./configuration_scripts/hosts_ip_string.py > ./openstack-ips.txt

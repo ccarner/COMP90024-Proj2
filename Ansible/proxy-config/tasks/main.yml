@@ -1,0 +1,14 @@
+---
+# put this in here for now, setting up the proxy, since currently ansible is being WEIRD and not playing multiple roles
+- name: copy config files needed to setup proxy
+  copy:
+    src: ./configuration_files/http_proxy_append.txt
+    dest: /home/ubuntu/http_proxy_append.txt
+
+- name: append proxy strings to /etc/environment
+  become: true
+  shell: cat /home/ubuntu/http_proxy_append.txt >> /etc/environment
+
+#hopefully this resets the SSH connection so the environment variables are reloaded
+- name: reset ssh connections
+  meta: reset_connection

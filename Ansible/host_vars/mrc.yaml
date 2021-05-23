@@ -35,6 +35,24 @@ security_groups:
     port_range_min: 443
     port_range_max: 443
     remote_ip_prefix: 0.0.0.0/0
+  - name: comp90024_proj2_couchdb_main
+    description: "Security group for COMP90024 project 2; allows couchdb"
+    protocol: tcp
+    port_range_min: 5984
+    port_range_max: 5984
+    remote_ip_prefix: 0.0.0.0/0
+  - name: comp90024_proj2_couchdb_erlang
+    description: "Security group for COMP90024 project 2; allows couchdb"
+    protocol: tcp
+    port_range_min: 9100
+    port_range_max: 9105
+    remote_ip_prefix: 0.0.0.0/0
+  - name: comp90024_proj2_couchdb_erlang_portmapper
+    description: "Security group for COMP90024 project 2; allows couchdb"
+    protocol: tcp
+    port_range_min: 4369
+    port_range_max: 4369
+    remote_ip_prefix: 0.0.0.0/0
 
 #Instances to create
 instances:
@@ -53,3 +71,12 @@ instances:
 
 instance_image: f8b79936-6616-4a22-b55d-0d0a1d27bceb #ubuntu 20.04
 instance_key_name: cloudssh # uses existing public/private keypair, TODO CHECK IF THIS OK (ie not uploading new one)
+
+#TODO: change this to be more secure, possibly read in from commandline etc.
+couch_db_username: admin
+couch_db_password: admin
+couch_db_secret: a192aeb93kfdsf893284usdkj01 #I just slapped the keyboard to make this string, perfectly random.
+
+# Mounting volumes
+volume_device: /dev/vdb #default device for attached instances in MRC/openstack
+volume_mount_point: /data #this is where we'll mount it to

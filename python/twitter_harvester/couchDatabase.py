@@ -11,7 +11,7 @@ class CouchDatabase:
 
     def __init__(self):
         with open("./twitter_harvester/couchdb_pword.txt", 'r') as f:
-            self.url = 'http://' + next(f) + '@localhost:5984'
+            self.url = 'http://' + next(f).strip() + '@localhost:5984'
             self.DB = couchdb.Server(self.url)
         self.setup_databases()
 

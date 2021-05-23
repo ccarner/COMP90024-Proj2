@@ -1,0 +1,17 @@
+---
+# setup couchdb cluster
+
+- name: copy config files needed to get MRC IP addresses
+  copy:
+    src: ./configuration_scripts/couchdb_cluster_configure.sh
+    dest: ~/couchdb_cluster_configure.sh
+    mode: 0775
+
+- name: copy list of IPs in instances in the deployment
+  copy:
+    src: ./openstack-ips.txt
+    dest: ~/openstack-ips.txt
+
+#note this can access the docker couch container via localhost port
+- name: run the scripts to get IPs and configure couchDB
+  shell: ~/couchdb_cluster_configure.sh

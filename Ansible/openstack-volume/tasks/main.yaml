@@ -18,4 +18,4 @@
 
 - name: Show openstack volume information
   debug:
-    msg: "Volumnes have been created: {{ os_vol.results }}"
+    msg: "Volumes have been created: {{ os_vol.results }}"
