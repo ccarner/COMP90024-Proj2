@@ -51,7 +51,7 @@ export default function MapBox({suburbData}) {
           "COMP90024"
         </title>
       </Head>
-      <MapHeader goToCoord={goTo} currCity={city} changeCityTo={setCity}/>
+      <MapHeader goToCoord={goTo} currCity={city} changeCityTo={setCity} usage={"map"}/>
       <MapGL
         {...viewport}
         width="100vw"

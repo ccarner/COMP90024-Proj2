@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MapHeader = ({goToCoord, currCity, changeCityTo}) => {
+const MapHeader = ({goToCoord, currCity, changeCityTo, usage}) => {
   const classes = useStyles();
   const theme = useTheme();
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -188,7 +188,9 @@ const MapHeader = ({goToCoord, currCity, changeCityTo}) => {
                 onClick = {() => {
                   changeCityTo(section.title);
                   console.log(`Changing longitude and latitude to ${section.title}`);
-                  goToCoord(section.lng, section.lat);
+                  if (usage == "map"){
+                    goToCoord(section.lng, section.lat);
+                  }
                 }}
                 className={classes.toolbarLink}
             >
