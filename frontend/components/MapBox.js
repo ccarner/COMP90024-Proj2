@@ -2,12 +2,40 @@ import React, {useState} from "react";
 import MapHeader from "./MapHeader";
 import Footer from "./Footer";
 import Head from "next/head";
-import MapGL, {FlyToInterpolator} from 'react-map-gl';
-// import * from 'd3-ease';
+import MapGL, {FlyToInterpolator, Source, Layer, Marker} from 'react-map-gl';
+// import * as melb_geo from '../constants/melbourne.geojson';
+// import Axios from 'axios';
 
-const MAPBOX_TOKEN = "pk.eyJ1IjoiYmluZ3gxIiwiYSI6ImNrb3ZpdjdmMDA3b28ycG1zczkzc3p2d2YifQ.XI1rQXCzrpvw5qNwSWM5qg";
+const suburbLayer = {
+  id: 'suburbs_data',
+  type: 'line',
+  source: 'suburbs',
+  "paint": {
+    "line-color": "#22B0C0",
+    "line-width": 0.5,
+    "line-opacity": 1
+  }
+};
 
-export default function MapBox() {
+const geojson = {
+  type: 'FeatureCollection',
+  features: [
+    {type: 'Feature', geometry: {type: 'Point', coordinates: [145.11, -37.84]}}
+  ]
+};
+
+const layerStyle = {
+  id: 'point',
+  type: 'circle',
+  paint: {
+    'circle-radius': 10,
+    'circle-color': '#007cbf'
+  }
+};
+
+
+export default function MapBox({suburbData}) {
+  console.log(suburbData);
   const [viewport, setViewport] = useState({
     latitude: -37.84,
     longitude: 145.11,
@@ -30,8 +58,6 @@ export default function MapBox() {
     });
   };
 
-  console.log(MAPBOX_TOKEN)
-
   return (
     <>
       <Head>
@@ -45,11 +71,13 @@ export default function MapBox() {
         width="100vw"
         height="100vh"
         mapStyle="mapbox://styles/shijiel2/cjvcb640p3oag1gjufck6jcio"
-        // mapStyle="mapbox://styles/mapbox/dark-v9"
         onViewportChange={setViewport}
-        mapboxApiAccessToken={MAPBOX_TOKEN}
-      />
-      {/* <button onClick={goToNYC}>New York City</button> */}
+        mapboxApiAccessToken={process.env.MAPBOX_API_TOKEN}
+      >
+      <Source id="suburbs" type="geojson" data={suburbData}>
+        <Layer {...suburbLayer} />
+      </Source>
+      </MapGL>
       <Footer />
     </>
   )
