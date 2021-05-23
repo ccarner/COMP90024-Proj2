@@ -10,7 +10,7 @@ from .mapreducefunct import MAP_BY_SUBURB, MAP_BY_WEEK, REDUCE_STATS
 class CouchDatabase:
 
     def __init__(self):
-        with open("./couchdb_pword.txt", 'r') as f:
+        with open("./twitter_harvester/couchdb_pword.txt", 'r') as f:
             self.url = 'http://' + next(f) + '@localhost:5984'
             self.DB = couchdb.Server(self.url)
         self.setup_databases()

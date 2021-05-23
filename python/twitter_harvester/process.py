@@ -10,7 +10,8 @@ from dateutil import tz
 
 # create dictionaries given a shapefile as a GP df and column names
 def create_dictionaries(shapeFile, codeCol, nameCol, geomCol):
-    DF = gpd.read_file(shapeFile)
+    print(shapeFile)
+    DF = gpd.read_file("./twitter_harvester/" + shapeFile)
     geom = pd.Series(DF[geomCol].values, index=DF[codeCol]).to_dict()
     names = pd.Series(DF[nameCol].values, index=DF[codeCol]).to_dict()
     return geom, names
