@@ -15,7 +15,6 @@ export async function getStaticProps(context) {
   }
 }
 export default function Home({suburbData}) {      
-  // console.log(suburbData)
   return (
       <MapBox suburbData={suburbData}/>
   )

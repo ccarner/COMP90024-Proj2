@@ -53,6 +53,7 @@ export default function Analytics() {
           </Container>
         </Grid>
       </Container>
+      <div className={classes.toolbarMargin} />
       <Footer />
     </>
   );

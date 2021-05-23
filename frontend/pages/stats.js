@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: "4em",
     },
     [theme.breakpoints.down("xs")]: {
-      marginBottom: "2em",
+      marginBottom: "4em",
     },
   },
 }));
@@ -48,6 +48,7 @@ export default function Stats() {
           </Container>
         </Grid>
       </Container>
+      <div className={classes.toolbarMargin} />
     </Layout>
   );
 }
