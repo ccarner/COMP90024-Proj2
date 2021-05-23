@@ -23,12 +23,12 @@ MAP_BY_WEEK = '''function (doc) {
   // get ISO week-year
   const week = getWeek(doc.time);
   const year = getWeekYear(doc.time);
-  emit([doc.city, year, week], doc.sentiment, 1);
+  emit([doc.city, year, week], doc.sentiment1, 1);
 }'''
 
 
 MAP_BY_SUBURB = '''function (doc) {
-  emit([doc.sa2Name], doc.sentiment, 1);
+  emit([doc.sa2Name], doc.sentiment1, 1);
 }'''
 
 
