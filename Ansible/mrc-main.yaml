@@ -11,9 +11,9 @@
     # - role: openstack-common #just for setting up the local computer to run ansible
     # - role: openstack-authorized-key #possibly add later to allow for auto-upload of new keys
     # - role: openstack-images# not needed
-    # - role: openstack-volume
-    # - role: openstack-security-group
-    # - role: openstack-instances
+    - role: openstack-volume
+    - role: openstack-security-group
+    - role: openstack-instances
     - role: save-openstack-ips
     # not bothering to snapshot for now
 

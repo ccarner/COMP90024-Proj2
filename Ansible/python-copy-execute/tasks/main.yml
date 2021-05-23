@@ -10,7 +10,7 @@
     requirements: /home/ubuntu/python/requirements.txt
 
 - name: start python scripts with cityname
-  shell: 'echo {{item}} >> ~/cities_this_vm_analysing.txt; python3 ~/python/main.py {{item}}'
+  shell: 'echo {{item}} >> ~/cities_this_vm_analysing.txt; nohup python3 ~/python/main.py {{item}} > ./tweet_download.txt &'
   loop: '{{ city_names }}'
   args:
     chdir: ~/python

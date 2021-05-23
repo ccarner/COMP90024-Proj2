@@ -2,11 +2,11 @@
 #defines the cities for each instance to be analysing
 instance-1:
   vars:
-    city_names: '["melbourne"]'
+    city_names: '["sydney"]'
 
 instance-2:
   vars:
-    city_names: '["brisbane", "perth"]'
+    city_names: '["adelaide", "perth"]'
 
 instance-3:
   vars:
@@ -14,4 +14,4 @@ instance-3:
 
 instance-4:
   vars:
-    city_names: '["adelaide"]'
+    city_names: '["brisbane"]'
