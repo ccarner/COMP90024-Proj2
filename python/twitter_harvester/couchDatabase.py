@@ -3,7 +3,8 @@ from couchdb.design import ViewDefinition
 import requests
 import json
 from datetime import date
-import mapreducefunct as mr
+from .mapreducefunct import MAP_BY_SUBURB, MAP_BY_WEEK, REDUCE_STATS
+# import mapreducefunct as mr
 
 
 class CouchDatabase:
@@ -71,11 +72,11 @@ class CouchDatabase:
         # https://markhaa.se/posts/couchdb-views-in-python/
         # create the two views we will need (by week and by suburb)
         # note that if they already exist in the DB it won't do anything
-        view_by_week = ViewDefinition('sentimentDocs', 'byWeek', mr.MAP_BY_WEEK, reduce_fun=mr.REDUCE_STATS)
+        view_by_week = ViewDefinition('sentimentDocs', 'byWeek', MAP_BY_WEEK, reduce_fun=REDUCE_STATS)
         view_by_week.get_doc(self.DB[db])
         view_by_week.sync(self.DB[db])
 
-        view_by_suburb = ViewDefinition('sentimentDocs', 'bySuburb', mr.MAP_BY_SUBURB, reduce_fun=mr.REDUCE_STATS)
+        view_by_suburb = ViewDefinition('sentimentDocs', 'bySuburb', MAP_BY_SUBURB, reduce_fun=REDUCE_STATS)
         view_by_suburb.get_doc(self.DB[db])
         view_by_suburb.sync(self.DB[db])
 

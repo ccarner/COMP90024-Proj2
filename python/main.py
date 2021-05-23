@@ -1,7 +1,7 @@
 import sys
-sys.path.insert(0, './twitter_harvester')
-import twitterCorpusDownload
-import twitterStreamer
+# sys.path.insert(0, './twitter_harvester')
+from twitter_harvester import twitterCorpusDownload
+from twitter_harvester import twitterStreamer
 
 if __name__ == '__main__':
     try:
