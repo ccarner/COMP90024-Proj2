@@ -5,6 +5,12 @@ import Head from "next/head";
 import MapGL, {FlyToInterpolator, Source, Layer} from 'react-map-gl';
 import ControlPanel from "./ControlPanel";
 
+function concatGeoJSON(g1, g2){
+  return { 
+      "type" : "FeatureCollection",
+      "features": [... g1.features, ... g2.features]
+  }
+}
 
 const suburbLayer = {
   id: 'suburbs_data',
