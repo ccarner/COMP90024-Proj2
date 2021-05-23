@@ -17,22 +17,6 @@ const suburbLayer = {
   }
 };
 
-const geojson = {
-  type: 'FeatureCollection',
-  features: [
-    {type: 'Feature', geometry: {type: 'Point', coordinates: [145.11, -37.84]}}
-  ]
-};
-
-const layerStyle = {
-  id: 'point',
-  type: 'circle',
-  paint: {
-    'circle-radius': 10,
-    'circle-color': '#007cbf'
-  }
-};
-
 
 export default function MapBox({suburbData}) {
   console.log(suburbData);
@@ -58,6 +42,8 @@ export default function MapBox({suburbData}) {
     });
   };
 
+  const [city, setCity] = useState("Melbourne");
+
   return (
     <>
       <Head>
@@ -65,7 +51,7 @@ export default function MapBox({suburbData}) {
           "COMP90024"
         </title>
       </Head>
-      <MapHeader goToCoord={goTo}/>
+      <MapHeader goToCoord={goTo} currCity={city} changeCityTo={setCity}/>
       <MapGL
         {...viewport}
         width="100vw"

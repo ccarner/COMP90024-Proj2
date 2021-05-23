@@ -84,12 +84,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MapHeader = ({goToCoord}) => {
+const MapHeader = ({goToCoord, currCity, changeCityTo}) => {
   const classes = useStyles();
   const theme = useTheme();
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
-  const [city, setCity] = useState("Melbourne");
   const [openDrawer, setOpenDrawer] = useState(false);
 
   const router = useRouter();
@@ -167,7 +166,7 @@ const MapHeader = ({goToCoord}) => {
       </IconButton>
     </>
   );
-  console.log(city);
+  console.log(currCity);
 
   return (
     <>
@@ -187,13 +186,13 @@ const MapHeader = ({goToCoord}) => {
                 // variant="body2"
                 href={section.url}
                 onClick = {() => {
-                  setCity(section.title);
+                  changeCityTo(section.title);
                   console.log(`Changing longitude and latitude to ${section.title}`);
                   goToCoord(section.lng, section.lat);
                 }}
                 className={classes.toolbarLink}
             >
-              <Typography style = {{color: city === section.title ?"inherit":"6C6F7D", fontWeight: city === section.title && "bold",}}>
+              <Typography style = {{color: currCity === section.title ?"inherit":"6C6F7D", fontWeight: currCity === section.title && "bold",}}>
                 {section.title}
               </Typography>
             </Link>
