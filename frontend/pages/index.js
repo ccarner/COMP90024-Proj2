@@ -14,11 +14,25 @@ function concatGeoJSON(g1, g2){
   }
 }
 
-export async function getStaticProps(context) {
-  console.log("Fetching")
+function getGeoJSONArray(){
   const melb_geo =  require('../data/melbourne.json');
   const adelaide_geo = require('../data/adelaide.json');
-  const geojson = concatGeoJSON(melb_geo, adelaide_geo);
+  const perth_geo = require('../data/perth.json');
+  const sydney_geo = require('../data/sydney.json');
+  const brisbane_geo = require('../data/brisbane.json');
+  return [melb_geo, adelaide_geo, perth_geo, sydney_geo, brisbane_geo]
+}
+
+
+export async function getStaticProps(context) {
+  console.log("Fetching")
+
+  const geojsonArray = getGeoJSONArray();
+
+  const reducer = (accumulator, currentValue) => concatGeoJSON(accumulator, currentValue);
+
+  const geojson = geojsonArray.reduce(reducer);
+  
   return {
     props: {suburbData: geojson}
   }
