@@ -1,10 +1,10 @@
 import tweepy
-import couchDatabase
+from .couchDatabase import CouchDatabase
 import time
 import requests
 import sys
 from urllib3.exceptions import ProtocolError
-import process
+from .process import Processor
 
 
 class tweetStreamer(tweepy.StreamListener):
@@ -13,8 +13,8 @@ class tweetStreamer(tweepy.StreamListener):
         self.start = time.time()
         self.limit = max_time
         self.city = city_str
-        self.ourCouch = couchDatabase.CouchDatabase()
-        self.processor = process.Processor(city_str)
+        self.ourCouch = CouchDatabase()
+        self.processor = Processor(city_str)
         super(tweetStreamer, self).__init__()
 
 
