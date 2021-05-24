@@ -23,6 +23,13 @@ const useStyles = makeStyles((theme) =>({
         marginLeft: "15px",
         marginBottom: "25px",
         fontSize: 13,
+    },
+    error: {
+        flex: '1 1 100%',
+        marginLeft: "15px",
+        marginTop: "5px",
+        fontSize: 14,
+        color: "red"
     }
 }));
 
@@ -59,6 +66,7 @@ export default function StyledPopup({
         <Typography className={classes.subtitle} variant="h6" component="div">
             {startDate.toLocaleDateString()} - {endDate.toLocaleDateString()}
         </Typography>
+        {avg_sentiment != 0 ? 
       <TableContainer component={Paper}>
         <Table size="small">
         <TableRow>
@@ -89,6 +97,10 @@ export default function StyledPopup({
           </TableRow>
         </Table>
       </TableContainer>
+    :         
+    <Typography className={classes.error} variant="h6" component="div">
+        No data is available for {city_name} in this period.
+    </Typography>}
     </Popup>
   );
 }
