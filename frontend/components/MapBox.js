@@ -32,7 +32,7 @@ const stateLayer = {
 export default function MapBox({suburbData, cityData, suburbOn, activateSuburbs}) {
   console.log(suburbData);
   const [viewport, setViewport] = useState({
-    latitude: -25.2744,
+    latitude: -24.3444,
     longitude: 133.775,
     zoom: 4.2,
     bearing: 0,

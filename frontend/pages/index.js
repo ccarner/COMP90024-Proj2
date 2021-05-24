@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import dynamic from 'next/dynamic'
+import Layout from '../components/Layout';
 // import Axios from 'axios';
 
 const MapBox = dynamic(() => import("../components/MapBox"), {
-  loading: () => <p>"Loading..."</p>,
+  loading: () => <Layout><p>"Loading..."</p></Layout>,
   ssr: false
 });
 
+// Concats two geoJSONs into one
 function concatGeoJSON(g1, g2){
   return { 
       "type" : "FeatureCollection",
@@ -14,6 +16,7 @@ function concatGeoJSON(g1, g2){
   }
 }
 
+// Retrieve the array of suburb geojson data for Australia
 function getGeoJSONArray(){
   const melb_geo =  require('../data/melbourne.json');
   const adelaide_geo = require('../data/adelaide.json');
@@ -23,6 +26,41 @@ function getGeoJSONArray(){
   return [melb_geo, adelaide_geo, perth_geo, sydney_geo, brisbane_geo]
 }
 
+const stateToCity = {
+  'New South Wales' : 'Sydney',
+  'Victoria' : 'Melbourne',
+  'Queensland': 'Brisbane',
+  'South Australia': 'Adelaide',
+  'Western Australia' : 'Perth'
+}
+
+// Combine city geojson data with city sentiment data
+function getCityData(){
+  const states = require('../data/states.json');
+  for (var i = 0; i < states.features.length; i++){
+    var state_name = states["features"][i]["properties"]["STATE_NAME"];
+    console.log(state_name);
+    if (state_name in stateToCity){
+      console.log("Time series data is available for this city ")
+      if (state_name == "South Australia"){
+        const adelaide = require('../data/adl_byWeek.json');
+        const rows = adelaide.rows;
+        console.log(rows);
+        rows.forEach((row) => {
+          var city_name = row["key"][0];
+          var year = row["key"][1];
+          var month = row["key"][2];
+          console.log(city_name, year, month);
+          var average_sentiment = row["value"]["sum"] / row["value"]["count"]
+          row["value"]["average_sentiment"] = average_sentiment; //Add average sentiment
+          row["key"] = [year, month]; // Don't need the city name in the key
+          console.log(row);
+        })
+      }
+    }
+  }
+  return states;
+}
 
 export async function getStaticProps(context) {
   console.log("Fetching")
@@ -33,10 +71,12 @@ export async function getStaticProps(context) {
 
   const geojson = geojsonArray.reduce(reducer);
   
-  const adelaide_city = require('../data/MetropolitanAdelaideBoundary_GDA2020.json');
+  // const adelaide_city = require('../data/MetropolitanAdelaideBoundary_GDA2020.json');
+  
+  const all_states = getCityData();
 
   return {
-    props: {suburbData: geojson, cityData: adelaide_city}
+    props: {suburbData: geojson, cityData: all_states}
   }
 }
 export default function Home({suburbData, cityData}) {

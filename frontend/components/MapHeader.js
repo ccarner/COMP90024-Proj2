@@ -9,7 +9,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { routes } from "../data/routes";
 
 const sections = [
-    { title: 'All States', url: '#', lng:133.775, lat:-25.2744},
+    { title: 'All States', url: '#', lng:133.775, lat:-24.3444},
     { title: 'Melbourne', url: '#',lng:145.11,lat:-37.84},
     { title: 'Sydney', url: '#', lng: 151.21, lat: -33.87},
     { title: 'Brisbane', url: '#', lng: 153.02, lat:-27.47},
