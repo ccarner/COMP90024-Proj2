@@ -2,7 +2,7 @@ import React, {useState, useMemo, useCallback} from "react";
 import MapHeader from "./MapHeader";
 import Footer from "./Footer";
 import Head from "next/head";
-import MapGL, {FlyToInterpolator, Source, Layer} from 'react-map-gl';
+import MapGL, {FlyToInterpolator, Source, Layer, Popup} from 'react-map-gl';
 import ControlPanel from "./ControlPanel";
 import {updateData, decimalYearToMonthAndWeek} from "../utils/helpers";
 import styles from "../styles/MapBox.module.css";
@@ -34,8 +34,10 @@ export default function MapBox({suburbData, cityData, suburbOn, activateSuburbs}
   };
 
   const [city, setCity] = useState("All States");
-  const [year, setYear] = useState(2020.02);
+  const [year, setYear] = useState(2020);
   const [hoverInfo, setHoverInfo] = useState(null);
+  const [clickInfo, setClickInfo] = useState(null);
+  const [showPopup, togglePopup] = useState(false);
 
   const onHover = useCallback(event => {
     const {
@@ -48,6 +50,24 @@ export default function MapBox({suburbData, cityData, suburbOn, activateSuburbs}
       hoveredFeature
         ? {
             feature: hoveredFeature,
+            x: offsetX,
+            y: offsetY
+          }
+        : null
+    );
+  }, []);
+
+  const onClick = useCallback(event => {
+    const {
+      features,
+      srcEvent: {offsetX, offsetY}
+    } = event;
+    const clickedFeature = features && features[0];
+    console.log(clickedFeature, features[0]);
+    setClickInfo(
+      clickedFeature
+        ? {
+            feature: clickedFeature,
             x: offsetX,
             y: offsetY
           }
@@ -80,6 +100,7 @@ export default function MapBox({suburbData, cityData, suburbOn, activateSuburbs}
         mapboxApiAccessToken={process.env.MAPBOX_API_TOKEN}
         interactiveLayerIds={['data']}
         onHover={onHover}
+        onClick={onClick}
       >
         {suburbOn ?       
         <Source key={1} id="suburbs" type="geojson" data={suburbData}>
@@ -96,10 +117,11 @@ export default function MapBox({suburbData, cityData, suburbOn, activateSuburbs}
         {hoverInfo && (
           <div className={styles.tooltip} style={{left: hoverInfo.x, top: hoverInfo.y}}>
             <div>State: {hoverInfo.feature.properties.STATE_NAME}</div>
-            <div>Average Sentiment: {hoverInfo.feature.properties.sentiment}</div>
+            <div>Average Sentiment: {(hoverInfo.feature.properties.sentiment).toFixed(3)}</div>
             <div>Number of tweets: {hoverInfo.feature.properties.count}</div>
           </div>
         )}
+        
         </>
       }
       </MapGL>

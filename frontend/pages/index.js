@@ -43,6 +43,7 @@ function getCityData(){
     var sentiment = {};
     if (state_name in stateToCity){
       console.log("Time series data is available for this city ", state_name);
+      // Change this line to a GET request to retrieve from the database.
       const weekly = require(`../data/Weekly/${stateToCity[state_name]}_byWeek.json`);
       var rows = weekly.rows;
       console.log(rows);

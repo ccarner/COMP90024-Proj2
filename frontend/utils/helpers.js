@@ -11,10 +11,6 @@ export function updateData(featureCollection, accessor) {
         curr_sentiment = values.average_sentiment;
         curr_count = values.count;
       }
-
-    //   const sentiment = values.average_sentiment;
-    //   const count = values.count;
-        
       console.log(values);
 
       const properties = {
@@ -31,12 +27,12 @@ export function decimalYearToDateStr(decimal_year){
     const year = Math.floor(decimal_year);
     const decimal = decimal_year - year;
     const week_number = Math.abs(Math.round(decimal * 52));
-    return `Week ${week_number} of ${year}`;
+    return `Week ${week_number + 1} of ${year}`;
 }
 
 export function decimalYearToMonthAndWeek(decimal_year){
     const year = Math.floor(decimal_year);
     const decimal = decimal_year - year;
     const week_number = Math.abs(Math.round(decimal * 52));
-    return [year, week_number];
+    return [year, week_number+1];
 }
