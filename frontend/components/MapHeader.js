@@ -9,6 +9,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { routes } from "../data/routes";
 
 const sections = [
+    { title: 'All States', url: '#', lng:133.775, lat:-25.2744},
     { title: 'Melbourne', url: '#',lng:145.11,lat:-37.84},
     { title: 'Sydney', url: '#', lng: 151.21, lat: -33.87},
     { title: 'Brisbane', url: '#', lng: 153.02, lat:-27.47},
@@ -84,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MapHeader = ({goToCoord, currCity, changeCityTo, usage}) => {
+const MapHeader = ({goToCoord, currCity, changeCityTo, usage, setSuburbOn}) => {
   const classes = useStyles();
   const theme = useTheme();
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -189,7 +190,15 @@ const MapHeader = ({goToCoord, currCity, changeCityTo, usage}) => {
                   changeCityTo(section.title);
                   console.log(`Changing longitude and latitude to ${section.title}`);
                   if (usage == "map"){
-                    goToCoord(section.lng, section.lat);
+                    if (section.title == "All States"){
+                      setSuburbOn(false);
+                      goToCoord(section.lng, section.lat, 4.2);
+                    }
+                    else{
+                      setSuburbOn(true);
+                      goToCoord(section.lng, section.lat, 9);
+                    }
+                    
                   }
                 }}
                 className={classes.toolbarLink}

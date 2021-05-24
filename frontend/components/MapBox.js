@@ -28,31 +28,32 @@ const stateLayer = {
   }
 };
 
-export default function MapBox({suburbData, cityData, suburbOn}) {
+
+export default function MapBox({suburbData, cityData, suburbOn, activateSuburbs}) {
   console.log(suburbData);
   const [viewport, setViewport] = useState({
-    latitude: -37.84,
-    longitude: 145.11,
-    zoom: 9,
+    latitude: -25.2744,
+    longitude: 133.775,
+    zoom: 4.2,
     bearing: 0,
     pitch: 0,
     width: "100%",
     height: "100%"
   });
 
-  const goTo = (long, lat) => {
+  const goTo = (long, lat, zm) => {
     setViewport({
       ...viewport,
       longitude: long,
       latitude: lat,
-      zoom: 9,
+      zoom: zm,
       transitionDuration: 3000,
       transitionInterpolator: new FlyToInterpolator(),
       // transitionEasing: d3.easeCubic
     });
   };
 
-  const [city, setCity] = useState("Melbourne");
+  const [city, setCity] = useState("All States");
   const [year, setYear] = useState(2020);
 
   return (
@@ -62,7 +63,7 @@ export default function MapBox({suburbData, cityData, suburbOn}) {
           "COMP90024"
         </title>
       </Head>
-      <MapHeader goToCoord={goTo} currCity={city} changeCityTo={setCity} usage={"map"}/>
+      <MapHeader goToCoord={goTo} currCity={city} changeCityTo={setCity} usage={"map"} setSuburbOn={activateSuburbs}/>
       <MapGL
         {...viewport}
         width="100vw"
@@ -72,11 +73,11 @@ export default function MapBox({suburbData, cityData, suburbOn}) {
         mapboxApiAccessToken={process.env.MAPBOX_API_TOKEN}
       >
         {suburbOn ?       
-        <Source id="suburbs" type="geojson" data={suburbData}>
+        <Source key={1} id="suburbs" type="geojson" data={suburbData}>
           <Layer {...suburbLayer} />
         </Source> 
         :       
-        <Source id="states" type="geojson" data={cityData}>
+        <Source key={2} id="states" type="geojson" data={cityData}>
           <Layer {...stateLayer} />
         </Source>
       }

@@ -42,6 +42,6 @@ export async function getStaticProps(context) {
 export default function Home({suburbData, cityData}) {
   const [suburbs, setSuburbOn] = useState(false);
   return (
-      <MapBox suburbData={suburbData} cityData={cityData} suburbOn={suburbs}/>
+      <MapBox suburbData={suburbData} cityData={cityData} suburbOn={suburbs} activateSuburbs={setSuburbOn}/>
   )
 }      
