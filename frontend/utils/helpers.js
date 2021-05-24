@@ -3,23 +3,40 @@ export function updateData(featureCollection, accessor) {
   return {
     type: 'FeatureCollection',
     features: features.map(f => {
-      const value = accessor(f);
+      const values = accessor(f);
+      var curr_sentiment = 0;
+      var curr_count = 0;
+
+      if (values){
+        curr_sentiment = values.average_sentiment;
+        curr_count = values.count;
+      }
+
+    //   const sentiment = values.average_sentiment;
+    //   const count = values.count;
+        
+      console.log(values);
+
       const properties = {
         ...f.properties,
-        value,
-        percentile: scale(value)
+        sentiment: curr_sentiment,
+        count: curr_count,
       };
       return {...f, properties};
     })
   };
 }
 
-export function decimalYearToDate(decimal_year){
+export function decimalYearToDateStr(decimal_year){
     const year = Math.floor(decimal_year);
     const decimal = decimal_year - year;
-    console.log(year, decimal);
-
     const week_number = Math.abs(Math.round(decimal * 52));
-    
     return `Week ${week_number} of ${year}`;
+}
+
+export function decimalYearToMonthAndWeek(decimal_year){
+    const year = Math.floor(decimal_year);
+    const decimal = decimal_year - year;
+    const week_number = Math.abs(Math.round(decimal * 52));
+    return [year, week_number];
 }
