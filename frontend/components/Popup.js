@@ -34,6 +34,8 @@ export default function StyledPopup({
   city_name,
   setClickInfo,
   avg_sentiment,
+  max_sentiment,
+  min_sentiment,
   year
 }) {
     const [curr_year, week_no] = decimalYearToMonthAndWeek(year);
@@ -64,6 +66,14 @@ export default function StyledPopup({
               <TableCell>Average Tweet Sentiment</TableCell>
             </TableHead>
             <TableCell>{avg_sentiment}</TableCell>
+          </TableRow>
+          <TableRow>
+              <TableCell align="right">Highest</TableCell>
+            <TableCell>{max_sentiment}</TableCell>
+          </TableRow>
+          <TableRow>
+              <TableCell align="right">Lowest</TableCell>
+            <TableCell>{min_sentiment}</TableCell>
           </TableRow>
           <TableRow>
             <TableHead>

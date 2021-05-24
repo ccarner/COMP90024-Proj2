@@ -137,6 +137,8 @@ export default function MapBox({suburbData, cityData, suburbOn, activateSuburbs}
         weekly_cases={10}
         weekly_deaths={6}
         avg_sentiment={clickInfo.feature.properties.sentiment.toFixed(3)}
+        max_sentiment={clickInfo.feature.properties.max.toFixed(3)}
+        min_sentiment={clickInfo.feature.properties.min.toFixed(3)}
         year={year}
         />}
         </>

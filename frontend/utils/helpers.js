@@ -6,10 +6,14 @@ export function updateData(featureCollection, accessor) {
       const values = accessor(f);
       var curr_sentiment = 0;
       var curr_count = 0;
-
+      var curr_max = 0;
+      var curr_min = 0;
+      
       if (values){
         curr_sentiment = values.average_sentiment;
         curr_count = values.count;
+        curr_max = values.max;
+        curr_min = values.min;
       }
       console.log(values);
 
@@ -17,6 +21,8 @@ export function updateData(featureCollection, accessor) {
         ...f.properties,
         sentiment: curr_sentiment,
         count: curr_count,
+        max: curr_max,
+        min: curr_min,
       };
       return {...f, properties};
     })
