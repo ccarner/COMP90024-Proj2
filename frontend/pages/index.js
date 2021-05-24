@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import dynamic from 'next/dynamic'
 // import Axios from 'axios';
 
@@ -33,12 +33,15 @@ export async function getStaticProps(context) {
 
   const geojson = geojsonArray.reduce(reducer);
   
+  const adelaide_city = require('../data/MetropolitanAdelaideBoundary_GDA2020.json');
+
   return {
-    props: {suburbData: geojson}
+    props: {suburbData: geojson, cityData: adelaide_city}
   }
 }
-export default function Home({suburbData}) {      
+export default function Home({suburbData, cityData}) {
+  const [suburbs, setSuburbOn] = useState(false);
   return (
-      <MapBox suburbData={suburbData}/>
+      <MapBox suburbData={suburbData} cityData={cityData} suburbOn={suburbs}/>
   )
 }      

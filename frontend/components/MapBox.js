@@ -5,12 +5,6 @@ import Head from "next/head";
 import MapGL, {FlyToInterpolator, Source, Layer} from 'react-map-gl';
 import ControlPanel from "./ControlPanel";
 
-function concatGeoJSON(g1, g2){
-  return { 
-      "type" : "FeatureCollection",
-      "features": [... g1.features, ... g2.features]
-  }
-}
 
 const suburbLayer = {
   id: 'suburbs_data',
@@ -23,8 +17,18 @@ const suburbLayer = {
   }
 };
 
+const stateLayer = {
+  id: 'state_data',
+  type: 'line',
+  source: 'states',
+  "paint": {
+    "line-color": "#22B0C0",
+    "line-width": 0.5,
+    "line-opacity": 1
+  }
+};
 
-export default function MapBox({suburbData}) {
+export default function MapBox({suburbData, cityData, suburbOn}) {
   console.log(suburbData);
   const [viewport, setViewport] = useState({
     latitude: -37.84,
@@ -67,9 +71,15 @@ export default function MapBox({suburbData}) {
         onViewportChange={setViewport}
         mapboxApiAccessToken={process.env.MAPBOX_API_TOKEN}
       >
-      <Source id="suburbs" type="geojson" data={suburbData}>
-        <Layer {...suburbLayer} />
-      </Source>
+        {suburbOn ?       
+        <Source id="suburbs" type="geojson" data={suburbData}>
+          <Layer {...suburbLayer} />
+        </Source> 
+        :       
+        <Source id="states" type="geojson" data={cityData}>
+          <Layer {...stateLayer} />
+        </Source>
+      }
       </MapGL>
       <ControlPanel year={year} onChange={value => setYear(value)} />
       <Footer />
