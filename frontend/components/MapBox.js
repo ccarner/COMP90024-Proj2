@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, {useState, useMemo} from "react";
 import MapHeader from "./MapHeader";
 import Footer from "./Footer";
 import Head from "next/head";
 import MapGL, {FlyToInterpolator, Source, Layer} from 'react-map-gl';
 import ControlPanel from "./ControlPanel";
-
+import {updateData} from "../utils/helpers";
 
 const suburbLayer = {
   id: 'suburbs_data',
@@ -30,7 +30,7 @@ const stateLayer = {
 
 
 export default function MapBox({suburbData, cityData, suburbOn, activateSuburbs}) {
-  console.log(suburbData);
+  // console.log(suburbData);
   const [viewport, setViewport] = useState({
     latitude: -24.3444,
     longitude: 133.775,
@@ -55,6 +55,11 @@ export default function MapBox({suburbData, cityData, suburbOn, activateSuburbs}
 
   const [city, setCity] = useState("All States");
   const [year, setYear] = useState(2020);
+  const [week, setWeek] = useState(1); // Weeks from 1 to 53
+
+  // const data = useMemo(() => {
+  //   return cityData && updateData(cityData, f => f.properties.)
+  // })
 
   return (
     <>

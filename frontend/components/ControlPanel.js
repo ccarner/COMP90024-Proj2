@@ -1,6 +1,7 @@
 
 import * as React from 'react';
 import styles from "../styles/ControlPanel.module.css";
+import {decimalYearToDate} from "../utils/helpers";
 
 function ControlPanel(props) {
   const {year} = props;
@@ -9,7 +10,7 @@ function ControlPanel(props) {
     <div className={styles.controlpanel}>
       <h3>Interactive GeoJSON</h3>
       <p>
-        Map showing sentiment by state in year <b>{year}</b>. Hover over a state to
+        Map showing sentiment by state in <b>{decimalYearToDate(year)}</b>. Hover over a state to
         see details.
       </p>
       <p>
@@ -18,13 +19,13 @@ function ControlPanel(props) {
       <hr />
 
       <div key={'year'} className="input">
-        <label>Year</label>
+        <label>Date</label>
         <input
           type="range"
           value={year}
-          min={1995}
-          max={2015}
-          step={1}
+          min={2020}
+          max={2021.28}
+          step={1/52}
           onChange={evt => props.onChange(evt.target.value)}
         />
       </div>

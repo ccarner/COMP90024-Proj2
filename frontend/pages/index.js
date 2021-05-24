@@ -44,7 +44,8 @@ function getCityData(){
       console.log("Time series data is available for this city ")
       if (state_name == "South Australia"){
         const adelaide = require('../data/adl_byWeek.json');
-        const rows = adelaide.rows;
+        var sentiment = {}
+        var rows = adelaide.rows;
         console.log(rows);
         rows.forEach((row) => {
           var city_name = row["key"][0];
@@ -53,9 +54,11 @@ function getCityData(){
           console.log(city_name, year, month);
           var average_sentiment = row["value"]["sum"] / row["value"]["count"]
           row["value"]["average_sentiment"] = average_sentiment; //Add average sentiment
-          row["key"] = [year, month]; // Don't need the city name in the key
-          console.log(row);
+          // row["key"] = [year, month]; // Don't need the city name in the key
+          sentiment[[year, month]] = row["value"];
+          console.log(sentiment[[year, month]]);
         })
+        states["features"][i]["properties"]["SENTIMENT"] = sentiment;
       }
     }
   }
@@ -74,13 +77,15 @@ export async function getStaticProps(context) {
   // const adelaide_city = require('../data/MetropolitanAdelaideBoundary_GDA2020.json');
   
   const all_states = getCityData();
-
+  
   return {
     props: {suburbData: geojson, cityData: all_states}
   }
 }
 export default function Home({suburbData, cityData}) {
   const [suburbs, setSuburbOn] = useState(false);
+
+  console.log(cityData);
   return (
       <MapBox suburbData={suburbData} cityData={cityData} suburbOn={suburbs} activateSuburbs={setSuburbOn}/>
   )
