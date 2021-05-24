@@ -7,14 +7,15 @@ import ControlPanel from "./ControlPanel";
 import {updateData, decimalYearToMonthAndWeek} from "../utils/helpers";
 import styles from "../styles/MapBox.module.css";
 import {stateLayer, suburbLayer, dataLayer} from "./MapStyles";
+import StyledPopup from "./Popup";
 
 const coords = {
- "South Australia":{lat: -34.93, long: 138.6},
- "Western Australia":{lat: -31.95, long: 115.86},
- "Victoria":{lat:-37.84, long: 145.11},
- "New South Wales":{lat: -33.87, long: 151.21},
- "Queensland":{lat: -27.47, long: 153.02},
- "Northern Territory":{lat: -19.49, long:132.55}
+ "South Australia":{lat: -34.93, long: 138.6, city:'Adelaide'},
+ "Western Australia":{lat: -31.95, long: 115.86, city:'Perth'},
+ "Victoria":{lat:-37.84, long: 145.11, city:'Melbourne'},
+ "New South Wales":{lat: -33.87, long: 151.21, city:'Sydney'},
+ "Queensland":{lat: -27.47, long: 153.02, city:'Brisbane'},
+ "Northern Territory":{lat: -19.49, long:132.55, city:'Darwin'}
 }
 
 export default function MapBox({suburbData, cityData, suburbOn, activateSuburbs}) {
@@ -128,15 +129,16 @@ export default function MapBox({suburbData, cityData, suburbOn, activateSuburbs}
             <div>Number of tweets: {hoverInfo.feature.properties.count}</div>
           </div>
         )}
-        {clickInfo && <Popup
-          latitude={coords[clickInfo.feature.properties.STATE_NAME].lat}
-          longitude={coords[clickInfo.feature.properties.STATE_NAME].long}
-          closeButton={true}
-          closeOnClick={true}
-          onClose={() => setClickInfo(false)}
-          anchor="top" >
-          <div>You clicked on {clickInfo.feature.properties.STATE_NAME}</div>
-        </Popup>}
+        {clickInfo && <StyledPopup 
+        lat={coords[clickInfo.feature.properties.STATE_NAME].lat}
+        long={coords[clickInfo.feature.properties.STATE_NAME].long}
+        setClickInfo={setClickInfo}
+        city_name = {coords[clickInfo.feature.properties.STATE_NAME].city}
+        weekly_cases={10}
+        weekly_deaths={6}
+        avg_sentiment={clickInfo.feature.properties.sentiment.toFixed(3)}
+        year={year}
+        />}
         </>
       }
       </MapGL>
