@@ -37,14 +37,14 @@ const dataLayer = {
       property: 'sentiment',
       stops: [
         [0, '#3288bd'],
-        [0.04, '#66c2a5'],
-        [0.08, '#abdda4'],
-        [0.12, '#e6f598'],
-        [0.16, '#ffffbf'],
-        [0.20, '#fee08b'],
-        [0.24, '#fdae61'],
-        [0.28, '#f46d43'],
-        [0.32, '#d53e4f']
+        [0.04, '#d53e4f'],
+        [0.08, '#f46d43'],
+        [0.12, '#fdae61'],
+        [0.16, '#fee08b'],
+        [0.20, '#ffffbf'],
+        [0.24, '#e6f598'],
+        [0.28, '#abdda4'],
+        [0.32, '#66c2a5']
       ]
     },
     'fill-opacity': 0.8
@@ -77,7 +77,7 @@ export default function MapBox({suburbData, cityData, suburbOn, activateSuburbs}
   };
 
   const [city, setCity] = useState("All States");
-  const [year, setYear] = useState(2020);
+  const [year, setYear] = useState(2020.02);
   const [hoverInfo, setHoverInfo] = useState(null);
 
   const onHover = useCallback(event => {

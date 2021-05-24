@@ -18,12 +18,12 @@ function ControlPanel(props) {
       </p>
       <hr />
 
-      <div key={'year'} className="input">
-        <label>Date</label>
+      <div key={'year'} className={styles.input}>
+        <label className={styles.label}>Date</label>
         <input
           type="range"
           value={year}
-          min={2020}
+          min={2020.02}
           max={2021.28}
           step={1/52}
           onChange={evt => props.onChange(evt.target.value)}
