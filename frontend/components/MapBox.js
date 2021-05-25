@@ -144,7 +144,7 @@ export default function MapBox({suburbData, cityData, suburbOn, activateSuburbs}
         </>
       }
       </MapGL>
-      <ControlPanel year={year} onChange={value => setYear(value)} />
+      <ControlPanel year={year} onChange={value => setYear(value)} setClickInfo={setClickInfo}/>
       <Footer />
     </>
   )

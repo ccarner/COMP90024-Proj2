@@ -4,7 +4,7 @@ import styles from "../styles/ControlPanel.module.css";
 import {decimalYearToDateStr, getDateOfISOWeek, decimalYearToMonthAndWeek} from "../utils/helpers";
 
 function ControlPanel(props) {
-  const {year} = props;
+  const {year, setClickInfo} = props;
   const [curr_year, week_no] = decimalYearToMonthAndWeek(year);
   const startDate = getDateOfISOWeek(week_no, curr_year);
   const endDate = new Date(startDate);
@@ -30,7 +30,10 @@ function ControlPanel(props) {
           min={2020}
           max={2021.28}
           step={1/52}
-          onChange={evt => props.onChange(evt.target.value)}
+          onChange={evt => {
+            props.onChange(evt.target.value);
+            setClickInfo(false);
+          }}
         />
       </div>
     </div>
