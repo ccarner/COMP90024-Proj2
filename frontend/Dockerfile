@@ -16,7 +16,7 @@ RUN yarn install --production
 
 COPY . /usr/src/app
 
-RUN export NODE_OPTIONS=--max_old_space_size=4096 yarn build
+RUN export NODE_OPTIONS=--max_old_space_size=4096; yarn build
 
 EXPOSE 3000
-CMD export NODE_OPTIONS=--max_old_space_size=4096 yarn run start
+CMD export NODE_OPTIONS=--max_old_space_size=4096; yarn run start

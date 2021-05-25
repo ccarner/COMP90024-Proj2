@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: instance-1
   vars_files:
     - host_vars/mrc.yaml
   gather_facts: true

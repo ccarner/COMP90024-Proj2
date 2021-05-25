@@ -12,17 +12,29 @@ if [[ -z "${OS_PROJECT_ID}" ]]; then
   . ./openrc.sh;
 fi
 
-echo "Welcome to our COMP90024 project deployment script!"
-sleep 1
+RED='\033[0;31m'
+NC='\033[0m' # No Color
 
+echo -e "${RED}Welcome to our COMP90024 project deployment script!${NC}"
+sleep 0.5
+
+#slow terminal effect :)
 echo "Please enter a single number corresponding to the task you want to perform: "
+sleep 0.05
 echo "0 Upload a public key to openstack"
+sleep 0.05
 echo "1 Setup from scratch (runs tasks 2-7)"
+sleep 0.05
 echo "2 Create openstack instances, create + attach volumes"
+sleep 0.05
 echo "3 Install + configure required software on instances"
+sleep 0.05
 echo "4 [Re]Start CouchDB container"
+sleep 0.05
 echo "5 Initialise CouchDB cluster"
+sleep 0.05
 echo "6 Transfer python files + [Re]Start scripts for harvesters and analysis"
+sleep 0.05
 echo "7 [Re]Start webserver + website container"
 
 read selection

@@ -12,17 +12,17 @@
 - name: pull docker container
   become: yes
   docker_image:   
-   name: couchdb
+   name: coltonc/comp90024_frontend
    tag: latest
 
 - name: frontend docker install
   become: yes
   docker_container:
-    name: couchdb
-    image: couchdb
+    name: frontend
+    image: coltonc/comp90024_frontend
     state: started
     recreate: yes
-    published_ports: # as per https://docs.couchdb.org/en/stable/setup/cluster.html
+    published_ports:
       - "80:3000"
 
 - name: stop and wait for docker deployment
