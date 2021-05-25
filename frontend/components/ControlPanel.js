@@ -17,7 +17,7 @@ function ControlPanel(props) {
       <h3>{city}</h3>
       <h4>Interactive GeoJSON</h4>
       <p>
-        Map showing sentiment by {city != "All States" ? "suburb": "state"} in <b>{city == "All States" ? DateString : "2020 - 2021"}</b>. Hover over a {city != "All States" ? "suburb": "state"} to
+        Map showing sentiment by {city != "All States" ? "suburb": "state"} in <b>{city == "All States" ? DateString : "2020 - 2021"}</b>. Hover over (or click) a {city != "All States" ? "suburb": "state"} to
         see details. 
       </p>
       <p>
