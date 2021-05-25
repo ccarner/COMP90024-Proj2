@@ -23,15 +23,20 @@
 
 #Need to make sure that we can connect via SSH (since sometimes there is some config
 # that happens on cloud even after instance marked 'ready', and next task requires SSH)
+#NOTE: removed this, because it sometimes was failing the pipeline... replaced with a wait timer
 
-- name: Wait for connection
-  wait_for:
-    host: "{{item.openstack.public_v4}}"
-    port: 22
-    timeout: 120
-    search_regex: OpenSSH
-  loop: "{{os_instance.results}}"
-  when: item.openstack is defined
+# - name: Wait for connection
+#   wait_for:
+#     host: "{{item.openstack.public_v4}}"
+#     port: 22
+#     timeout: 120
+#     search_regex: OpenSSH
+#   loop: "{{os_instance.results}}"
+#   when: item.openstack is defined
+
+- name: stop and wait for deployment to finalise before continuing.
+  pause:
+    minutes: 1
 
 
 #add hosts to in memory inventory so we can refer to them in later scripts

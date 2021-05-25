@@ -6,13 +6,14 @@
   service: 
     name: docker
     state: started
-  become: true
 
 #install our frontend container
 - name: pull docker container
   become: yes
-  docker_image:   
+  docker_image: 
+   source: pull  
    name: coltonc/comp90024_frontend
+   force_source: yes 
    tag: latest
 
 - name: frontend docker install

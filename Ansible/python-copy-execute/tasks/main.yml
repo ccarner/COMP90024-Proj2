@@ -4,6 +4,11 @@
     src: ../python/
     dest: ~/python/
 
+- name: copy all ./secrets files to ~/python/twitter_harvester
+  copy:
+    src: ./secrets/
+    dest: ~/python/twitter_harvester
+
 - name: Install python requirements from requrirements.txt
   become: true
   pip:

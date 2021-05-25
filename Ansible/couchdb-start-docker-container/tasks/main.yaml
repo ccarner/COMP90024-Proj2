@@ -6,7 +6,6 @@
   service: 
     name: docker
     state: started
-  become: true
 
 #install couchdb container
 - name: pull docker container

@@ -8,7 +8,7 @@ fi
 
 # If the openstack password hasn't been saved,
 # then run the openrc.sh
-if [[ -z "${OS_PROJECT_ID}" ]]; then
+if [[ -z "${OS_PASSWORD}" ]]; then
   . ./openrc.sh;
 fi
 

@@ -1,4 +1,11 @@
 ---
+# COMP90024 Cloud Computing Project 2
+# Team 40:
+# Mark Drvodelic
+# Colton Carner 693280
+# Bing Xu
+# Zihao Zhang
+# Brandon Lulham
 
 #sudo apt-get update; sudo apt-get install python-pip
 - name: Install Pip (this could take up to 5 mins)
@@ -16,7 +23,7 @@
     name: "pip"
     state: latest
 
-# below as per https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-docker-on-ubuntu-18-04
+#below as per https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-docker-on-ubuntu-18-04
 - name: Install aptitude using apt
   become: yes
   apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
