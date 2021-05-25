@@ -18,6 +18,12 @@ export function getGeoJSONArray(){
     return [melb_geo, adelaide_geo, perth_geo, sydney_geo, brisbane_geo]
   }
 
+export function loadCovidData(){
+  let confirmed = require('../data/covid19/cumulative_cases.json');
+  let deaths = require('../data/covid19/cumulative_deaths.json');
+  return [confirmed, deaths];
+}
+
 export function getSuburbAURINData(){
     let melb_aurin = require('../data/AURIN/melbourne_aurin.json');
     let adelaide_aurin = require('../data/AURIN/adelaide_aurin.json');
