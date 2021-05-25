@@ -28,12 +28,12 @@ export async function getStaticProps(context) {
 
   const reducer = (accumulator, currentValue) => concatGeoJSON(accumulator, currentValue);
 
-  const geojson = geojsonArray.reduce(reducer);
+  let geojson = geojsonArray.reduce(reducer);
   // console.log("Memory usage 2", process.memoryUsage());
 
 
   // Fetch suburb aurin data and combine into one json
-  const aurin_data = getSuburbAURINData();
+  let aurin_data = getSuburbAURINData();
 
   // console.log("Memory usage 3:", process.memoryUsage());
 
@@ -45,19 +45,16 @@ export async function getStaticProps(context) {
     
   const all_states = getCityData();
   // console.log("Memory usage 4", process.memoryUsage());
-
-  // console.log(geojson);
-  // console.log(aurin_data);
   return {
-    props: {suburbData: geojson, cityData: all_states, aurinData: aurin_data} 
+    props: {suburbData: suburbAndAurinData, cityData: all_states} 
   }
 }
 
-export default function Home({suburbData, cityData, aurinData}) {
+export default function Home({suburbData, cityData}) {
   const [suburbs, setSuburbOn] = useState(false);
 
   // console.log(cityData);
   return (
-      <MapBox suburbData={suburbData} aurinData={aurinData} cityData={cityData} suburbOn={suburbs} activateSuburbs={setSuburbOn}/>
+      <MapBox suburbData={suburbData} cityData={cityData} suburbOn={suburbs} activateSuburbs={setSuburbOn}/>
   )
 }      
