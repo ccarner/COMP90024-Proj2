@@ -1,0 +1,38 @@
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:              sentiment   R-squared:                       0.058
+Model:                            OLS   Adj. R-squared:                  0.014
+Method:                 Least Squares   F-statistic:                     1.315
+Date:                Tue, 25 May 2021   Prob (F-statistic):              0.210
+Time:                        19:12:49   Log-Likelihood:                -84.892
+No. Observations:                 267   AIC:                             195.8
+Df Residuals:                     254   BIC:                             242.4
+Df Model:                          12                                         
+Covariance Type:            nonrobust                                         
+===================================================================================================
+                                      coef    std err          t      P>|t|      [0.025      0.975]
+---------------------------------------------------------------------------------------------------
+const                              -4.2148      4.155     -1.014      0.311     -12.398       3.968
+median_age                          0.0273      0.011      2.519      0.012       0.006       0.049
+population                       1.923e-06   3.68e-06      0.522      0.602   -5.33e-06    9.18e-06
+median_weekly_personal_income       0.0004      0.000      1.343      0.180      -0.000       0.001
+average_life_satisfaction_score     0.0409      0.046      0.882      0.379      -0.050       0.132
+percent_unemployed                  0.0585      0.030      1.946      0.053      -0.001       0.118
+homeless_rate                       9.8323      8.287      1.186      0.237      -6.488      26.153
+housing_stress_30_40_rule           0.0348      0.022      1.558      0.120      -0.009       0.079
+gini_coefficient                   -0.1790      1.715     -0.104      0.917      -3.557       3.199
+poverty_rate                       -0.0363      0.028     -1.301      0.195      -0.091       0.019
+ieo_score                          -0.0007      0.001     -0.610      0.543      -0.003       0.002
+percent_nonreligious                0.0041      0.004      1.098      0.273      -0.003       0.012
+percent_citizenship                 0.0019      0.005      0.414      0.679      -0.007       0.011
+==============================================================================
+Omnibus:                       22.692   Durbin-Watson:                   1.867
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               28.383
+Skew:                          -0.632   Prob(JB):                     6.87e-07
+Kurtosis:                       3.976   Cond. No.                     6.46e+06
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 6.46e+06. This might indicate that there are
+strong multicollinearity or other numerical problems.

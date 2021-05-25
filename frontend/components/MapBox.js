@@ -6,7 +6,7 @@ import MapGL, {FlyToInterpolator, Source, Layer, Popup} from 'react-map-gl';
 import ControlPanel from "./ControlPanel";
 import {updateData, decimalYearToMonthAndWeek} from "../utils/helpers";
 import styles from "../styles/MapBox.module.css";
-import {stateLayer, suburbLayer, dataLayer} from "./MapStyles";
+import {stateLayer, suburbLayer, dataLayer, suburbdataLayer} from "./MapStyles";
 import StyledPopup from "./Popup";
 
 const coords = {
@@ -109,10 +109,22 @@ export default function MapBox({suburbData, cityData,suburbOn, activateSuburbs})
         onHover={onHover}
         onClick={onClick}
       >
-        {suburbOn ?       
+        {suburbOn ?
+        <>       
         <Source key={1} id="suburbs" type="geojson" data={suburbData}>
           <Layer {...suburbLayer} />
-        </Source> 
+        </Source>
+        <Source key={4} id="suburbs-fill" type="geojson" data={suburbData}>
+          <Layer {...suburbdataLayer} />
+        </Source>
+        {hoverInfo && (
+          <div className={styles.tooltip} style={{left: hoverInfo.x, top: hoverInfo.y}}>
+            <div>Suburb: {hoverInfo.feature.properties.sa2_name}</div>
+            <div>Average Sentiment: {(hoverInfo.feature.properties.sentiment).toFixed(3)}</div>
+            <div>Number of tweets: {hoverInfo.feature.properties.counts}</div>
+          </div>
+        )} 
+        </>
         :
         <>       
         <Source key={2} id="states" type="geojson" data={cityData}>

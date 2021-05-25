@@ -56,18 +56,25 @@ export function getDateOfISOWeek(w, y) {
 
 export function combineSuburbWithAurin(suburb_data, aurin_data){
   for (var i =0; i< suburb_data.features.length; i++){
-    console.log(suburb_data.features[i]);
+    // console.log(suburb_data.features[i]);
     // Suburb code
     var suburb_id = suburb_data["features"][i]["properties"]["sa2_mainc0"];
-    console.log(suburb_id);
-    console.log(aurin_data[suburb_id]);
+    var aurin_props;
+    if (!(suburb_id in aurin_data)){
+      console.log(suburb_id, " is not in AURINN Data");
+      aurin_props = {sentiment: 0, counts: 0}
+    }
+    else{
+      aurin_props = aurin_data[suburb_id];
+    }
+    // console.log(aurin_data[suburb_id]);
     // Variables to read in 
     var properties = {
       ...suburb_data["features"][i].properties,
-      ...aurin_data[suburb_id]
+      ...aurin_props
     };
     suburb_data["features"][i]["properties"] = properties;
-    console.log(suburb_data.features[i]);
+    // console.log(suburb_data.features[i]);
   }
   return suburb_data;
 }
