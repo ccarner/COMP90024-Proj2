@@ -5,7 +5,7 @@ RUN apk add --no-cache libc6-compat
 ENV NODE_OPTIONS '--max-old-space-size==4096'
 WORKDIR /app
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+RUN yarn install
 
 # Rebuild the source code only when needed
 FROM node:alpine AS builder
