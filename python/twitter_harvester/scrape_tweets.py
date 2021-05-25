@@ -41,7 +41,7 @@ def main():
     # go through each file for each month (we do it separately to ensure maximised num of tweets)
     months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP"]
     for month in months:
-        with open("melb_tweets_" + month, 'r') as f:
+        with open("melb_tweets_" + month + ".json", 'r') as f:
             for i in f:
                 try:
                     tweet = json.loads(i.strip())
