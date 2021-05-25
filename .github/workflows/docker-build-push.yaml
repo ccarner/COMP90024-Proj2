@@ -1,9 +1,9 @@
-name: docker-build-push
+name: docker-build-push-frontend
 
 on:
   push:
     paths:
-      - 'frontend/*'
+      - 'frontend*'
 
 jobs:
   docker:
@@ -27,7 +27,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          context: frontend/
+          context: frontend
           tags: coltonc/comp90024_frontend:latest
       -
         name: Image digest
