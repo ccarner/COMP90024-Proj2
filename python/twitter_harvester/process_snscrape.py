@@ -45,7 +45,7 @@ class Processor:
     # return a dictionary for a given tweet containing vital features of tweet + location and sentiment
     def process_tweet(self, tweet):
         tweetDict = {}
-        tweetDict['city'] = "MELB"
+        tweetDict['city'] = "melbourne"
         tweetDict["sa2Name"] = None
         tweetDict["coord"] = None
         tweetDict["sa2Code"] = None
