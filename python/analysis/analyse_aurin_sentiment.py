@@ -232,6 +232,7 @@ def main(city):
         plt.xticks(rotation=45)
         ax = plt.gca()
         ax.set(title=title, xlabel=xlabel, ylabel=ylabel)
+        plt.gcf().subplots_adjust(bottom=0.15)
         plt.savefig("./OUTPUT/"+city + "/by_week/" + city +"_time_series")
         plt.close()
 
