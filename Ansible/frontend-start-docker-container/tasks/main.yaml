@@ -1,0 +1,44 @@
+---
+    
+#start up docker
+- name: Run docker Daemon
+  become: yes
+  service: 
+    name: docker
+    state: started
+  become: true
+
+#install our frontend container
+- name: pull docker container
+  become: yes
+  docker_image:   
+   name: couchdb
+   tag: latest
+
+- name: couchdb docker install
+  become: yes
+  docker_container:
+    name: couchdb
+    image: couchdb
+    state: started
+    recreate: yes
+    volumes:
+      - "/data/couch:/opt/couchdb/data"
+    published_ports: # as per https://docs.couchdb.org/en/stable/setup/cluster.html
+      - "5984:5984"
+      - "9100-9105:9100-9105"
+      - "4369:4369"
+    env: #note these are still needed here even if putting at playbook level, since these are for the DOCKER container
+      COUCHDB_USER: '{{ couch_db_username }}'
+      COUCHDB_PASSWORD: '{{ couch_db_password }}'
+      COUCHDB_SECRET: '{{ couch_db_secret }}'
+      ERL_FLAGS: "-setcookie {{ couch_db_secret }} -name couchdb@{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }} -kernel inet_dist_listen_min 9100 -kernel inet_dist_listen_max 9105"
+
+
+- name: stop and wait for docker deployment
+  pause:
+    minutes: 1
+
+
+
+
