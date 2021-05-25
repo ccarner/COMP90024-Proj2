@@ -54,5 +54,20 @@ export function getDateOfISOWeek(w, y) {
   return ISOweekStart;
 }
 
-// 
-export function combineSuburbData()
+export function combineSuburbWithAurin(suburb_data, aurin_data){
+  for (var i =0; i< suburb_data.features.length; i++){
+    console.log(suburb_data.features[i]);
+    // Suburb code
+    var suburb_id = suburb_data["features"][i]["properties"]["sa2_mainc0"];
+    console.log(suburb_id);
+    console.log(aurin_data[suburb_id]);
+    // Variables to read in 
+    var properties = {
+      ...suburb_data["features"][i].properties,
+      ...aurin_data[suburb_id]
+    };
+    suburb_data["features"][i]["properties"] = properties;
+    console.log(suburb_data.features[i]);
+  }
+  return suburb_data;
+}

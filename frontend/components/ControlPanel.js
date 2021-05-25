@@ -11,7 +11,7 @@ function ControlPanel(props) {
   endDate.setDate(endDate.getDate() + 7);
 
   const DateString = `${decimalYearToDateStr(year)}, ${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`
-  console.log("Control panel - city:", city);
+  // console.log("Control panel - city:", city);
   return (
     <div className={styles.controlpanel}>
       <h3>{city}</h3>

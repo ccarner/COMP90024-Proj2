@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import dynamic from 'next/dynamic'
 import Layout from '../components/Layout';
-import {getGeoJSONArray, getCityData} from '../utils/dataloaders';
+import {getGeoJSONArray, getCityData, getSuburbAURINData} from '../utils/dataloaders';
+import {combineSuburbWithAurin} from '../utils/helpers';
+
 // import Axios from 'axios';
 
 const MapBox = dynamic(() => import("../components/MapBox"), {
@@ -20,24 +22,42 @@ function concatGeoJSON(g1, g2){
 export async function getStaticProps(context) {
   console.log("Fetching")
 
+  // Fetch suburb geojson data and  combine into one json
+  // console.log("Memory usage 1", process.memoryUsage());
   const geojsonArray = getGeoJSONArray();
 
   const reducer = (accumulator, currentValue) => concatGeoJSON(accumulator, currentValue);
 
   const geojson = geojsonArray.reduce(reducer);
+  // console.log("Memory usage 2", process.memoryUsage());
+
+
+  // Fetch suburb aurin data and combine into one json
+  const aurin_data = getSuburbAURINData();
+
+  // console.log("Memory usage 3:", process.memoryUsage());
+
+  // console.log(geojson);
+  // Combine aurin and suburb data
+  const suburbAndAurinData = combineSuburbWithAurin(geojson, aurin_data);
+
+  // console.log(suburbAndAurinData);
     
   const all_states = getCityData();
-  
+  // console.log("Memory usage 4", process.memoryUsage());
+
+  // console.log(geojson);
+  // console.log(aurin_data);
   return {
-    props: {suburbData: geojson, cityData: all_states}
+    props: {suburbData: geojson, cityData: all_states, aurinData: aurin_data} 
   }
 }
 
-export default function Home({suburbData, cityData}) {
+export default function Home({suburbData, cityData, aurinData}) {
   const [suburbs, setSuburbOn] = useState(false);
 
-  console.log(cityData);
+  // console.log(cityData);
   return (
-      <MapBox suburbData={suburbData} cityData={cityData} suburbOn={suburbs} activateSuburbs={setSuburbOn}/>
+      <MapBox suburbData={suburbData} aurinData={aurinData} cityData={cityData} suburbOn={suburbs} activateSuburbs={setSuburbOn}/>
   )
 }      

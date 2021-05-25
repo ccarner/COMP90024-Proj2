@@ -167,7 +167,7 @@ const MapHeader = ({goToCoord, currCity, changeCityTo, usage, setSuburbOn, setCl
       </IconButton>
     </>
   );
-  console.log(currCity);
+  // console.log(currCity);
 
   return (
     <>

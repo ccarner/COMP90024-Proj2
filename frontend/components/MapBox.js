@@ -18,7 +18,7 @@ const coords = {
  "Northern Territory":{lat: -19.49, long:132.55, city:'Darwin'}
 }
 
-export default function MapBox({suburbData, cityData, suburbOn, activateSuburbs}) {
+export default function MapBox({suburbData, cityData, aurinData,suburbOn, activateSuburbs}) {
   const [viewport, setViewport] = useState({
     latitude: -24.3444,
     longitude: 133.775,
@@ -88,7 +88,7 @@ export default function MapBox({suburbData, cityData, suburbOn, activateSuburbs}
     return cityData && updateData(cityData, f => f.properties.SENTIMENT[[curr_year, week_no]]);
   }, [cityData, year]);
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <>
