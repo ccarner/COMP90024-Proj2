@@ -26,7 +26,9 @@ const options = {
   },
 };
 
-const LineChart = () => (
+export default function LineChart(cityData, cityName) {
+
+return (
   <>
     <div className='header'>
       <h1 className='title'>Line Chart</h1>
@@ -41,6 +43,7 @@ const LineChart = () => (
     </div>
     <Line data={data} options={options} />
   </>
-);
+)
+}
 
 export default LineChart;
