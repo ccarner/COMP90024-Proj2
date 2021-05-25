@@ -4,24 +4,27 @@ import styles from "../styles/ControlPanel.module.css";
 import {decimalYearToDateStr, getDateOfISOWeek, decimalYearToMonthAndWeek} from "../utils/helpers";
 
 function ControlPanel(props) {
-  const {year, setClickInfo} = props;
+  const {year, setClickInfo, city} = props;
   const [curr_year, week_no] = decimalYearToMonthAndWeek(year);
   const startDate = getDateOfISOWeek(week_no, curr_year);
   const endDate = new Date(startDate);
   endDate.setDate(endDate.getDate() + 7);
 
+  const DateString = `${decimalYearToDateStr(year)}, ${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`
+  console.log("Control panel - city:", city);
   return (
     <div className={styles.controlpanel}>
-      <h3>Interactive GeoJSON</h3>
+      <h3>{city}</h3>
+      <h4>Interactive GeoJSON</h4>
       <p>
-        Map showing sentiment by state in <b>{decimalYearToDateStr(year)}, {startDate.toLocaleDateString()} - {endDate.toLocaleDateString()}</b>. Hover over a state to
+        Map showing sentiment by {city != "All States" ? "suburb": "state"} in <b>{city == "All States" ? DateString : "2020 - 2021"}</b>. Hover over a {city != "All States" ? "suburb": "state"} to
         see details. 
       </p>
       <p>
         Data source: <a href="https://aurin.org.au/">AURIN</a>
       </p>
       <hr />
-
+      { city == "All States" ?
       <div key={'year'} className={styles.input}>
         <label className={styles.label}>Date</label>
         <input
@@ -36,6 +39,9 @@ function ControlPanel(props) {
           }}
         />
       </div>
+      :
+      <div/> 
+      }
     </div>
   );
 }

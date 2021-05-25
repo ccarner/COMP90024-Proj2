@@ -19,7 +19,6 @@ const coords = {
 }
 
 export default function MapBox({suburbData, cityData, suburbOn, activateSuburbs}) {
-  // console.log(suburbData);
   const [viewport, setViewport] = useState({
     latitude: -24.3444,
     longitude: 133.775,
@@ -144,7 +143,7 @@ export default function MapBox({suburbData, cityData, suburbOn, activateSuburbs}
         </>
       }
       </MapGL>
-      <ControlPanel year={year} onChange={value => setYear(value)} setClickInfo={setClickInfo}/>
+      <ControlPanel year={year} onChange={value => setYear(value)} setClickInfo={setClickInfo} city={city}/>
       <Footer />
     </>
   )
