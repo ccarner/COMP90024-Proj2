@@ -14,6 +14,7 @@ import MapHeader from "../components/MapHeader";
 import Footer from "../components/Footer";
 import Head from "next/head";
 import Image from "next/image";
+import LineChart from "../components/Chart";
 
 const analytics_routes = {
   "melbourne":["melbourne_time_series", "housing_stress_30_40_rule_partial_regression", "median_age_partial_regression", "median_weekly_personal_income_partial_regression", "percent_nonreligious_partial_regression", "percent_unemployed_partial_regression", "poverty_rate_partial_regression"],
@@ -68,6 +69,11 @@ export default function Analytics() {
           justify="center"
           spacing={0}
         />
+        {/* <Grid item>
+          <Container>
+              <LineChart/>
+          </Container>
+        </Grid> */}
         {
           analytics_routes[lowercase_city].map((name) =>(
           <Grid item>
