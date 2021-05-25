@@ -18,11 +18,11 @@ function concatGeoJSON(g1, g2){
 
 // Retrieve the array of suburb geojson data for Australia
 function getGeoJSONArray(){
-  const melb_geo =  require('../data/melbourne.json');
-  const adelaide_geo = require('../data/adelaide.json');
-  const perth_geo = require('../data/perth.json');
-  const sydney_geo = require('../data/sydney.json');
-  const brisbane_geo = require('../data/brisbane.json');
+  const melb_geo =  require('../data/state-suburbs/melbourne.json');
+  const adelaide_geo = require('../data/state-suburbs/adelaide.json');
+  const perth_geo = require('../data/state-suburbs/perth.json');
+  const sydney_geo = require('../data/state-suburbs/sydney.json');
+  const brisbane_geo = require('../data/state-suburbs/brisbane.json');
   return [melb_geo, adelaide_geo, perth_geo, sydney_geo, brisbane_geo]
 }
 
