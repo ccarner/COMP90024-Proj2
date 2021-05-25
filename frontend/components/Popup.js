@@ -65,9 +65,6 @@ export default function StyledPopup({
     const startDate = getDateOfISOWeek(week_no, curr_year);
     const endDate = new Date(startDate);
     endDate.setDate(endDate.getDate() + 7);
-    const abrv_year = endDate.getFullYear() - 2000;
-    const day = endDate.getDate();
-    const month = endDate.getMonth();
 
     const abrv_date1 = getAbrvDate(startDate);
     const abrv_date2 = getAbrvDate(endDate);
