@@ -1,7 +1,9 @@
+---
+# Run all scripts
 - import_playbook: mrc-openstack-configure.yaml
 - import_playbook: mrc-install.yaml
 - import_playbook: mrc-start-couchdb.yaml
 - import_playbook: mrc-cluster-couchdb.yaml
 - import_playbook: mrc-python-execute.yaml
-#TODO run the website deployment
+- import_playbook: mrc-start-frontend.yaml
 

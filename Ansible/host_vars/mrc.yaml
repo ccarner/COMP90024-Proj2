@@ -70,7 +70,7 @@ instances:
     flavor: uom.mse.1c4g
 
 instance_image: f8b79936-6616-4a22-b55d-0d0a1d27bceb #ubuntu 20.04
-instance_key_name: cloudssh # uses existing public/private keypair, TODO CHECK IF THIS OK (ie not uploading new one)
+instance_key_name: cloudssh #note can also UPLOAD a public key too... try option 0 from the deploy.sh script
 
 #TODO: change this to be more secure, possibly read in from commandline etc.
 couch_db_username: admin
