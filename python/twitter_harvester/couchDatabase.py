@@ -97,7 +97,7 @@ class CouchDatabase:
             output_json = output.json()
             avg_sentiment = [x['value']['sum'] / x['value']['count'] for x in output_json['rows']]
             count = [x['value']['count'] for x in output_json['rows']]
-            if view == 'byWeek':
+            if view == 'byWeek' or view == 'byWeek2':
                 time = [str(x['key'][1]) + "-" + str(x['key'][2]) for x in output_json['rows']]
                 toDate = lambda x: date.fromisocalendar(int(x.split("-")[0]), int(x.split("-")[1]), 1)
                 time = [toDate(x).strftime('%d-%m-%Y') for x in time]
