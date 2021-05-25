@@ -1,0 +1,11 @@
+---
+- name: Delete existing 'cloudssh' public key from Openstack
+  os_keypair:
+      state: absent
+      name: cloudssh
+
+- name: Upload new publickey to Openstack
+  os_keypair:
+      state: present
+      name: cloudssh
+      public_key_file: ./secrets/publickey.pem

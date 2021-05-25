@@ -1,50 +1,14 @@
 ---
-
-#first is install for ALL hosts
+#Install couchdb for ALL hosts
 - hosts: all
   vars_files:
     - host_vars/mrc.yaml
   gather_facts: true
   remote_user: ubuntu
-  environment:
-      COUCHDB_USER: '{{ couch_db_username }}'
-      COUCHDB_PASSWORD: '{{ couch_db_password }}'
-      COUCHDB_SECRET: '{{ couch_db_secret }}'
-      #use tip from here to get IP of host: https://www.middlewareinventory.com/blog/ansible-get-ip-address/
-      ERL_FLAGS: "-setcookie {{ couch_db_secret }} -name couchdb@{{ hostvars[inventory_hostname]['ansible_env'].SSH_CONNECTION.split(' ')[2] }} -kernel inet_dist_listen_min 9100 -kernel inet_dist_listen_max 9105"
   roles:
     - role: openstack-mount-volumes-filesystem
     - role: proxy-config
     - role: docker-install #temp comment out to speed up testing couchdb install/config
-    - role: couchdb-install
-
-#then on the main/coordination host, setup the cluster
-- hosts: instance-1
-  vars_files:
-    - host_vars/mrc.yaml
-  gather_facts: true
-  remote_user: ubuntu
-  environment:
-      COUCHDB_USER: '{{ couch_db_username }}'
-      COUCHDB_PASSWORD: '{{ couch_db_password }}'
-      COUCHDB_SECRET: '{{ couch_db_secret }}'
-      ERL_FLAGS: "-setcookie {{ couch_db_secret }} -name couchdb@{{ hostvars[inventory_hostname]['ansible_env'].SSH_CONNECTION.split(' ')[2] }} -kernel inet_dist_listen_min 9100 -kernel inet_dist_listen_max 9105"
-  roles:
-    - couchdb-clustering
   
-#lastly, roles that require couchDB installed...
-- hosts: all
-  vars_files:
-    - host_vars/mrc.yaml
-  gather_facts: true
-  remote_user: ubuntu
-  environment:
-      COUCHDB_USER: '{{ couch_db_username }}'
-      COUCHDB_PASSWORD: '{{ couch_db_password }}'
-      COUCHDB_SECRET: '{{ couch_db_secret }}'
-      #use tip from here to get IP of host: https://www.middlewareinventory.com/blog/ansible-get-ip-address/
-      ERL_FLAGS: "-setcookie {{ couch_db_secret }} -name couchdb@{{ hostvars[inventory_hostname]['ansible_env'].SSH_CONNECTION.split(' ')[2] }} -kernel inet_dist_listen_min 9100 -kernel inet_dist_listen_max 9105"
-  roles:
-    - role: python-copy-execute
     
   

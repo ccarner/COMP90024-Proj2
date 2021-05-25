@@ -15,7 +15,6 @@
    name: couchdb
    tag: latest
 
-
 - name: couchdb docker install
   become: yes
   docker_container:

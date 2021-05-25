@@ -9,7 +9,22 @@
   pip:
     requirements: /home/ubuntu/python/requirements.txt
 
-- name: start python scripts with cityname
+- name: kill persisting python scripts
+  shell: 'pkill /home/ubuntu/python/main.py -f'
+
+- name: start python scripts [part1 - corpus]
+  shell: 'echo {{item}} >> ~/cities_this_vm_analysing.txt; nohup python3 ~/python/main.py {{item}} corpus > ./tweet_download.txt &'
+  loop: '{{ city_names }}'
+  args:
+    chdir: ~/python
+
+- name: start python scripts [part2 - streamer]
+  shell: 'echo {{item}} >> ~/cities_this_vm_analysing.txt; nohup python3 ~/python/main.py {{item}} streamer > ./tweet_download.txt &'
+  loop: '{{ city_names }}'
+  args:
+    chdir: ~/python
+
+- name: start python scripts [part3 - analysis]
   shell: 'echo {{item}} >> ~/cities_this_vm_analysing.txt; nohup python3 ~/python/main.py {{item}} > ./tweet_download.txt &'
   loop: '{{ city_names }}'
   args:
