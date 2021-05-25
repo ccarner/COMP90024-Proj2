@@ -198,7 +198,7 @@ const MapHeader = ({goToCoord, currCity, changeCityTo, usage, setSuburbOn, setCl
                     }
                     else{
                       setSuburbOn(true);
-                      goToCoord(section.lng, section.lat, 9);
+                      goToCoord(section.lng, section.lat, 10);
                     }
                     
                   }

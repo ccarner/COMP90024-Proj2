@@ -126,8 +126,8 @@ export default function MapBox({suburbData, cityData,suburbOn, activateSuburbs})
           </div>
         )}
         {clickInfo && <SuburbPopup 
-        lat={clickInfo.x}
-        long={clickInfo.y}
+        lat={viewport.latitude}
+        long={viewport.longitude}
         setClickInfo={setClickInfo}
         feature_props={clickInfo.feature.properties}
         city_name={city}

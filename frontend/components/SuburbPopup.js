@@ -17,6 +17,15 @@ const coords = {
     "Brisbane":{lat: -27.47, long: 153.02},
    }
 
+const popup_rows = [
+    {name:"Age (Median)", prop: "median_age"},
+    {name:"Population", prop: "population"},
+    {name:"Weekly Income (Median)", prop:"median_weekly_personal_income"},
+    {name:"Life Satisfaction Score (Avg)", prop:"average_life_satisfaction_score"},
+    {name:"Unemployment rate (%)", prop:"percent_unemployed"},
+    {name:"Homeless rate (%)", prop:"homeless_rate"},
+]
+
 const useStyles = makeStyles((theme) =>({
     title: {
         flex: '1 1 100%',
@@ -50,8 +59,8 @@ export default function SuburbPopup({
     const classes = useStyles();
   return (
     <Popup
-      latitude={coords[city_name].lat}
-      longitude={coords[city_name].long}
+      latitude={lat}
+      longitude={long}
       closeButton={true}
       closeOnClick={true}
       onClose={() => setClickInfo(false)}
@@ -70,8 +79,18 @@ export default function SuburbPopup({
             <TableHead>
               <TableCell>Average Tweet Sentiment</TableCell>
             </TableHead>
-            <TableCell>{feature_props.sentiment}</TableCell>
-          </TableRow>
+            <TableCell align="right">{(feature_props.sentiment).toFixed(3)}</TableCell>
+        </TableRow>
+            {
+                popup_rows.map((d) => (
+                    <TableRow>
+                    <TableHead>
+                      <TableCell>{d.name}</TableCell>
+                    </TableHead>
+                    <TableCell align="right">{(feature_props[d.prop]).toFixed(0)}</TableCell>
+                </TableRow>
+                ))
+            }
         </Table>
       </TableContainer>
     :         
