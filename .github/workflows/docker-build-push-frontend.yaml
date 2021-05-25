@@ -1,7 +1,7 @@
 name: docker-build-push-frontend
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
   push:
     paths:
       - 'frontend*'
