@@ -60,9 +60,9 @@ export default function Analytics() {
         />
         {
           analytics_routes[lowercase_city].map((name) =>(
-            <Grid item>
+            <Grid container item spacing={30}>
             <Container>
-                <Image src={`/${lowercase_city}/${name}.png`} width={13} height={9} layout="responsive"/>
+                <Image src={`/${lowercase_city}/${name}.png`} width={13.5} height={7.9} layout="responsive"/>
             </Container>
           </Grid>
           ))
