@@ -19,7 +19,7 @@ const coords = {
  "Northern Territory":{lat: -19.49, long:132.55, city:'Darwin'}
 }
 
-export default function MapBox({suburbData, cityData,suburbOn, activateSuburbs}) {
+export default function MapBox({suburbData, cityData,suburbOn, activateSuburbs, covidCases, covidDeaths}) {
   const [viewport, setViewport] = useState({
     latitude: -24.3444,
     longitude: 133.775,
@@ -89,7 +89,7 @@ export default function MapBox({suburbData, cityData,suburbOn, activateSuburbs})
     return cityData && updateData(cityData, f => f.properties.SENTIMENT[[curr_year, week_no]]);
   }, [cityData, year]);
 
-  console.log(clickInfo);
+  console.log(covidCases);
 
   return (
     <>
@@ -153,6 +153,8 @@ export default function MapBox({suburbData, cityData,suburbOn, activateSuburbs})
         long={coords[clickInfo.feature.properties.STATE_NAME].long}
         setClickInfo={setClickInfo}
         city_name = {coords[clickInfo.feature.properties.STATE_NAME].city}
+        covidCases={covidCases}
+        covidDeaths={covidDeaths}
         weekly_cases={10}
         weekly_deaths={6}
         avg_sentiment={clickInfo.feature.properties.sentiment.toFixed(3)}

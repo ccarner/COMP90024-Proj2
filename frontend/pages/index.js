@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import dynamic from 'next/dynamic'
 import Layout from '../components/Layout';
-import {getGeoJSONArray, getCityData, getSuburbAURINData} from '../utils/dataloaders';
+import {getGeoJSONArray, getCityData, getSuburbAURINData, loadCovidData} from '../utils/dataloaders';
 import {combineSuburbWithAurin} from '../utils/helpers';
 
 // import Axios from 'axios';
@@ -35,16 +35,25 @@ export async function getStaticProps(context) {
   // Combine aurin and suburb data
   const suburbAndAurinData = combineSuburbWithAurin(geojson, aurin_data);
 
+  // Covid data
+  const covidData = loadCovidData();
+
+  let confirmed_cases = covidData[0];
+
+  let confirmed_deaths = covidData[1];
+
+  console.log(confirmed_cases);
+
   const all_states = getCityData();
   return {
-    props: {suburbData: suburbAndAurinData, cityData: all_states} 
+    props: {suburbData: suburbAndAurinData, cityData: all_states, covid_cases: confirmed_cases, covid_deaths: confirmed_deaths} 
   }
 }
 
-export default function Home({suburbData, cityData}) {
+export default function Home({suburbData, cityData, covid_cases, covid_deaths}) {
   const [suburbs, setSuburbOn] = useState(false);
 
   return (
-      <MapBox suburbData={suburbData} cityData={cityData} suburbOn={suburbs} activateSuburbs={setSuburbOn}/>
+      <MapBox covidCases={covid_cases} covidDeaths={covid_deaths} suburbData={suburbData} cityData={cityData} suburbOn={suburbs} activateSuburbs={setSuburbOn}/>
   )
 }      

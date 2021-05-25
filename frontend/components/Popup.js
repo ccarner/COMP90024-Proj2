@@ -10,6 +10,14 @@ import Typography from "@material-ui/core/Typography";
 import {makeStyles} from "@material-ui/core/styles";
 import {decimalYearToDateStr, getDateOfISOWeek, decimalYearToMonthAndWeek} from "../utils/helpers";
 
+const coords = {
+  "Adelaide":"South Australia",
+  "Perth":"Western Australia",
+  'Melbourne':"Victoria",
+  "Sydney":"New South Wales",
+  "Brisbane":"Queensland",
+ }
+
 const useStyles = makeStyles((theme) =>({
     title: {
         flex: '1 1 100%',
@@ -36,13 +44,13 @@ const useStyles = makeStyles((theme) =>({
 export default function StyledPopup({
   lat,
   long,
-  weekly_cases,
-  weekly_deaths,
   city_name,
   setClickInfo,
   avg_sentiment,
   max_sentiment,
   min_sentiment,
+  covidCases,
+  covidDeaths,
   year
 }) {
     const [curr_year, week_no] = decimalYearToMonthAndWeek(year);
@@ -50,6 +58,25 @@ export default function StyledPopup({
     const startDate = getDateOfISOWeek(week_no, curr_year);
     const endDate = new Date(startDate);
     endDate.setDate(endDate.getDate() + 7);
+    const abrv_year = endDate.getFullYear() - 2000;
+    const day = endDate.getDate();
+    const month = endDate.getMonth();
+
+    const abrv_date = `${month+1}/${day}/${abrv_year}`
+    console.log(covidCases)
+    console.log("Abbreviated date:", abrv_date);
+    
+    var cases = 0;
+    if (covidCases[coords[city_name]][abrv_date]){
+      cases = covidCases[coords[city_name]][abrv_date];
+      console.log("Cases: ", cases);
+    }
+
+    var deaths = 0;
+    if (covidDeaths[coords[city_name]][abrv_date]){
+      deaths = covidDeaths[coords[city_name]][abrv_date];
+      console.log("Deaths: ", deaths);
+    }
 
   return (
     <Popup
@@ -87,13 +114,13 @@ export default function StyledPopup({
             <TableHead>
               <TableCell>COVID-19 Cases</TableCell>
             </TableHead>
-            <TableCell>{weekly_cases}</TableCell>
+            <TableCell >{cases}</TableCell>
           </TableRow>
           <TableRow>
             <TableHead>
               <TableCell>COVID-19 Deaths</TableCell>
             </TableHead>
-            <TableCell>{weekly_deaths}</TableCell>
+            <TableCell >{deaths}</TableCell>
           </TableRow>
         </Table>
       </TableContainer>

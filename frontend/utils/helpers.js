@@ -61,7 +61,7 @@ export function combineSuburbWithAurin(suburb_data, aurin_data){
     var suburb_id = suburb_data["features"][i]["properties"]["sa2_mainc0"];
     var aurin_props;
     if (!(suburb_id in aurin_data)){
-      console.log(suburb_id, " is not in AURINN Data");
+      // console.log(suburb_id, " is not in AURINN Data");
       aurin_props = {sentiment: 0, counts: 0}
     }
     else{
