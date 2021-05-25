@@ -30,12 +30,13 @@ def request_twitter_corpus(city, date_start="1/1/2020", date_end="30/4/2021", ev
         r.raise_for_status()
         # create counter so we only process every nth tweet (otherwise takes too long)
         counter = 0
-        for chunk in r.iter_content(chunk_size=None):
+        for chunk in r.iter_lines():
             try:
                 tweet = json.loads(chunk.decode("utf-8").strip().strip(','))['doc']
                 # only process and add tweet if i) has coordinates or ii) is every 20th tweet
                 # this is to ensure we can finish in time
                 if tweet['coordinates'] is not None or counter % int(every_nth_tweet) == 0:
+                    print('got a tweet which was tagged')
                     tweet_dict = processor.process_tweet(tweet)
                     our_couch.add_tweet(tweet_dict, city)
                 counter += 1
