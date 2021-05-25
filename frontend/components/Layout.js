@@ -1,6 +1,15 @@
+/*  
+COMP90024 Cloud Computing Project 2
+  Team 40:
+  Mark Drvodelic, 1068574
+  Colton Carner, 693280
+  Bing Xu, 833684
+  Zihao Zhang, 1151006
+  Brandon Lulham, 1162377
+*/
+
 import Header from "./Header";
 import Footer from "./Footer";
-
 import Head from "next/head";
 
 const Layout = ({ children, title, description, ogImage, url }) => {

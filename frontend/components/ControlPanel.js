@@ -1,3 +1,12 @@
+/*  
+COMP90024 Cloud Computing Project 2
+  Team 40:
+  Mark Drvodelic, 1068574
+  Colton Carner, 693280
+  Bing Xu, 833684
+  Zihao Zhang, 1151006
+  Brandon Lulham, 1162377
+*/
 
 import * as React from 'react';
 import styles from "../styles/ControlPanel.module.css";
@@ -11,7 +20,6 @@ function ControlPanel(props) {
   endDate.setDate(endDate.getDate() + 7);
 
   const DateString = `${decimalYearToDateStr(year)}, ${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`
-  // console.log("Control panel - city:", city);
   return (
     <div className={styles.controlpanel}>
       <h3>{city}</h3>
