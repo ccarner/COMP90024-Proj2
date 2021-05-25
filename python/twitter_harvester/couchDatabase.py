@@ -3,7 +3,7 @@ from couchdb.design import ViewDefinition
 import requests
 import json
 from datetime import date
-from .mapreducefunct import MAP_BY_SUBURB, MAP_BY_WEEK, REDUCE_STATS
+from .mapreducefunct import MAP_BY_SUBURB, MAP_BY_WEEK, REDUCE_STATS, MAP_BY_SUBURB2, MAP_BY_WEEK2
 # import mapreducefunct as mr
 
 
@@ -77,6 +77,14 @@ class CouchDatabase:
         view_by_week.sync(self.DB[db])
 
         view_by_suburb = ViewDefinition('sentimentDocs', 'bySuburb', MAP_BY_SUBURB, reduce_fun=REDUCE_STATS)
+        view_by_suburb.get_doc(self.DB[db])
+        view_by_suburb.sync(self.DB[db])
+        
+        view_by_week = ViewDefinition('sentimentDocs', 'byWeek2', MAP_BY_WEEK2, reduce_fun=REDUCE_STATS)
+        view_by_week.get_doc(self.DB[db])
+        view_by_week.sync(self.DB[db])
+
+        view_by_suburb = ViewDefinition('sentimentDocs', 'bySuburb2', MAP_BY_SUBURB2, reduce_fun=REDUCE_STATS)
         view_by_suburb.get_doc(self.DB[db])
         view_by_suburb.sync(self.DB[db])
 
