@@ -8,6 +8,7 @@ import {updateData, decimalYearToMonthAndWeek} from "../utils/helpers";
 import styles from "../styles/MapBox.module.css";
 import {stateLayer, suburbLayer, dataLayer, suburbdataLayer} from "./MapStyles";
 import StyledPopup from "./Popup";
+import SuburbPopup from "./SuburbPopup";
 
 const coords = {
  "South Australia":{lat: -34.93, long: 138.6, city:'Adelaide'},
@@ -88,7 +89,7 @@ export default function MapBox({suburbData, cityData,suburbOn, activateSuburbs})
     return cityData && updateData(cityData, f => f.properties.SENTIMENT[[curr_year, week_no]]);
   }, [cityData, year]);
 
-  // console.log(data);
+  console.log(clickInfo);
 
   return (
     <>
@@ -123,7 +124,14 @@ export default function MapBox({suburbData, cityData,suburbOn, activateSuburbs})
             <div>Average Sentiment: {(hoverInfo.feature.properties.sentiment).toFixed(3)}</div>
             <div>Number of tweets: {hoverInfo.feature.properties.counts}</div>
           </div>
-        )} 
+        )}
+        {clickInfo && <SuburbPopup 
+        lat={clickInfo.x}
+        long={clickInfo.y}
+        setClickInfo={setClickInfo}
+        feature_props={clickInfo.feature.properties}
+        city_name={city}
+        />} 
         </>
         :
         <>       
