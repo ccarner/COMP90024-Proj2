@@ -1,0 +1,8 @@
+---
+- hosts: all
+  vars_files:
+    - host_vars/mrc.yaml
+  gather_facts: true
+  remote_user: ubuntu
+  roles:
+    - role: frontend-start-docker-container

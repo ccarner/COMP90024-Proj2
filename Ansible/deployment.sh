@@ -51,8 +51,7 @@ case $selection in
         ansible-playbook mrc-python-execute.yaml -K -i inventory --key-file $1;
         ;;
     "7")
-        START WEBSERVER
-        #TODO
+        ansible-playbook mrc-start-frontend.yaml -K -i inventory --key-file $1;
         ;;
     *)
         echo "Please type a single number to indicate the job to perform"

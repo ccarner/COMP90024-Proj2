@@ -13,7 +13,7 @@ WORKDIR /app
 ENV NODE_OPTIONS '--max-old-space-size==4096'
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
-RUN NODE_OPTIONS='--max-old-space-size=4096' yarn build && yarn install --production --ignore-scripts --prefer-offline
+RUN export NODE_OPTIONS=--max_old_space_size=4096 yarn build && yarn install --production --ignore-scripts --prefer-offline
 
 # Production image, copy all the files and run next
 FROM node:alpine AS runner
@@ -42,4 +42,4 @@ EXPOSE 3000
 # Uncomment the following line in case you want to disable telemetry.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
-CMD NODE_OPTIONS='--max-old-space-size=4096' yarn run start
+CMD export NODE_OPTIONS=--max_old_space_size=4096 yarn run start
