@@ -3,8 +3,8 @@ import csv
 import os
 import json
 import requests
-import couchDatabase
-import process_snscrape
+from .couchDatabase import CouchDatabase
+from .process_snscrape import Processor
 
 
 def main():
@@ -33,10 +33,10 @@ def main():
     # process each tweet and push to melbourne database
 
     # get a Processor which is specific to snscrape outputs
-    process = process_snscrape.Processor()
+    process = Processor()
 
     # connect to our couch database
-    my_couch = couchDatabase.CouchDatabase()
+    my_couch = CouchDatabase()
 
     # go through each file for each month (we do it separately to ensure maximised num of tweets)
     months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP"]
