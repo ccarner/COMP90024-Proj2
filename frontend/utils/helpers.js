@@ -53,3 +53,6 @@ export function getDateOfISOWeek(w, y) {
       ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
   return ISOweekStart;
 }
+
+// 
+export function combineSuburbData()
