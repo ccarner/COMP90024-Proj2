@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MapHeader = ({goToCoord, currCity, changeCityTo, usage, setSuburbOn}) => {
+const MapHeader = ({goToCoord, currCity, changeCityTo, usage, setSuburbOn, setClickInfo}) => {
   const classes = useStyles();
   const theme = useTheme();
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -188,6 +188,7 @@ const MapHeader = ({goToCoord, currCity, changeCityTo, usage, setSuburbOn}) => {
                 href={section.url}
                 onClick = {() => {
                   changeCityTo(section.title);
+                  setClickInfo(false);
                   console.log(`Changing longitude and latitude to ${section.title}`);
                   if (usage == "map"){
                     if (section.title == "All States"){

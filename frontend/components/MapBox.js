@@ -98,7 +98,7 @@ export default function MapBox({suburbData, cityData, suburbOn, activateSuburbs}
           "COMP90024"
         </title>
       </Head>
-      <MapHeader goToCoord={goTo} currCity={city} changeCityTo={setCity} usage={"map"} setSuburbOn={activateSuburbs}/>
+      <MapHeader goToCoord={goTo} currCity={city} changeCityTo={setCity} usage={"map"} setSuburbOn={activateSuburbs} setClickInfo={setClickInfo}/>
       <MapGL
         {...viewport}
         width="100vw"
