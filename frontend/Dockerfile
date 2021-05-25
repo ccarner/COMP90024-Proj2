@@ -1,45 +1,69 @@
-# Install dependencies only when needed
-FROM node:alpine AS deps
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat
-WORKDIR /app
-COPY package.json yarn.lock ./
-RUN yarn install
+FROM node:alpine
 
-# Rebuild the source code only when needed
-FROM node:alpine AS builder
-WORKDIR /app
-ENV NODE_OPTIONS '--max-old-space-size==4096'
-COPY . .
-COPY --from=deps /app/node_modules ./node_modules
-RUN export NODE_OPTIONS=--max_old_space_size=4096 yarn build && yarn install --production --ignore-scripts --prefer-offline
+RUN mkdir -p /usr/src/app
+ENV PORT 3000
 
-# Production image, copy all the files and run next
-FROM node:alpine AS runner
-WORKDIR /app
+WORKDIR /usr/src/app
 
-ENV NODE_ENV production
-ENV NODE_OPTIONS '--max-old-space-size==4096'
+COPY package.json /usr/src/app
+COPY yarn.lock /usr/src/app
 
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
+# Production use node instead of root
+# USER node
 
-# You only need to copy next.config.js if you are NOT using the default configuration
-COPY --from=builder /app/next.config.js ./
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
+RUN yarn install --production
 
-USER nextjs
-ENV NODE_OPTIONS '--max-old-space-size==4096'
-ENV MAPBOX_API_TOKEN sk.eyJ1IjoiYmluZ3gxIiwiYSI6ImNrb3p4NnAwdjBieWkydm80dGJhaGl3eXQifQ.Pki9-SIIx3FM5Yh8NYQiCA
+COPY . /usr/src/app
+
+RUN export NODE_OPTIONS=--max_old_space_size=4096 yarn build
 
 EXPOSE 3000
-
-# Next.js collects completely anonymous telemetry data about general usage.
-# Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry.
-# ENV NEXT_TELEMETRY_DISABLED 1
-
 CMD export NODE_OPTIONS=--max_old_space_size=4096 yarn run start
+
+
+
+# # Install dependencies only when needed
+# FROM node:alpine AS deps
+# # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+# RUN apk add --no-cache libc6-compat
+# WORKDIR /app
+# COPY package.json yarn.lock ./
+# RUN yarn install
+
+# # Rebuild the source code only when needed
+# FROM node:alpine AS builder
+# WORKDIR /app
+# ENV NODE_OPTIONS '--max-old-space-size==4096'
+# COPY . .
+# COPY --from=deps /app/node_modules ./node_modules
+# RUN export NODE_OPTIONS=--max_old_space_size=4096 yarn build && yarn install --production --ignore-scripts --prefer-offline
+
+# # Production image, copy all the files and run next
+# FROM node:alpine AS runner
+# WORKDIR /app
+
+# ENV NODE_ENV production
+# ENV NODE_OPTIONS '--max-old-space-size==4096'
+
+# RUN addgroup -g 1001 -S nodejs
+# RUN adduser -S nextjs -u 1001
+
+# # You only need to copy next.config.js if you are NOT using the default configuration
+# COPY --from=builder /app/next.config.js ./
+# COPY --from=builder /app/public ./public
+# COPY --from=builder /app/.next ./.next
+# COPY --from=builder /app/node_modules ./node_modules
+# COPY --from=builder /app/package.json ./package.json
+
+# USER nextjs
+# ENV NODE_OPTIONS '--max-old-space-size==4096'
+# ENV MAPBOX_API_TOKEN sk.eyJ1IjoiYmluZ3gxIiwiYSI6ImNrb3p4NnAwdjBieWkydm80dGJhaGl3eXQifQ.Pki9-SIIx3FM5Yh8NYQiCA
+
+# EXPOSE 3000
+
+# # Next.js collects completely anonymous telemetry data about general usage.
+# # Learn more here: https://nextjs.org/telemetry
+# # Uncomment the following line in case you want to disable telemetry.
+# # ENV NEXT_TELEMETRY_DISABLED 1
+
+# CMD export NODE_OPTIONS=--max_old_space_size=4096 yarn run start
