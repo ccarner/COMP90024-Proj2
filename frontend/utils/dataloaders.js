@@ -2,7 +2,7 @@ import Axios from 'axios';
 
 const stateToCity = {
     'New South Wales' : 'sydney',
-    // 'Victoria' : 'melbourne',
+    'Victoria' : 'melbourne',
     'Queensland': 'brisbane',
     'South Australia': 'adelaide',
     'Western Australia' : 'perth'

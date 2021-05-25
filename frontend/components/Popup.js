@@ -41,6 +41,13 @@ const useStyles = makeStyles((theme) =>({
     }
 }));
 
+function getAbrvDate(date){
+  const abrv_year = date.getFullYear() - 2000;
+  const day = date.getDate();
+  const month = date.getMonth();
+  return `${month+1}/${day}/${abrv_year}`;
+}
+
 export default function StyledPopup({
   lat,
   long,
@@ -62,20 +69,28 @@ export default function StyledPopup({
     const day = endDate.getDate();
     const month = endDate.getMonth();
 
-    const abrv_date = `${month+1}/${day}/${abrv_year}`
-    console.log(covidCases)
-    console.log("Abbreviated date:", abrv_date);
+    const abrv_date1 = getAbrvDate(startDate);
+    const abrv_date2 = getAbrvDate(endDate);
+    // console.log(covidCases)
+    console.log("Abbreviated start-date:", abrv_date1);
+    console.log("Abbreviated end-date:", abrv_date2);
     
     var cases = 0;
-    if (covidCases[coords[city_name]][abrv_date]){
-      cases = covidCases[coords[city_name]][abrv_date];
+    if (covidCases[coords[city_name]][abrv_date2]){
+      cases = covidCases[coords[city_name]][abrv_date2];
       console.log("Cases: ", cases);
     }
 
-    var deaths = 0;
-    if (covidDeaths[coords[city_name]][abrv_date]){
-      deaths = covidDeaths[coords[city_name]][abrv_date];
-      console.log("Deaths: ", deaths);
+    var deaths1 = 0;
+    if (covidDeaths[coords[city_name]][abrv_date1]){
+      deaths1 = covidDeaths[coords[city_name]][abrv_date1];
+      console.log("Deaths on start date: ", deaths1);
+    }
+
+    var deaths2 = 0;
+    if (covidDeaths[coords[city_name]][abrv_date2]){
+      deaths2 = covidDeaths[coords[city_name]][abrv_date2];
+      console.log("Deaths on end date: ", deaths2);
     }
 
   return (
@@ -112,15 +127,15 @@ export default function StyledPopup({
           </TableRow>
           <TableRow>
             <TableHead>
-              <TableCell>COVID-19 Cases</TableCell>
+              <TableCell>COVID-19 Cases (Total)</TableCell>
             </TableHead>
             <TableCell >{cases}</TableCell>
           </TableRow>
           <TableRow>
             <TableHead>
-              <TableCell>COVID-19 Deaths</TableCell>
+              <TableCell>COVID-19 Deaths (Week)</TableCell>
             </TableHead>
-            <TableCell >{deaths}</TableCell>
+            <TableCell >{deaths2 - deaths1}</TableCell>
           </TableRow>
         </Table>
       </TableContainer>
