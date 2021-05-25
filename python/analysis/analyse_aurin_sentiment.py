@@ -164,7 +164,7 @@ def main(city):
 
     # setup couchdb instance so that we can push analysed data
     couch = couchDatabase.CouchDatabase()
-    sentiment_by_week = couch.get_view(city, view='bySuburb', level=1)
+    sentiment_by_week = couch.get_view(city, view='bySuburb2', level=1)
     cols = list(zip(sentiment_by_week[0], sentiment_by_week[1], sentiment_by_week[2]))
     sentiment = pd.DataFrame(cols, columns=["sentiment", "counts", "suburb_code"])
 
@@ -224,7 +224,7 @@ def main(city):
 
     # let's plot the time series now!
 
-    avg_sentiment, count, time = couch.get_view(city)
+    avg_sentiment, count, time = couch.get_view(city, view='byWeek2')
 
     def plot_df(df, x, y, city, title="", xlabel="", ylabel="", dpi=100):
         plt.figure(figsize=(16,5), dpi=dpi)
@@ -232,6 +232,7 @@ def main(city):
         plt.xticks(rotation=45)
         ax = plt.gca()
         ax.set(title=title, xlabel=xlabel, ylabel=ylabel)
+        plt.gcf().subplots_adjust(bottom=0.15)
         plt.savefig("./OUTPUT/"+city + "/by_week/" + city +"_time_series")
         plt.close()
 
