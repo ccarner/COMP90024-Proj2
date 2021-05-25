@@ -60,6 +60,6 @@ export const dataLayer = {
           [0.60, '#66c2a5']
         ]
       },
-      'fill-opacity': 0.8
+      'fill-opacity': 0.5
     }
   };

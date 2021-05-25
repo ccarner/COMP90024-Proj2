@@ -188,7 +188,9 @@ const MapHeader = ({goToCoord, currCity, changeCityTo, usage, setSuburbOn, setCl
                 href={section.url}
                 onClick = {() => {
                   changeCityTo(section.title);
-                  setClickInfo(false);
+                  {if (setClickInfo){
+                    setClickInfo(false);
+                  }}
                   console.log(`Changing longitude and latitude to ${section.title}`);
                   if (usage == "map"){
                     if (section.title == "All States"){

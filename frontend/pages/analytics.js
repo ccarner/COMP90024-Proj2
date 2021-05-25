@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import Layout from "../components/Layout";
 import { Container, Grid, Typography, Avatar, Button, makeStyles } from "@material-ui/core";
-import LineChart from "../components/Chart";
 import MapHeader from "../components/MapHeader";
 import Footer from "../components/Footer";
 import Head from "next/head";
+import Image from "next/image";
 
 const useStyles = makeStyles((theme) => ({
   toolbarMargin: {
@@ -23,6 +23,7 @@ export default function Analytics() {
   const classes = useStyles();
   const [city, setCity] = useState("Melbourne");
 
+  var lowercase_city = city.toLowerCase();
   return (
     <>
     <Head>
@@ -46,10 +47,10 @@ export default function Analytics() {
           direction="column"
           alignItems="center"
           spacing={4}
-        ></Grid>
+        />
         <Grid item>
-          <Container maxWidth="sm">
-              <LineChart/>
+          <Container>
+              <Image src={`/${lowercase_city}/${lowercase_city}_time_series.png`} width={26} height={14} layout="responsive"/>
           </Container>
         </Grid>
       </Container>
