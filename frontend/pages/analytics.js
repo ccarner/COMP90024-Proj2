@@ -15,6 +15,7 @@ import Footer from "../components/Footer";
 import Head from "next/head";
 import Image from "next/image";
 import LineChart from "../components/Chart";
+import RegressionChart from "../components/RegressionChart";
 import {getTimeSeriesData} from '../utils/dataloaders';
 
 const analytics_routes = {
@@ -81,6 +82,9 @@ export default function Analytics({tsData}) {
           justify="center"
           spacing={0}
         />
+        <Grid key={101} item>
+          <RegressionChart cityName={city} indepVar={"median_weekly_personal_income"}/>
+        </Grid>
         <Grid key={100} item>
           <LineChart cityData={tsData[lowercase_city]} cityName={city}/>
         </Grid>
