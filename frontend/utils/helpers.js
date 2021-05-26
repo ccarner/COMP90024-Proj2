@@ -15,8 +15,6 @@ export function updateData(featureCollection, accessor) {
         curr_max = values.max;
         curr_min = values.min;
       }
-      // console.log(values);
-
       const properties = {
         ...f.properties,
         sentiment: curr_sentiment,
@@ -56,52 +54,23 @@ export function getDateOfISOWeek(w, y) {
 
 export function combineSuburbWithAurin(suburb_data, aurin_data){
   for (var i =0; i< suburb_data.features.length; i++){
-    // console.log(suburb_data.features[i]);
     // Suburb code
     var suburb_id = suburb_data["features"][i]["properties"]["sa2_mainc0"];
     var aurin_props;
     if (!(suburb_id in aurin_data)){
-      // console.log(suburb_id, " is not in AURINN Data");
       aurin_props = {sentiment: 0, counts: 0}
     }
     else{
       aurin_props = aurin_data[suburb_id];
     }
-    // console.log(aurin_data[suburb_id]);
     // Variables to read in 
     var properties = {
       ...suburb_data["features"][i].properties,
       ...aurin_props
     };
     suburb_data["features"][i]["properties"] = properties;
-    // console.log(suburb_data.features[i]);
   }
   return suburb_data;
-}
-
-export function linearRegression(y,x){
-  var lr = {};
-  var n = y.length;
-  var sum_x = 0;
-  var sum_y = 0;
-  var sum_xy = 0;
-  var sum_xx = 0;
-  var sum_yy = 0;
-
-  for (var i = 0; i < y.length; i++) {
-
-      sum_x += x[i];
-      sum_y += y[i];
-      sum_xy += (x[i]*y[i]);
-      sum_xx += (x[i]*x[i]);
-      sum_yy += (y[i]*y[i]);
-  } 
-
-  lr['slope'] = (n * sum_xy - sum_x * sum_y) / (n*sum_xx - sum_x * sum_x);
-  lr['intercept'] = (sum_y - lr.slope * sum_x)/n;
-  lr['r2'] = Math.pow((n*sum_xy - sum_x*sum_y)/Math.sqrt((n*sum_xx-sum_x*sum_x)*(n*sum_yy-sum_y*sum_y)),2);
-
-  return lr;
 }
 
 export const regress = (x, y) => {

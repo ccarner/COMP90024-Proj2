@@ -31,7 +31,6 @@ const popup_rows = [
     {name:"Age (Median)", prop: "median_age"},
     {name:"Population", prop: "population"},
     {name:"Weekly income (Median)", prop:"median_weekly_personal_income"},
-    // {name:"Poverty rate (%)", prop:"poverty_rate"},
     {name:"Unemployment rate (%)", prop:"percent_unemployed"},
     {name:"Homeless rate (%)", prop:"homeless_rate"},
 ]

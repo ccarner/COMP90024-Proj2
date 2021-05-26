@@ -9,7 +9,6 @@ COMP90024 Cloud Computing Project 2
 */
 
 import React from 'react';
-// import { Line } from 'react-chartjs-2';
 import dynamic from 'next/dynamic'
 
 const Line = dynamic(() => import("react-chartjs-2").then((mod) => mod.Line), {ssr: false});
