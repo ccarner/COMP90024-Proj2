@@ -106,7 +106,7 @@ export function getCityData(){
       rows.push({'x': date, 'y': y});
     }
     all_timeseries["all states"] = rows;
-    console.log(all_timeseries);
+    // console.log(all_timeseries);
     return all_timeseries;
   }
 

@@ -15,7 +15,7 @@ export function updateData(featureCollection, accessor) {
         curr_max = values.max;
         curr_min = values.min;
       }
-      console.log(values);
+      // console.log(values);
 
       const properties = {
         ...f.properties,

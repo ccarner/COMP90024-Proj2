@@ -63,20 +63,20 @@ export default function RegressionChart({aurin, cityName, indepVar}) {
 
   const y_data = aurin[lowercase_city].map(r => (r["sentiment"]));
 
-  console.log("x data", x_data);
-  console.log("y data", y_data);
+  // console.log("x data", x_data);
+  // console.log("y data", y_data);
 //   const linear_reg = linearRegression(y_data, x_data);
 
   const linear_reg = regress(x_data, y_data);
 
-  console.log("Regression output:", linear_reg);
+  // console.log("Regression output:", linear_reg);
 
   const x_min = Math.min(...x_data);
 
   const x_max = Math.max(...x_data);
 
-  console.log("min x", x_min);
-  console.log("max x", x_max);
+  // console.log("min x", x_min);
+  // console.log("max x", x_max);
 
   const point1 = {
       'x': x_min, 

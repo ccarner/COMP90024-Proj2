@@ -11,8 +11,6 @@ COMP90024 Cloud Computing Project 2
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
-
-
 const options = {
   scales: {
     yAxes: [
@@ -38,8 +36,6 @@ const options = {
 };
 
 export default function LineChart({cityData, cityName}) {
-  // console.log(cityData);
-
   const data = {
     labels: [],
     datasets: [
@@ -52,9 +48,6 @@ export default function LineChart({cityData, cityName}) {
       },
     ],
   };
-
-  console.log(data);
-
 return (
   <>
     <div className='header'>

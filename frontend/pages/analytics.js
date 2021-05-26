@@ -8,14 +8,26 @@ COMP90024 Cloud Computing Project 2
   Brandon Lulham, 1162377
 */
 
-import React, { useEffect, useRef, useState } from "react";
+import React, {useState} from "react";
 import { Container, Grid, Typography, makeStyles } from "@material-ui/core";
 import MapHeader from "../components/MapHeader";
 import Footer from "../components/Footer";
 import Head from "next/head";
-import LineChart from "../components/Chart";
-import RegressionChart from "../components/RegressionChart";
 import {getTimeSeriesData, getAURINDataForAnalysis} from '../utils/dataloaders';
+import LineChart from '../components/Chart';
+import RegressionChart from '../components/RegressionChart';
+// import dynamic from 'next/dynamic'
+
+// const LineChart = dynamic(() => import("../components/Chart"), {
+//   loading: () => <p>"Loading..."</p>,
+//   ssr: true
+// });
+
+
+// const RegressionChart = dynamic(() => import("../components/RegressionChart"), {
+//   loading: () => <p>"Loading..."</p>,
+//   ssr: true
+// });
 
 const regressionVars = {
   "melbourne":["housing_stress_30_40_rule", "median_age", "median_weekly_personal_income", "percent_nonreligious", "percent_unemployed", "poverty_rate"],
@@ -75,8 +87,6 @@ export default function Analytics({tsData, aurinData}) {
         </Typography>
         <Grid
           container
-          // direction="column"
-          // alignItems="center"
           justify="center"
           spacing={0}
         />
