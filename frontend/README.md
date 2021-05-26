@@ -4,7 +4,10 @@ This folder contains the code for the web application used to display the data c
 
 The home page serves an interactive map displaying sentiment at varying levels of granularity (state -> suburb). 
 
-For state-level sentiment data, a control panel will appear to allow the user to adjust which period of time they would like the map to display sentiment for. 
+For state-level sentiment data, a control panel will appear to allow the user to adjust which period of time they would like the map to display sentiment for.
+
+## Data 
+Data is pulled from AURIN and CouchDB (which is being fed tweets from a running twitter harvester). This data is then displayed in the frontend. 
 
 ## Getting Started
 
