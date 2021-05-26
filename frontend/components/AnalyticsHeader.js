@@ -19,7 +19,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { routes } from "../data/routes";
 
 const sections = [
-    { title: 'All States', url: '/analytics'},
     { title: 'Melbourne', url: '/analytics/melbourne'},
     { title: 'Sydney', url: '/analytics/sydney'},
     { title: 'Brisbane', url: '/analytics/brisbane'},
