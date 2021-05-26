@@ -12,13 +12,16 @@ import React, {useState, useMemo, useCallback} from "react";
 import MapHeader from "./MapHeader";
 import Footer from "./Footer";
 import Head from "next/head";
-import MapGL, {FlyToInterpolator, Source, Layer, Popup} from 'react-map-gl';
+import MapGL, {FlyToInterpolator, Source, Layer} from 'react-map-gl';
 import ControlPanel from "./ControlPanel";
 import {updateData, decimalYearToMonthAndWeek} from "../utils/helpers";
 import styles from "../styles/MapBox.module.css";
 import {stateLayer, suburbLayer, dataLayer, suburbdataLayer} from "./MapStyles";
 import StyledPopup from "./Popup";
 import SuburbPopup from "./SuburbPopup";
+import dynamic from 'next/dynamic'
+
+const d3 = dynamic(() => import("d3-ease"), {ssr: false});
 
 const coords = {
  "South Australia":{lat: -34.93, long: 138.6, city:'Adelaide'},
@@ -48,7 +51,7 @@ export default function MapBox({suburbData, cityData,suburbOn, activateSuburbs, 
       zoom: zm,
       transitionDuration: 3000,
       transitionInterpolator: new FlyToInterpolator(),
-      // transitionEasing: d3.easeCubic
+      transitionEasing: d3.easeCubic
     });
   };
 
