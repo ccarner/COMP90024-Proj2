@@ -30,8 +30,8 @@ const coords = {
 const popup_rows = [
     {name:"Age (Median)", prop: "median_age"},
     {name:"Population", prop: "population"},
-    {name:"Weekly Income (Median)", prop:"median_weekly_personal_income"},
-    {name:"Life Satisfaction Score (Avg)", prop:"average_life_satisfaction_score"},
+    {name:"Weekly income (Median)", prop:"median_weekly_personal_income"},
+    {name:"Poverty rate (%)", prop:"poverty_rate"},
     {name:"Unemployment rate (%)", prop:"percent_unemployed"},
     {name:"Homeless rate (%)", prop:"homeless_rate"},
 ]
@@ -92,14 +92,17 @@ export default function SuburbPopup({
             <TableCell align="right">{(feature_props.sentiment).toFixed(3)}</TableCell>
         </TableRow>
             {
-                popup_rows.map((d) => (
+                popup_rows.map((d) => {
+                  console.log(d.prop, feature_props[d.prop]);
+                  return (
                     <TableRow>
                     <TableHead>
                       <TableCell>{d.name}</TableCell>
                     </TableHead>
                     <TableCell align="right">{(feature_props[d.prop]).toFixed(0)}</TableCell>
                 </TableRow>
-                ))
+                );
+              })
             }
         </Table>
       </TableContainer>

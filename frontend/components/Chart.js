@@ -36,18 +36,18 @@ const options = {
   },
 };
 
-export default function LineChart(cityData, cityName) {
+export default function LineChart({cityData, cityName}) {
 
 return (
   <>
     <div className='header'>
-      <h1 className='title'>Line Chart</h1>
+      <h1 className='title'>Average Tweet Sentiment ({cityName})</h1>
       <div className='links'>
         <a
           className='btn btn-gh'
           href='https://github.com/reactchartjs/react-chartjs-2/blob/master/example/src/charts/Line.js'
         >
-          Github Source
+          January 2020 - April 2021
         </a>
       </div>
     </div>

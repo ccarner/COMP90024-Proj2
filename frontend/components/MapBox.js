@@ -81,7 +81,7 @@ export default function MapBox({suburbData, cityData,suburbOn, activateSuburbs, 
       srcEvent: {offsetX, offsetY}
     } = event;
     const clickedFeature = features && features[0];
-    console.log(clickedFeature, features[0]);
+    // console.log(clickedFeature, features[0]);
     setClickInfo(
       clickedFeature
         ? {
@@ -99,7 +99,7 @@ export default function MapBox({suburbData, cityData,suburbOn, activateSuburbs, 
     return cityData && updateData(cityData, f => f.properties.SENTIMENT[[curr_year, week_no]]);
   }, [cityData, year]);
 
-  console.log(covidCases);
+  // console.log(covidCases);
 
   return (
     <>

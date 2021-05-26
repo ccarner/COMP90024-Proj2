@@ -43,7 +43,7 @@ export default function Analytics() {
   const [city, setCity] = useState("Melbourne");
 
   var lowercase_city = city.toLowerCase();
-  console.log(analytics_routes[lowercase_city]);
+  // console.log(analytics_routes[lowercase_city]);
   return (
     <>
     <Head>
@@ -69,14 +69,12 @@ export default function Analytics() {
           justify="center"
           spacing={0}
         />
-        {/* <Grid item>
-          <Container>
-              <LineChart/>
-          </Container>
+        {/* <Grid key={100} item>
+          <LineChart cityName={city}/>
         </Grid> */}
         {
-          analytics_routes[lowercase_city].map((name) =>(
-          <Grid item>
+          analytics_routes[lowercase_city].map((name, key) =>(
+          <Grid key={key} item>
             <Container>
                 <Image src={`/${lowercase_city}/${name}.png`} width={13.5} height={7.9} layout="responsive"/>
             </Container>
