@@ -96,6 +96,22 @@ export function getCityData(){
       });
       all_timeseries[state_name] = rows;
     }
+    // all states
+    const states = ['adelaide', 'melbourne', 'sydney', 'brisbane', 'perth'];
+    var rows = []
+    for (var j = 0; j < all_timeseries['adelaide'].length; j++){
+      var date = all_timeseries['adelaide'][j]["x"];
+
+      var y = 0;
+
+      states.forEach((state) => {
+        y += all_timeseries[state][j]["y"];
+      })
+      // Take avg
+      y /= 5;
+      rows.push({'x': date, 'y': y});
+    }
+    all_timeseries["all states"] = rows;
     console.log(all_timeseries);
     return all_timeseries;
   }
