@@ -90,24 +90,24 @@ export function getCityData(){
       });
       all_timeseries[state_name] = rows;
     }
-    // all states
-    const states = ['adelaide', 'melbourne', 'sydney', 'brisbane', 'perth'];
-    var rows = []
-    for (var j = 0; j < all_timeseries['adelaide'].length; j++){
-      var date = all_timeseries['adelaide'][j]["x"];
-
-      var y = 0;
-
-      states.forEach((state) => {
-        y += all_timeseries[state][j]["y"];
-      })
-      // Take avg
-      y /= 5;
-      rows.push({'x': date, 'y': y});
-    }
-    all_timeseries["all states"] = rows;
-    // console.log(all_timeseries);
     return all_timeseries;
+  }
+
+  // Takes in city-name in lower-case - i.e. 'melbourne'
+  export function getCityTimeSeriesData(city_name){
+    var output = {}
+    let data = require(`../data/Weekly/${city_name}_byWeek.json`);
+    var rows = [];
+    data.rows.forEach((row) => {
+      var year = row.key[1]
+      var week_no = row.key[2]
+      var date = getDateOfISOWeek(week_no, year);
+      var avg_sent = row.value.sum / row.value.count
+      var new_row = {'x': date.toLocaleDateString(), 'y': avg_sent}
+      rows.push(new_row);
+    });
+    output[city_name] = rows;
+    return output;
   }
 
   export function getAURINDataForAnalysis(){

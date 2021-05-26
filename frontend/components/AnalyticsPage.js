@@ -12,7 +12,7 @@ import Footer from "../components/Footer";
 import Head from "next/head";
 import AnalyticsHeader from "./AnalyticsHeader";
 import LineChart from '../components/Chart';
-// import RegressionChart from '../components/RegressionChart';
+import RegressionChart from '../components/RegressionChart';
 
 
 const regressionVars = {
@@ -67,6 +67,13 @@ export default function AnalyticsPage({tsData, city, aurinData}) {
         <Grid key={100} item>
             <LineChart cityData={tsData[lowercase_city]} cityName={city}/>
         </Grid>
+        {
+          regressionVars[lowercase_city].map((name, key) =>(
+          <Grid key={key} item>
+            <RegressionChart key={key} aurin={aurinData} cityName={city} indepVar={name}/> 
+          </Grid>
+          ))
+          }
       </Container>
       <div className={classes.toolbarMargin} />
       <Footer />
