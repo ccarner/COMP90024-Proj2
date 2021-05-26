@@ -15,13 +15,14 @@ import Footer from "../components/Footer";
 import Head from "next/head";
 import Image from "next/image";
 import LineChart from "../components/Chart";
+import {getTimeSeriesData} from '../utils/dataloaders';
 
 const analytics_routes = {
-  "melbourne":["melbourne_time_series", "housing_stress_30_40_rule_partial_regression", "median_age_partial_regression", "median_weekly_personal_income_partial_regression", "percent_nonreligious_partial_regression", "percent_unemployed_partial_regression", "poverty_rate_partial_regression"],
-  "perth":["perth_time_series","percent_citizenship_partial_regression","homeless_rate_partial_regression","gini_coefficient_partial_regression","average_life_satisfaction_score_partial_regression"],
-  "sydney":["sydney_time_series", "housing_stress_30_40_rule_partial_regression", "median_age_partial_regression", "median_weekly_personal_income_partial_regression", "gini_coefficient_partial_regression","percent_unemployed_partial_regression", "poverty_rate_partial_regression"],
-  "brisbane":["brisbane_time_series", "housing_stress_30_40_rule_partial_regression","average_life_satisfaction_score_partial_regression"],
-  "adelaide":["adelaide_time_series","average_life_satisfaction_score_partial_regression","percent_nonreligious_partial_regression","percent_unemployed_partial_regression","percent_citizenship_partial_regression"],
+  "melbourne":["housing_stress_30_40_rule_partial_regression", "median_age_partial_regression", "median_weekly_personal_income_partial_regression", "percent_nonreligious_partial_regression", "percent_unemployed_partial_regression", "poverty_rate_partial_regression"],
+  "perth":["percent_citizenship_partial_regression","homeless_rate_partial_regression","gini_coefficient_partial_regression","average_life_satisfaction_score_partial_regression"],
+  "sydney":["housing_stress_30_40_rule_partial_regression", "median_age_partial_regression", "median_weekly_personal_income_partial_regression", "gini_coefficient_partial_regression","percent_unemployed_partial_regression", "poverty_rate_partial_regression"],
+  "brisbane":["housing_stress_30_40_rule_partial_regression","average_life_satisfaction_score_partial_regression"],
+  "adelaide":["average_life_satisfaction_score_partial_regression","percent_nonreligious_partial_regression","percent_unemployed_partial_regression","percent_citizenship_partial_regression"],
   "all states":[]
 };
 
@@ -38,9 +39,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Analytics() {
+export async function getStaticProps(context) {
+  console.log("Fetching time series data for analytics")
+
+  const all_timeseries = getTimeSeriesData();
+
+  return {
+    props: {tsData: all_timeseries} 
+  }
+}
+
+export default function Analytics({tsData}) {
   const classes = useStyles();
   const [city, setCity] = useState("Melbourne");
+  // console.log(tsData);
 
   var lowercase_city = city.toLowerCase();
   // console.log(analytics_routes[lowercase_city]);
@@ -69,14 +81,14 @@ export default function Analytics() {
           justify="center"
           spacing={0}
         />
-        {/* <Grid key={100} item>
-          <LineChart cityName={city}/>
-        </Grid> */}
+        <Grid key={100} item>
+          <LineChart cityData={tsData[lowercase_city]} cityName={city}/>
+        </Grid>
         {
           analytics_routes[lowercase_city].map((name, key) =>(
           <Grid key={key} item>
             <Container>
-                <Image src={`/${lowercase_city}/${name}.png`} width={13.5} height={7.9} layout="responsive"/>
+                <Image src={`/${lowercase_city}/${name}.png`} width={10} height={7} layout="responsive"/>
             </Container>
           </Grid>
           ))

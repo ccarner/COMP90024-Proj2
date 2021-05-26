@@ -11,18 +11,7 @@ COMP90024 Cloud Computing Project 2
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
-const data = {
-  labels: ['1', '2', '3', '4', '5', '6'],
-  datasets: [
-    {
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
-      fill: false,
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgba(255, 99, 132, 0.2)',
-    },
-  ],
-};
+
 
 const options = {
   scales: {
@@ -33,15 +22,41 @@ const options = {
         },
       },
     ],
+    xAxes: [{
+      type: 'time',
+      // distribution: 'linear',
+      time: {
+        displayFormats: {
+          day: 'MMM D',
+          week: 'MMM YYYY',
+          month: 'MMM YYYY',
+          quarter:  'MMM YYYY'
+        }
+      }
+    }]
   },
 };
 
 export default function LineChart({cityData, cityName}) {
+  console.log(cityData);
+
+  const data = {
+    labels: [],
+    datasets: [
+      {
+        label: 'Average Sentiment',
+        data: cityData,
+        fill: false,
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgba(255, 99, 132, 0.2)',
+      },
+    ],
+  };
 
 return (
   <>
     <div className='header'>
-      <h1 className='title'>Average Tweet Sentiment ({cityName})</h1>
+      <h1 className='title'>Average Tweet Sentiment</h1>
       <div className='links'>
         <a
           className='btn btn-gh'

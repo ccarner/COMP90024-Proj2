@@ -99,8 +99,6 @@ export default function MapBox({suburbData, cityData,suburbOn, activateSuburbs, 
     return cityData && updateData(cityData, f => f.properties.SENTIMENT[[curr_year, week_no]]);
   }, [cityData, year]);
 
-  // console.log(covidCases);
-
   return (
     <>
       <Head>

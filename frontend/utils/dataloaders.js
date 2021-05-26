@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import {getDateOfISOWeek} from './helpers';
 
 const stateToCity = {
     'New South Wales' : 'sydney',
@@ -70,4 +71,31 @@ export function getCityData(){
       states["features"][i]["properties"]["SENTIMENT"] = sentiment;
     }
     return states;
+  }
+
+  export function getTimeSeriesData(){
+    var all_timeseries = {}
+    let melb = require('../data/Weekly/melbourne_byWeek.json');
+    let sydney = require('../data/Weekly/sydney_byWeek.json');
+    let brisbane = require('../data/Weekly/brisbane_byWeek.json');
+    let perth = require('../data/Weekly/perth_byWeek.json');
+    let adelaide =require('../data/Weekly/adelaide_byWeek.json');
+    var all = [melb, sydney, brisbane, perth, adelaide];
+    for (var i = 0; i < all.length; i++){
+      var state_name = all[i].rows[0].key[0];
+      var rows = [];
+      // console.log(state_name);
+      all[i].rows.forEach((row) => {
+        var year = row.key[1]
+        var week_no = row.key[2]
+        var date = getDateOfISOWeek(week_no, year);
+        var avg_sent = row.value.sum / row.value.count
+        var new_row = {'x': date.toLocaleDateString(), 'y': avg_sent}
+        // console.log(new_row);
+        rows.push(new_row);
+      });
+      all_timeseries[state_name] = rows;
+    }
+    console.log(all_timeseries);
+    return all_timeseries;
   }

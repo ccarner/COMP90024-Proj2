@@ -52,7 +52,7 @@ export async function getStaticProps(context) {
 
   let confirmed_deaths = covidData[1];
 
-  console.log(confirmed_cases);
+  // console.log(confirmed_cases);
 
   const all_states = getCityData();
   return {
