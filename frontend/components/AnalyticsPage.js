@@ -7,27 +7,14 @@ COMP90024 Cloud Computing Project 2
   Zihao Zhang, 1151006
   Brandon Lulham, 1162377
 */
-
-import React, {useState} from "react";
 import { Container, Grid, Typography, makeStyles } from "@material-ui/core";
-import MapHeader from "../components/MapHeader";
 import Footer from "../components/Footer";
 import Head from "next/head";
-import {getTimeSeriesData, getAURINDataForAnalysis} from '../utils/dataloaders';
-import LineChart from '../components/Chart';
-import RegressionChart from '../components/RegressionChart';
-// import dynamic from 'next/dynamic'
+import AnalyticsHeader from "./AnalyticsHeader";
 
-// const LineChart = dynamic(() => import("../components/Chart"), {
-//   loading: () => <p>"Loading..."</p>,
-//   ssr: true
-// });
+// import LineChart from '../components/Chart';
+// import RegressionChart from '../components/RegressionChart';
 
-
-// const RegressionChart = dynamic(() => import("../components/RegressionChart"), {
-//   loading: () => <p>"Loading..."</p>,
-//   ssr: true
-// });
 
 const regressionVars = {
   "melbourne":["housing_stress_30_40_rule", "median_age", "median_weekly_personal_income", "percent_nonreligious", "percent_unemployed", "poverty_rate"],
@@ -51,22 +38,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export async function getStaticProps(context) {
-  console.log("Fetching time series data for analytics")
-
-  const all_timeseries = getTimeSeriesData();
-
-  const aurin = getAURINDataForAnalysis();
-
-  return {
-    props: {tsData: all_timeseries, aurinData: aurin} 
-  }
-}
-
-export default function Analytics({tsData, aurinData}) {
+export default function AnalyticsPage({tsData, city}) {
   const classes = useStyles();
-  const [city, setCity] = useState("Melbourne");
-  var lowercase_city = city.toLowerCase();
+  // var lowercase_city = city.toLowerCase();
   return (
     <>
     <Head>
@@ -74,7 +48,7 @@ export default function Analytics({tsData, aurinData}) {
         Analytics by City
       </title>
     </Head>
-    <MapHeader currCity={city} changeCityTo={setCity} usage="analytics"/>
+    <AnalyticsHeader cityName={city}/>
       <div className={classes.toolbarMargin} />
       <Container maxWidth="md">
         <Typography
@@ -91,15 +65,8 @@ export default function Analytics({tsData, aurinData}) {
           spacing={0}
         />
         <Grid key={100} item>
-          <LineChart cityData={tsData[lowercase_city]} cityName={city}/>
+          <div>Hello World!</div>
         </Grid>
-          {
-          regressionVars[lowercase_city].map((name, key) =>(
-          <Grid key={key} item>
-            <RegressionChart key={key} aurin={aurinData} cityName={city} indepVar={name}/> 
-          </Grid>
-          ))
-          }
       </Container>
       <div className={classes.toolbarMargin} />
       <Footer />

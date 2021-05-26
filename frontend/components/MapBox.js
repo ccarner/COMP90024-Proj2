@@ -103,7 +103,7 @@ export default function MapBox({suburbData, cityData,suburbOn, activateSuburbs, 
     <>
       <Head>
         <title>
-          "COMP90024"
+          COMP90024
         </title>
       </Head>
       <MapHeader goToCoord={goTo} currCity={city} changeCityTo={setCity} usage={"map"} setSuburbOn={activateSuburbs} setClickInfo={setClickInfo}/>

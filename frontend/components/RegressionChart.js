@@ -7,11 +7,12 @@ COMP90024 Cloud Computing Project 2
   Zihao Zhang, 1151006
   Brandon Lulham, 1162377
 */
-
-import { ContactPhoneOutlined } from '@material-ui/icons';
 import React from 'react';
-import { Scatter } from 'react-chartjs-2';
-import {linearRegression, regress} from '../utils/helpers';
+// import { Scatter } from 'react-chartjs-2';
+import {regress} from '../utils/helpers';
+import dynamic from 'next/dynamic'
+
+const Scatter = dynamic(() => import("react-chartjs-2").then((mod) => mod.Scatter), {ssr: false});
 
 const translations = {
     "median_age":"Age (Median)",

@@ -29,7 +29,7 @@ function concatGeoJSON(g1, g2){
 }
 
 export async function getStaticProps(context) {
-  console.log("Fetching")
+  console.log("Fetching suburb data, AURIN data for maps")
 
   // Fetch suburb geojson data and  combine into one json
   const geojsonArray = getGeoJSONArray();
