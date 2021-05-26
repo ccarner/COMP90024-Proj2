@@ -45,24 +45,20 @@ export function getCityData(){
     const states = require('../data/states.json');
     for (var i = 0; i < states.features.length; i++){
       var state_name = states["features"][i]["properties"]["STATE_NAME"];
-    //   console.log(state_name);
       var sentiment = {};
       if (state_name in stateToCity){
         // console.log("Time series data is available for this city ", state_name);
         // Change this line to a GET request to retrieve from the database.
         const weekly = require(`../data/Weekly/${stateToCity[state_name]}_byWeek.json`);
         var rows = weekly.rows;
-        // console.log(rows);
         rows.forEach((row) => {
           var city_name = row["key"][0];
           var year = row["key"][1];
           var month = row["key"][2];
-        //   console.log(city_name, year, month);
           var average_sentiment = row["value"]["sum"] / row["value"]["count"]
           row["value"]["average_sentiment"] = average_sentiment; //Add average sentiment
           // row["key"] = [year, month]; // Don't need the city name in the key
           sentiment[[year, month]] = row["value"];
-        //   console.log(sentiment[[year, month]]);
         })
       
       }
@@ -84,14 +80,12 @@ export function getCityData(){
     for (var i = 0; i < all.length; i++){
       var state_name = all[i].rows[0].key[0];
       var rows = [];
-      // console.log(state_name);
       all[i].rows.forEach((row) => {
         var year = row.key[1]
         var week_no = row.key[2]
         var date = getDateOfISOWeek(week_no, year);
         var avg_sent = row.value.sum / row.value.count
         var new_row = {'x': date.toLocaleDateString(), 'y': avg_sent}
-        // console.log(new_row);
         rows.push(new_row);
       });
       all_timeseries[state_name] = rows;

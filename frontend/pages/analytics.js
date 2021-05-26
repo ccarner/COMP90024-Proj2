@@ -54,10 +54,7 @@ export async function getStaticProps(context) {
 export default function Analytics({tsData, aurinData}) {
   const classes = useStyles();
   const [city, setCity] = useState("Melbourne");
-  // console.log(aurinData);
-
   var lowercase_city = city.toLowerCase();
-  // console.log(analytics_routes[lowercase_city]);
   return (
     <>
     <Head>

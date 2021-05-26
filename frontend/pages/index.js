@@ -14,7 +14,6 @@ import Layout from '../components/Layout';
 import {getGeoJSONArray, getCityData, getSuburbAURINData, loadCovidData} from '../utils/dataloaders';
 import {combineSuburbWithAurin} from '../utils/helpers';
 
-// import Axios from 'axios';
 
 const MapBox = dynamic(() => import("../components/MapBox"), {
   loading: () => <Layout><p>"Loading..."</p></Layout>,
@@ -51,8 +50,6 @@ export async function getStaticProps(context) {
   let confirmed_cases = covidData[0];
 
   let confirmed_deaths = covidData[1];
-
-  // console.log(confirmed_cases);
 
   const all_states = getCityData();
   return {
