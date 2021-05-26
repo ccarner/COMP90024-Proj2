@@ -115,3 +115,18 @@ export function getCityData(){
     console.log(all_timeseries);
     return all_timeseries;
   }
+
+  export function getAURINDataForAnalysis(){
+    let melb_aurin = require('../data/AURIN/melbourne_aurin.json');
+    let adelaide_aurin = require('../data/AURIN/adelaide_aurin.json');
+    let perth_aurin = require('../data/AURIN/perth_aurin.json');
+    let sydney_aurin = require('../data/AURIN/sydney_aurin.json');
+    let brisbane_aurin = require('../data/AURIN/brisbane_aurin.json');
+    
+    var cleaned_aurin_data = {}
+
+    let names=["melbourne","adelaide","perth","sydney","brisbane"];
+    let aurin_data=[melb_aurin, adelaide_aurin, perth_aurin, syndey_aurin, brisbane_aurin]
+
+    return cleaned_aurin_data;
+}
