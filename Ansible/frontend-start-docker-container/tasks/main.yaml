@@ -1,5 +1,12 @@
 ---
-    
+# COMP90024 Cloud Computing Project 2
+# Team 40:
+# Mark Drvodelic 1068574
+# Colton Carner 693280
+# Bing Xu 833684
+# Zihao Zhang 1151006
+# Brandon Lulham 1162377
+
 #start up docker
 - name: Run docker Daemon
   become: yes
@@ -11,9 +18,9 @@
 - name: pull docker container
   become: yes
   docker_image: 
-   source: pull  
+   source: pull
+   force_source: yes   
    name: coltonc/comp90024_frontend
-   force_source: yes 
    tag: latest
 
 - name: frontend docker install

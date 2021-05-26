@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# COMP90024 Cloud Computing Project 2
+# Team 40:
+# Mark Drvodelic 1068574
+# Colton Carner 693280
+# Bing Xu 833684
+# Zihao Zhang 1151006
+# Brandon Lulham 1162377
+
 #check that positiona argument for key location was provided
 if [ "$1" == "$2" ]; then
     echo "Please provide the path to your private key file for openstack"

@@ -1,4 +1,12 @@
 ---
+# COMP90024 Cloud Computing Project 2
+# Team 40:
+# Mark Drvodelic 1068574
+# Colton Carner 693280
+# Bing Xu 833684
+# Zihao Zhang 1151006
+# Brandon Lulham 1162377
+
 - name: copy all ../python files to server ~/python (this could take a while...)
   copy:
     src: ../python/
@@ -15,22 +23,23 @@
     requirements: /home/ubuntu/python/requirements.txt
 
 - name: kill persisting python scripts
-  shell: 'pkill /home/ubuntu/python/main.py -f'
+  shell: 'pkill /home/ubuntu/python/main.py -f || /bin/true' #ignore return value of 1, since that just means nothing to kill
+  ignore_errors: yes
 
 - name: start python scripts [part1 - corpus]
-  shell: 'echo {{item}} >> ~/cities_this_vm_analysing.txt; nohup python3 ~/python/main.py {{item}} corpus > ./tweet_download.txt &'
+  shell: 'echo {{item}} >> ~/cities_this_vm_analysing.txt; nohup python3 ~/python/main.py {{item}} corpus &'
   loop: '{{ city_names }}'
   args:
     chdir: ~/python
 
 - name: start python scripts [part2 - streamer]
-  shell: 'echo {{item}} >> ~/cities_this_vm_analysing.txt; nohup python3 ~/python/main.py {{item}} streamer > ./tweet_download.txt &'
+  shell: 'echo {{item}} >> ~/cities_this_vm_analysing.txt; nohup python3 ~/python/main.py {{item}} streamer &'
   loop: '{{ city_names }}'
   args:
     chdir: ~/python
 
 - name: start python scripts [part3 - analysis]
-  shell: 'echo {{item}} >> ~/cities_this_vm_analysing.txt; nohup python3 ~/python/main.py {{item}} > ./tweet_download.txt &'
+  shell: 'echo {{item}} >> ~/cities_this_vm_analysing.txt; nohup python3 ~/python/main.py {{item}} analysis &'
   loop: '{{ city_names }}'
   args:
     chdir: ~/python

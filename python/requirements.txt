@@ -27,4 +27,5 @@ tqdm==4.60.0
 tweepy==3.10.0
 urllib3==1.26.4
 vaderSentiment==3.3.2
-snscrape==0.3.5.dev106+gf18b64e
+snscrape==0.3.4
+matplotlib==3.4.2
