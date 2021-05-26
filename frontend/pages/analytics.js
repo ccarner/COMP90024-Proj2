@@ -9,23 +9,13 @@ COMP90024 Cloud Computing Project 2
 */
 
 import React, { useEffect, useRef, useState } from "react";
-import { Container, Grid, Typography, Avatar, Button, makeStyles } from "@material-ui/core";
+import { Container, Grid, Typography, makeStyles } from "@material-ui/core";
 import MapHeader from "../components/MapHeader";
 import Footer from "../components/Footer";
 import Head from "next/head";
-import Image from "next/image";
 import LineChart from "../components/Chart";
 import RegressionChart from "../components/RegressionChart";
 import {getTimeSeriesData, getAURINDataForAnalysis} from '../utils/dataloaders';
-
-const analytics_routes = {
-  "melbourne":["housing_stress_30_40_rule_partial_regression", "median_age_partial_regression", "median_weekly_personal_income_partial_regression", "percent_nonreligious_partial_regression", "percent_unemployed_partial_regression", "poverty_rate_partial_regression"],
-  "perth":["percent_citizenship_partial_regression","homeless_rate_partial_regression","gini_coefficient_partial_regression","average_life_satisfaction_score_partial_regression"],
-  "sydney":["housing_stress_30_40_rule_partial_regression", "median_age_partial_regression", "median_weekly_personal_income_partial_regression", "gini_coefficient_partial_regression","percent_unemployed_partial_regression", "poverty_rate_partial_regression"],
-  "brisbane":["housing_stress_30_40_rule_partial_regression","average_life_satisfaction_score_partial_regression"],
-  "adelaide":["average_life_satisfaction_score_partial_regression","percent_nonreligious_partial_regression","percent_unemployed_partial_regression","percent_citizenship_partial_regression"],
-  "all states":[]
-};
 
 const regressionVars = {
   "melbourne":["housing_stress_30_40_rule", "median_age", "median_weekly_personal_income", "percent_nonreligious", "percent_unemployed", "poverty_rate"],

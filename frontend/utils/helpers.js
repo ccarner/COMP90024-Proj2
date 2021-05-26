@@ -78,3 +78,61 @@ export function combineSuburbWithAurin(suburb_data, aurin_data){
   }
   return suburb_data;
 }
+
+export function linearRegression(y,x){
+  var lr = {};
+  var n = y.length;
+  var sum_x = 0;
+  var sum_y = 0;
+  var sum_xy = 0;
+  var sum_xx = 0;
+  var sum_yy = 0;
+
+  for (var i = 0; i < y.length; i++) {
+
+      sum_x += x[i];
+      sum_y += y[i];
+      sum_xy += (x[i]*y[i]);
+      sum_xx += (x[i]*x[i]);
+      sum_yy += (y[i]*y[i]);
+  } 
+
+  lr['slope'] = (n * sum_xy - sum_x * sum_y) / (n*sum_xx - sum_x * sum_x);
+  lr['intercept'] = (sum_y - lr.slope * sum_x)/n;
+  lr['r2'] = Math.pow((n*sum_xy - sum_x*sum_y)/Math.sqrt((n*sum_xx-sum_x*sum_x)*(n*sum_yy-sum_y*sum_y)),2);
+
+  return lr;
+}
+
+export const regress = (x, y) => {
+  const n = y.length;
+  let sx = 0;
+  let sy = 0;
+  let sxy = 0;
+  let sxx = 0;
+  let syy = 0;
+  for (let i = 0; i < n; i++) {
+      sx += x[i];
+      sy += y[i];
+      sxy += x[i] * y[i];
+      sxx += x[i] * x[i];
+      syy += y[i] * y[i];
+  }
+  const mx = sx / n;
+  const my = sy / n;
+  const yy = n * syy - sy * sy;
+  const xx = n * sxx - sx * sx;
+  const xy = n * sxy - sx * sy;
+  const slope = xy / xx;
+  const intercept = my - slope * mx;
+  const r = xy / Math.sqrt(xx * yy);
+  const r2 = Math.pow(r,2);
+  let sst = 0;
+  for (let i = 0; i < n; i++) {
+     sst += Math.pow((y[i] - my), 2);
+  }
+  const sse = sst - r2 * sst;
+  const see = Math.sqrt(sse / (n - 2));
+  const ssr = sst - sse;
+  return {slope, intercept, r, r2, sse, ssr, sst, sy, sx, see};
+}

@@ -8,8 +8,10 @@ COMP90024 Cloud Computing Project 2
   Brandon Lulham, 1162377
 */
 
+import { ContactPhoneOutlined } from '@material-ui/icons';
 import React from 'react';
 import { Scatter } from 'react-chartjs-2';
+import {linearRegression, regress} from '../utils/helpers';
 
 const translations = {
     "median_age":"Age (Median)",
@@ -31,14 +33,14 @@ const options = {
       {
         ticks: {
           beginAtZero: false,
-          min: -0.5,
-          max: 0.5
         },
       },
     ],
     xAxes: [{
         type: 'linear',
-        position: 'bottom'
+        position: '',
+        display: true,
+        text: "Haha"
     }]
   },
 };
@@ -57,9 +59,38 @@ export default function RegressionChart({aurin, cityName, indepVar}) {
     return {'x': d[indepVar], 'y': d["sentiment"]}
   })
 
-  console.log("Sample Data: ", sample_city_data);
+  const x_data = aurin[lowercase_city].map(r => (r[indepVar]));
 
-  console.log("Actual data: ", pointCityData);
+  const y_data = aurin[lowercase_city].map(r => (r["sentiment"]));
+
+  console.log("x data", x_data);
+  console.log("y data", y_data);
+//   const linear_reg = linearRegression(y_data, x_data);
+
+  const linear_reg = regress(x_data, y_data);
+
+  console.log("Regression output:", linear_reg);
+
+  const x_min = Math.min(...x_data);
+
+  const x_max = Math.max(...x_data);
+
+  console.log("min x", x_min);
+  console.log("max x", x_max);
+
+  const point1 = {
+      'x': x_min, 
+      'y': x_min * linear_reg["slope"] + linear_reg["intercept"]
+    }
+
+  const point2 = {
+      'x': x_max,
+      'y': x_max * linear_reg["slope"] + linear_reg["intercept"]
+    };
+
+  const line_data = [point1, point2];
+
+  console.log("Line data", line_data);
 
   const data = {
     labels: [],
@@ -70,16 +101,21 @@ export default function RegressionChart({aurin, cityName, indepVar}) {
         fill: false,
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgba(255, 99, 132, 0.2)',
+        order: 2,
       },
       {
         label: 'Line of best fit',
-        data: sample_line_data,
-        type: 'line'
+        data: line_data,
+        type: 'line',
+        fill: false,
+        backgroundColor: 'rgb(54, 162, 235)',
+        borderColor: 'rgba(54, 162, 235, 0.2)',
+        Opacity: 0.5,
+        order: 1,
       }
     ],
   };
 
-  console.log(data);
 
 return (
   <>
@@ -98,7 +134,7 @@ return (
         </a>
       </div>
     </div>
-    <Scatter data={data}/>
+    <Scatter data={data} options={options}/>
   </>
 )
 }
