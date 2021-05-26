@@ -16,7 +16,7 @@ import Head from "next/head";
 import Image from "next/image";
 import LineChart from "../components/Chart";
 import RegressionChart from "../components/RegressionChart";
-import {getTimeSeriesData} from '../utils/dataloaders';
+import {getTimeSeriesData, getAURINDataForAnalysis} from '../utils/dataloaders';
 
 const analytics_routes = {
   "melbourne":["housing_stress_30_40_rule_partial_regression", "median_age_partial_regression", "median_weekly_personal_income_partial_regression", "percent_nonreligious_partial_regression", "percent_unemployed_partial_regression", "poverty_rate_partial_regression"],
@@ -24,6 +24,15 @@ const analytics_routes = {
   "sydney":["housing_stress_30_40_rule_partial_regression", "median_age_partial_regression", "median_weekly_personal_income_partial_regression", "gini_coefficient_partial_regression","percent_unemployed_partial_regression", "poverty_rate_partial_regression"],
   "brisbane":["housing_stress_30_40_rule_partial_regression","average_life_satisfaction_score_partial_regression"],
   "adelaide":["average_life_satisfaction_score_partial_regression","percent_nonreligious_partial_regression","percent_unemployed_partial_regression","percent_citizenship_partial_regression"],
+  "all states":[]
+};
+
+const regressionVars = {
+  "melbourne":["housing_stress_30_40_rule", "median_age", "median_weekly_personal_income", "percent_nonreligious", "percent_unemployed", "poverty_rate"],
+  "perth":["percent_citizenship","homeless_rate","gini_coefficient","average_life_satisfaction_score"],
+  "sydney":["housing_stress_30_40_rule", "median_age", "median_weekly_personal_income", "gini_coefficient","percent_unemployed", "poverty_rate"],
+  "brisbane":["housing_stress_30_40_rule","average_life_satisfaction_score"],
+  "adelaide":["average_life_satisfaction_score","percent_nonreligious","percent_unemployed","percent_citizenship"],
   "all states":[]
 };
 
@@ -45,15 +54,17 @@ export async function getStaticProps(context) {
 
   const all_timeseries = getTimeSeriesData();
 
+  const aurin = getAURINDataForAnalysis();
+
   return {
-    props: {tsData: all_timeseries} 
+    props: {tsData: all_timeseries, aurinData: aurin} 
   }
 }
 
-export default function Analytics({tsData}) {
+export default function Analytics({tsData, aurinData}) {
   const classes = useStyles();
   const [city, setCity] = useState("Melbourne");
-  // console.log(tsData);
+  // console.log(aurinData);
 
   var lowercase_city = city.toLowerCase();
   // console.log(analytics_routes[lowercase_city]);
@@ -82,21 +93,16 @@ export default function Analytics({tsData}) {
           justify="center"
           spacing={0}
         />
-        <Grid key={101} item>
-          <RegressionChart cityName={city} indepVar={"median_weekly_personal_income"}/>
-        </Grid>
         <Grid key={100} item>
           <LineChart cityData={tsData[lowercase_city]} cityName={city}/>
         </Grid>
-        {
-          analytics_routes[lowercase_city].map((name, key) =>(
+          {
+          regressionVars[lowercase_city].map((name, key) =>(
           <Grid key={key} item>
-            <Container>
-                <Image src={`/${lowercase_city}/${name}.png`} width={10} height={7} layout="responsive"/>
-            </Container>
+            <RegressionChart key={key} aurin={aurinData} cityName={city} indepVar={name}/> 
           </Grid>
           ))
-        }
+          }
       </Container>
       <div className={classes.toolbarMargin} />
       <Footer />

@@ -117,16 +117,19 @@ export function getCityData(){
   }
 
   export function getAURINDataForAnalysis(){
-    let melb_aurin = require('../data/AURIN/melbourne_aurin.json');
-    let adelaide_aurin = require('../data/AURIN/adelaide_aurin.json');
-    let perth_aurin = require('../data/AURIN/perth_aurin.json');
-    let sydney_aurin = require('../data/AURIN/sydney_aurin.json');
-    let brisbane_aurin = require('../data/AURIN/brisbane_aurin.json');
+    let melb_aurin = require('../data/AURIN/analysis/melbourne_aurin_analysis.json');
+    let adelaide_aurin = require('../data/AURIN/analysis/adelaide_aurin_analysis.json');
+    let perth_aurin = require('../data/AURIN/analysis/perth_aurin_analysis.json');
+    let sydney_aurin = require('../data/AURIN/analysis/sydney_aurin_analysis.json');
+    let brisbane_aurin = require('../data/AURIN/analysis/brisbane_aurin_analysis.json');
     
     var cleaned_aurin_data = {}
 
-    let names=["melbourne","adelaide","perth","sydney","brisbane"];
-    let aurin_data=[melb_aurin, adelaide_aurin, perth_aurin, syndey_aurin, brisbane_aurin]
+    cleaned_aurin_data["melbourne"] = melb_aurin;
+    cleaned_aurin_data["adelaide"] = adelaide_aurin;
+    cleaned_aurin_data["perth"] = perth_aurin;
+    cleaned_aurin_data["sydney"] = sydney_aurin;
+    cleaned_aurin_data["brisbane"] = brisbane_aurin;
 
     return cleaned_aurin_data;
 }

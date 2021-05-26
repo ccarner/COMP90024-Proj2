@@ -19,38 +19,57 @@ const translations = {
     "percent_unemployed":"Unemployment rate (%)",
     "homeless_rate":"Homeless rate (%)",
     "percent_nonreligious":"Non-religious rate (%)",
-    "housing_stress_30_40_rule":"Housing stress" 
+    "housing_stress_30_40_rule":"Housing stress",
+    "percent_citizenship":"Citizenship (%)",
+    "average_life_satisfaction_score":"Life satisfaction score (Average)",
+    "gini_coefficient":"Gini coefficient"
 }
 
 const options = {
   scales: {
-    y: [
+    yAxes: [
       {
         ticks: {
-          beginAtZero: true,
+          beginAtZero: false,
+          min: -0.5,
+          max: 0.5
         },
       },
     ],
+    xAxes: [{
+        type: 'linear',
+        position: 'bottom'
+    }]
   },
 };
 
-export default function RegressionChart({cityData, lineData, cityName, indepVar}) {
+
+export default function RegressionChart({aurin, cityName, indepVar}) {
 //   console.log(cityData);
    
   const sample_city_data = [{'x':1,'y':1}, {'x':0.5,'y':1.5},{'x':-1, 'y':-1.3}, {'x':2,'y':2}]
 
-  const sample_line_data = [{'x':-4,'y':-4},{'x':5,'y':5}]
+  const sample_line_data = [{'x':1,'y':0.2},{'x':0,'y':0}]
+
+  var lowercase_city = cityName.toLowerCase();
+
+  const pointCityData = aurin[lowercase_city].map(d => {
+    return {'x': d[indepVar], 'y': d["sentiment"]}
+  })
+
+  console.log("Sample Data: ", sample_city_data);
+
+  console.log("Actual data: ", pointCityData);
 
   const data = {
     labels: [],
     datasets: [
       {
         label: 'Points',
-        data: sample_city_data,
+        data: pointCityData,
         fill: false,
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgba(255, 99, 132, 0.2)',
-        order: 2,
       },
       {
         label: 'Line of best fit',
@@ -59,6 +78,8 @@ export default function RegressionChart({cityData, lineData, cityName, indepVar}
       }
     ],
   };
+
+  console.log(data);
 
 return (
   <>
@@ -77,7 +98,7 @@ return (
         </a>
       </div>
     </div>
-    <Scatter data={data} options={options} />
+    <Scatter data={data}/>
   </>
 )
 }

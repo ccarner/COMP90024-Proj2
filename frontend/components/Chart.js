@@ -38,7 +38,7 @@ const options = {
 };
 
 export default function LineChart({cityData, cityName}) {
-  console.log(cityData);
+  // console.log(cityData);
 
   const data = {
     labels: [],
@@ -52,6 +52,8 @@ export default function LineChart({cityData, cityName}) {
       },
     ],
   };
+
+  console.log(data);
 
 return (
   <>
