@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AnalyticsPage({tsData, city}) {
+export default function AnalyticsPage({tsData, city, aurinData}) {
   const classes = useStyles();
   var lowercase_city = city.toLowerCase();
   return (

@@ -15,6 +15,6 @@ export async function getStaticProps(context) {
 
 export default function AnalyticsHome({tsData, aurinData}) {
     return (
-        <AnalyticsPage city="Melbourne" tsData={tsData}/>
+        <AnalyticsPage city="Melbourne" tsData={tsData} aurinData={aurinData}/>
     )
 }

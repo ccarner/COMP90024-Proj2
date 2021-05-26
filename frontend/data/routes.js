@@ -3,6 +3,6 @@
 
 export const routes = [
     { name: "Home", link: "/" },
-    { name: "Analytics", link: "/analytics" },
+    { name: "Analytics", link: "/analytics/melbourne" },
     // { name: "path name", link: "link url" }, like this
   ];
