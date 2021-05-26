@@ -57,6 +57,13 @@ return (
   <>
     <div className='header'>
       <h1 className='title'>Average Tweet Sentiment</h1>
+      <div>
+        <a>
+          This chart displays how sentiment has changed over time in {cityName}.
+          The average tweet sentiment is calculated based on tweets harvested by the cluster in the week (starting from the dates below).
+        </a>
+      </div>
+      <br></br>
       <div className='links'>
         <a
           className='btn btn-gh'
@@ -65,6 +72,7 @@ return (
           January 2020 - April 2021
         </a>
       </div>
+
     </div>
     <Line data={data} options={options} />
   </>
