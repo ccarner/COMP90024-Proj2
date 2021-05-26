@@ -1,10 +1,20 @@
+/*  
+COMP90024 Cloud Computing Project 2
+  Team 40:
+  Mark Drvodelic, 1068574
+  Colton Carner, 693280
+  Bing Xu, 833684
+  Zihao Zhang, 1151006
+  Brandon Lulham, 1162377
+*/
+
 import React, { useEffect, useRef, useState } from "react";
-import Layout from "../components/Layout";
 import { Container, Grid, Typography, Avatar, Button, makeStyles } from "@material-ui/core";
 import MapHeader from "../components/MapHeader";
 import Footer from "../components/Footer";
 import Head from "next/head";
 import Image from "next/image";
+import LineChart from "../components/Chart";
 
 const analytics_routes = {
   "melbourne":["melbourne_time_series", "housing_stress_30_40_rule_partial_regression", "median_age_partial_regression", "median_weekly_personal_income_partial_regression", "percent_nonreligious_partial_regression", "percent_unemployed_partial_regression", "poverty_rate_partial_regression"],
@@ -54,13 +64,19 @@ export default function Analytics() {
         </Typography>
         <Grid
           container
-          direction="column"
-          alignItems="center"
-          spacing={4}
+          // direction="column"
+          // alignItems="center"
+          justify="center"
+          spacing={0}
         />
+        {/* <Grid item>
+          <Container>
+              <LineChart/>
+          </Container>
+        </Grid> */}
         {
           analytics_routes[lowercase_city].map((name) =>(
-            <Grid container item spacing={30}>
+          <Grid item>
             <Container>
                 <Image src={`/${lowercase_city}/${name}.png`} width={13.5} height={7.9} layout="responsive"/>
             </Container>

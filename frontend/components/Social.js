@@ -1,3 +1,13 @@
+/*  
+COMP90024 Cloud Computing Project 2
+  Team 40:
+  Mark Drvodelic, 1068574
+  Colton Carner, 693280
+  Bing Xu, 833684
+  Zihao Zhang, 1151006
+  Brandon Lulham, 1162377
+*/
+
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import GitHubIcon from "@material-ui/icons/GitHub";

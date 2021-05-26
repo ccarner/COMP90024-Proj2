@@ -1,10 +1,17 @@
+/*  
+COMP90024 Cloud Computing Project 2
+  Team 40:
+  Mark Drvodelic, 1068574
+  Colton Carner, 693280
+  Bing Xu, 833684
+  Zihao Zhang, 1151006
+  Brandon Lulham, 1162377
+*/
+
 import Link from "./Link";
 import { useRouter } from "next/router";
-
 import { makeStyles } from "@material-ui/core/styles";
-
 import { Container, Grid, Typography } from "@material-ui/core";
-
 import { routes } from "../data/routes";
 import Social from "./Social";
 
@@ -73,7 +80,7 @@ const Footer = () => {
           }}
         >
           <Typography className={classes.copylight}>
-          &copy; bingx1 - ccarner - mamarik - BLULHAM
+          &copy; bingx1 - ccarner - mamarik - BLULHAM - ZihaoZhang2
           </Typography>
         </Grid>
       </Container>

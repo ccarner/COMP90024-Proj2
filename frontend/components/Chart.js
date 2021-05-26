@@ -1,3 +1,13 @@
+/*  
+COMP90024 Cloud Computing Project 2
+  Team 40:
+  Mark Drvodelic, 1068574
+  Colton Carner, 693280
+  Bing Xu, 833684
+  Zihao Zhang, 1151006
+  Brandon Lulham, 1162377
+*/
+
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
@@ -26,7 +36,9 @@ const options = {
   },
 };
 
-const LineChart = () => (
+export default function LineChart(cityData, cityName) {
+
+return (
   <>
     <div className='header'>
       <h1 className='title'>Line Chart</h1>
@@ -41,6 +53,5 @@ const LineChart = () => (
     </div>
     <Line data={data} options={options} />
   </>
-);
-
-export default LineChart;
+)
+}

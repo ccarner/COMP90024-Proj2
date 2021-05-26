@@ -1,7 +1,16 @@
+/*  
+COMP90024 Cloud Computing Project 2
+  Team 40:
+  Mark Drvodelic, 1068574
+  Colton Carner, 693280
+  Bing Xu, 833684
+  Zihao Zhang, 1151006
+  Brandon Lulham, 1162377
+*/
+
 import Link from "./Link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {
@@ -16,10 +25,9 @@ import {
   IconButton,
 } from "@material-ui/core";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-
 import MenuIcon from "@material-ui/icons/Menu";
-
 import { routes } from "../data/routes";
+
 
 function ElevationScroll(props) {
   const { children } = props;
