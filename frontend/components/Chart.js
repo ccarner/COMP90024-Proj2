@@ -71,7 +71,6 @@ return (
           January 2020 - April 2021
         </a>
       </div>
-
     </div>
     <Line data={data} options={options} />
   </>

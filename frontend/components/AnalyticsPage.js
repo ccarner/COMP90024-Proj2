@@ -11,8 +11,7 @@ import { Container, Grid, Typography, makeStyles } from "@material-ui/core";
 import Footer from "../components/Footer";
 import Head from "next/head";
 import AnalyticsHeader from "./AnalyticsHeader";
-
-// import LineChart from '../components/Chart';
+import LineChart from '../components/Chart';
 // import RegressionChart from '../components/RegressionChart';
 
 
@@ -40,13 +39,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AnalyticsPage({tsData, city}) {
   const classes = useStyles();
-  // var lowercase_city = city.toLowerCase();
+  var lowercase_city = city.toLowerCase();
   return (
     <>
     <Head>
       <title>
         Analytics by City
       </title>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </Head>
     <AnalyticsHeader cityName={city}/>
       <div className={classes.toolbarMargin} />
@@ -65,7 +65,7 @@ export default function AnalyticsPage({tsData, city}) {
           spacing={0}
         />
         <Grid key={100} item>
-          <div>Hello World!</div>
+            <LineChart cityData={tsData[lowercase_city]} cityName={city}/>
         </Grid>
       </Container>
       <div className={classes.toolbarMargin} />
