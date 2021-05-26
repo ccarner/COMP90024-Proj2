@@ -19,7 +19,7 @@ import Typography from "@material-ui/core/Typography";
 import {makeStyles} from "@material-ui/core/styles";
 import {decimalYearToDateStr, getDateOfISOWeek, decimalYearToMonthAndWeek} from "../utils/helpers";
 
-const coords = {
+const cityToState = {
   "Adelaide":"South Australia",
   "Perth":"Western Australia",
   'Melbourne':"Victoria",
@@ -81,22 +81,22 @@ export default function StyledPopup({
     console.log("Abbreviated start-date:", abrv_date1);
     console.log("Abbreviated end-date:", abrv_date2);
     
-    if (city_name in coords){
+    if (city_name in cityToState){
       var cases = 0;
-      if (covidCases[coords[city_name]][abrv_date2]){
-        cases = covidCases[coords[city_name]][abrv_date2];
+      if (covidCases[cityToState[city_name]][abrv_date2]){
+        cases = covidCases[cityToState[city_name]][abrv_date2];
         console.log("Cases: ", cases);
       }
   
       var deaths1 = 0;
-      if (covidDeaths[coords[city_name]][abrv_date1]){
-        deaths1 = covidDeaths[coords[city_name]][abrv_date1];
+      if (covidDeaths[cityToState[city_name]][abrv_date1]){
+        deaths1 = covidDeaths[cityToState[city_name]][abrv_date1];
         console.log("Deaths on start date: ", deaths1);
       }
   
       var deaths2 = 0;
-      if (covidDeaths[coords[city_name]][abrv_date2]){
-        deaths2 = covidDeaths[coords[city_name]][abrv_date2];
+      if (covidDeaths[cityToState[city_name]][abrv_date2]){
+        deaths2 = covidDeaths[cityToState[city_name]][abrv_date2];
         console.log("Deaths on end date: ", deaths2);
       }
     }

@@ -18,7 +18,7 @@ import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import MenuIcon from "@material-ui/icons/Menu";
 import { routes } from "../data/routes";
 
-const sections = [
+const AnalyticsHeaderSections = [
     { title: 'Melbourne', url: '/analytics/melbourne'},
     { title: 'Sydney', url: '/analytics/sydney'},
     { title: 'Brisbane', url: '/analytics/brisbane'},
@@ -189,7 +189,7 @@ const AnalyticsHeader = ({cityName}) => {
             {matches ? drawer : tabs}
           </Toolbar>
           <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
-            {sections.map((section) => (
+            {AnalyticsHeaderSections.map((section) => (
             <Link
                 noWrap
                 key={section.title}

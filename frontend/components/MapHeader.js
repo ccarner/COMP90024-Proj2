@@ -18,13 +18,13 @@ import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import MenuIcon from "@material-ui/icons/Menu";
 import { routes } from "../data/routes";
 
-const sections = [
-    { title: 'All States', url: '#', lng:133.775, lat:-24.3444},
-    { title: 'Melbourne', url: '#',lng:145.11,lat:-37.84},
-    { title: 'Sydney', url: '#', lng: 151.21, lat: -33.87},
-    { title: 'Brisbane', url: '#', lng: 153.02, lat:-27.47},
-    { title: 'Perth', url: '#', lng: 115.86, lat: -31.95},
-    { title: 'Adelaide', url: '#', lng: 138.60, lat:-34.93},
+const MapHeaderSections = [
+    { title: 'All States', url: '', lng:133.775, lat:-24.3444},
+    { title: 'Melbourne', url: '',lng:145.11,lat:-37.84},
+    { title: 'Sydney', url: '', lng: 151.21, lat: -33.87},
+    { title: 'Brisbane', url: '', lng: 153.02, lat:-27.47},
+    { title: 'Perth', url: '', lng: 115.86, lat: -31.95},
+    { title: 'Adelaide', url: '', lng: 138.60, lat:-34.93},
   ];
   
 function ElevationScroll(props) {
@@ -189,7 +189,7 @@ const MapHeader = ({goToCoord, currCity, changeCityTo, usage, setSuburbOn, setCl
             {matches ? drawer : tabs}
           </Toolbar>
           <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
-            {sections.map((section) => (
+            {MapHeaderSections.map((section) => (
             <Link
                 noWrap
                 key={section.title}
