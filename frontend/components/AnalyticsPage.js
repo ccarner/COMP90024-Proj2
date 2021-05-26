@@ -14,16 +14,6 @@ import AnalyticsHeader from "./AnalyticsHeader";
 import LineChart from '../components/Chart';
 import RegressionChart from '../components/RegressionChart';
 
-
-const regressionVars = {
-  "melbourne":["housing_stress_30_40_rule", "median_age", "median_weekly_personal_income", "percent_nonreligious", "percent_unemployed", "poverty_rate"],
-  "perth":["percent_citizenship","homeless_rate","gini_coefficient","average_life_satisfaction_score"],
-  "sydney":["housing_stress_30_40_rule", "median_age", "median_weekly_personal_income", "gini_coefficient","percent_unemployed", "poverty_rate"],
-  "brisbane":["housing_stress_30_40_rule","average_life_satisfaction_score"],
-  "adelaide":["average_life_satisfaction_score","percent_nonreligious","percent_unemployed","percent_citizenship"],
-  "all states":[]
-};
-
 const useStyles = makeStyles((theme) => ({
   toolbarMargin: {
     ...theme.mixins.toolbar,
@@ -37,9 +27,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AnalyticsPage({tsData, city, aurinData}) {
+export default function AnalyticsPage({tsData, city, aurinData, regressionVars}) {
   const classes = useStyles();
-  var lowercase_city = city.toLowerCase();
   return (
     <>
     <Head>
@@ -65,10 +54,10 @@ export default function AnalyticsPage({tsData, city, aurinData}) {
           spacing={0}
         />
         <Grid key={100} item>
-            <LineChart cityData={tsData[lowercase_city]} cityName={city}/>
+            <LineChart cityData={tsData[city.toLowerCase()]} cityName={city}/>
         </Grid>
         {
-          regressionVars[lowercase_city].map((name, key) =>(
+          regressionVars.map((name, key) =>(
           <Grid key={key} item>
             <RegressionChart key={key} aurin={aurinData} cityName={city} indepVar={name}/> 
           </Grid>
